@@ -3,7 +3,7 @@ import sys
 import time
 import subprocess
 
-from ..libs.netconfLib import netconf_loop
+from libs.netconfLib import netconf_loop
 
 
 log = logging.getLogger("wifininja")

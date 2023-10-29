@@ -12,17 +12,13 @@ import dnacLib
 env = envLib.read_config_file()
 log = logging.getLogger("wifininja.wlcLib")
 
-NETCONF_CYCLE_LONG = 300 #seconds
-NETCONF_CYCLE_SHORT = 300 #seconds
 
 class Ninja2():
 
     def __init__(self):
 
-        self.long_lastrun = datetime.now()
-        self.short_lastrun = datetime.now()
-        self.long_firstrun = True
-        self.short_firstrun = True
+        self.netconf_lastrun = datetime.now()
+        self.netconf_firstrun = True
         self.wlc_data = {}
         self.ap_data = {}
 
@@ -33,13 +29,12 @@ dnac = dnacLib.Dna(env)
 
 def netconf_loop():
 
-    short_idle_period = datetime.now() - init.short_lastrun #short frequency data collection
-    long_idle_period = datetime.now() - init.long_lastrun #long frequency data collection
+    idle_period = datetime.now() - init.netconf_lastrun
+    
+    if init.netconf_firstrun or idle_period.seconds >= int(env["NETCONF_CYCLE"]):
 
-    if init.short_firstrun or short_idle_period.seconds >= NETCONF_CYCLE_SHORT:
-
-        init.short_firstrun = False
-        init.short_lastrun = datetime.now()
+        init.netconf_firstrun = False
+        init.netconf_lastrun = datetime.now()
 
         get_netconf_interfaces_oper()
         get_netconf_wireless_client_global_oper()
@@ -52,11 +47,6 @@ def netconf_loop():
             influxLib.send_to_influx_wlc(env, init.wlc_data)
         if env["SAVE_CSV"] == "True":
             fileLib.send_to_csv_wlc(init.wlc_data)
-        
-    if init.long_firstrun or long_idle_period.seconds >= NETCONF_CYCLE_LONG:
-
-        init.long_firstrun = False
-        init.long_lastrun = datetime.now()
 
         get_netconf_wireless_access_point_oper()
         #get_netconf_wireless_ap_cfg() #site/rf tag data is collected from ops, not cfg

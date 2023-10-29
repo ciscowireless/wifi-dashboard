@@ -4,7 +4,7 @@ import logging
 log = logging.getLogger("wifininja.envLib")
 
 
-def read_config_file(config_file="../config.ini"):
+def read_config_file(config_file="config.ini"):
 
     config_data = {}
     try:

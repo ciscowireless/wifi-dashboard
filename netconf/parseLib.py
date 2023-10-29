@@ -181,9 +181,13 @@ def parse_ap_ops_capwap(netconf_dict, ap_data):
     except KeyError:
         log.warning(f"No AP operational capwap data")
     else:
-        for ap in ap_ops_data:            
-            ap_data[ap["wtp-mac"]]["site-tag"] = ap["tag-info"]["site-tag"]["site-tag-name"]
-            ap_data[ap["wtp-mac"]]["rf-tag"] = ap["tag-info"]["rf-tag"]["rf-tag-name"]
+        for ap in ap_ops_data:
+            try:
+                ap_data[ap["wtp-mac"]]["site-tag"] = ap["tag-info"]["site-tag"]["site-tag-name"]
+                ap_data[ap["wtp-mac"]]["rf-tag"] = ap["tag-info"]["rf-tag"]["rf-tag-name"]
+            except TypeError:
+                log.warning("TypeError on RF/site tag")
+                pass
 
     return ap_data
 

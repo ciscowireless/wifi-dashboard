@@ -15,8 +15,6 @@ log = logging.getLogger("wifininja.wlcLib")
 NETCONF_CYCLE_LONG = 300 #seconds
 NETCONF_CYCLE_SHORT = 300 #seconds
 
-
-
 class Ninja2():
 
     def __init__(self):

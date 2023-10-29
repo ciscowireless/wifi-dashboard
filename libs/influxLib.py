@@ -1,9 +1,8 @@
-import time
 import json
 import logging
 
-import commsLib
-import envLib
+import libs.commsLib as commsLib
+import libs.envLib as envLib
 
 env = envLib.read_config_file()
 log = logging.getLogger("wifininja.influxLib")

@@ -25,7 +25,7 @@ class InitCsv():
 
     def __init__(self):
 
-        self.path = "../logs/"
+        self.path = "./logs/"
         self.stamp = str(datetime.now())[:-7].replace(':', "-").replace(" ", "_")
         self.wlc_filename = f"{self.path}{self.stamp}_WLC.csv"
         self.ap_filename = f"{self.path}{self.stamp}_AP.csv"

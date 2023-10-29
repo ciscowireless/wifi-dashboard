@@ -2,12 +2,12 @@ import logging
 
 from datetime import datetime
 
-import envLib
-import commsLib
-import influxLib
-import fileLib
-import parseLib
-import dnacLib
+import libs.envLib as envLib
+import libs.commsLib as commsLib
+import libs.influxLib as influxLib
+import libs.fileLib as fileLib
+import libs.parseLib as parseLib
+import libs.dnacLib as dnacLib
 
 env = envLib.read_config_file()
 log = logging.getLogger("wifininja.wlcLib")

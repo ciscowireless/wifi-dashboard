@@ -4,7 +4,6 @@ from datetime import datetime
 
 import envLib
 import commsLib
-import dashboardLib
 import influxLib
 import fileLib
 import parseLib
@@ -53,8 +52,6 @@ def netconf_loop():
         
         if env["SEND_TO_INFLUX"] == "True":
             influxLib.send_to_influx_wlc(env, init.wlc_data)
-        if env["SEND_TO_DASHBOARD"] == "True":
-            dashboardLib.send_to_dashboard_wlc(env, init.wlc_data)
         if env["SAVE_CSV"] == "True":
             fileLib.send_to_csv_wlc(init.wlc_data)
         
@@ -69,8 +66,6 @@ def netconf_loop():
 
         if env["SEND_TO_INFLUX"] == "True":
             influxLib.send_to_influx_ap(env, init.ap_data)
-        if env["SEND_TO_DASHBOARD"] == "True":
-            dashboardLib.send_to_dashboard_ap(env, init.ap_data)
         if env["SAVE_CSV"] == "True":
             fileLib.send_to_csv_ap(init.ap_data)
 

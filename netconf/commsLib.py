@@ -1,6 +1,5 @@
 import os
 import re
-import json
 import time
 import logging
 
@@ -11,7 +10,6 @@ import requests
 
 log = logging.getLogger("wifininja.commsLib")
 
-DASHBOARD_API_KEY = os.environ["DASHBOARD_API_KEY"]
 INFLUX_API_KEY = os.environ["INFLUX_API_KEY"]
 WLC_USER = os.environ["WLC_USER"]
 WLC_PASS = os.environ["WLC_PASS"]
@@ -42,24 +40,6 @@ def send_to_influx(env, data, precision="s"):
         log.error(f"Influx connection timeout")
     except requests.exceptions.ConnectionError:
         log.error(f"Influx connection error") 
-
-
-def send_to_dashboard(env, api, data):
-
-    dashboard_api = f'http://{env["DASHBOARD_IP"]}:{env["DASHBOARD_PORT"]}/Post{api}Data'
-    headers = {"Api-Key" : DASHBOARD_API_KEY}
-    try:
-        requests.post(
-            dashboard_api,
-            headers=headers,
-            data=json.dumps(data),
-            verify=False,
-            timeout=3
-        )
-    except requests.exceptions.ConnectTimeout:
-        log.error(f"Dashboard connection timeout")
-    except requests.exceptions.ConnectionError:
-        log.error(f"Dashboard connection error")
 
 
 def netconf_get(env, filter): #Using xmltodict

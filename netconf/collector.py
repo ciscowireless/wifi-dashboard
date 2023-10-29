@@ -3,7 +3,8 @@ import sys
 import time
 import subprocess
 
-import wlcLib
+from ..libs.netconfLib import netconf_loop
+
 
 log = logging.getLogger("wifininja")
 log.setLevel(logging.DEBUG)
@@ -22,7 +23,7 @@ def run():
     subprocess.run(["echo", "Wi-Fi collector : Running"])
     try:
         while True:
-            wlcLib.netconf_loop()
+            netconf_loop()
             time.sleep(1)
                 
     except KeyboardInterrupt:

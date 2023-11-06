@@ -7,7 +7,7 @@ This repository consists of:
 - DNAC collector - Python project, collects useful wireless metrics from DNAC
 - Grafana Dashboard - Visualise metrics received from collector app(s)
 
-Grafana and InfluxDB are required, please follow installation instruction on grafana.com and influxdata.com respectively.
+Grafana and InfluxDB are required, please follow installation instructions on grafana.com and influxdata.com respectively.
 
 **Wireless metrics (collected using NETCONF)**
 

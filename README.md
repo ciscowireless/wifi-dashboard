@@ -88,7 +88,7 @@ Sample screenshots:
 
 This is a work in progress, some items may not work in your network deployment
 
-Tested on Catalyst 9800 running 17.9.3 code at scale (~11,000 clients)
+Verified on Catalyst 9800 running 17.9.3 code at scale (~11,000 clients)
 
-Tested on Raspberry Pi
+Verified on Raspberry Pi
 

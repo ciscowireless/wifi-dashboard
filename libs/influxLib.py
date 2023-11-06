@@ -8,7 +8,7 @@ env = envLib.read_config_file()
 log = logging.getLogger("wifininja.influxLib")
 
 
-def send_to_influx_wlc(env, wlc_data):
+def send_to_influx_wncd(env, wlc_data):
 
     try:
         load_data = f"wlcData,wlcName=WLC9800 "
@@ -21,6 +21,9 @@ def send_to_influx_wlc(env, wlc_data):
 
     except KeyError:
         log.warning("Data error sending to Influx (WNCD load)")
+
+
+def send_to_influx_wlc(env, wlc_data):
 
     try:
         commsLib.send_to_influx(env,

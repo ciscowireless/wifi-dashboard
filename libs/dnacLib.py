@@ -3,14 +3,26 @@ import re
 import time
 import json
 import base64
+import logging
+
+from datetime import datetime
+
+import libs.influxLib as influxLib
+import libs.envLib as envLib
+
 import requests
 
-requests.packages.urllib3.disable_warnings() 
+requests.packages.urllib3.disable_warnings()
+
+log = logging.getLogger("wifininja.influxLib")
 
 
 class Dna():
 
     def __init__(self, env):
+
+        self.dnac_lastrun = datetime.now()
+        self.dnac_firstrun = True
 
         self.wlc_host = env["WLC_IP"]
         self.dnac_ip = env["DNAC_IP"]
@@ -129,11 +141,19 @@ class Dna():
         return {"wncd_load" : wncd_load}
 
 
-if __name__ == "__main__":
+def dnac_loop():
 
-    run = Dna()
-    run.get_dnac_token()
-    run.get_network_device()
-    run.cli_read()
-    run.get_file()
-    run.parse_wncd()
+    env = envLib.read_config_file()
+    run = Dna(env)
+
+    idle_period = datetime.now() - run.dnac_lastrun
+    if run.dnac_firstrun or idle_period.seconds >= int(env["DNAC_CYCLE"]):
+
+        run.dnac_firstrun = False
+        run.dnac_lastrun = datetime.now()
+
+        run.get_dnac_token()
+        run.get_network_device()
+        run.cli_read()
+        run.get_file()
+        influxLib.send_to_influx_wncd(env, run.parse_wncd())

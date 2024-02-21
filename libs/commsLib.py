@@ -10,9 +10,12 @@ import requests
 
 log = logging.getLogger("wifininja.commsLib")
 
-INFLUX_API_KEY = os.environ["INFLUX_API_KEY"]
-WLC_USER = os.environ["WLC_USER"]
-WLC_PASS = os.environ["WLC_PASS"]
+#WLC_USER = os.environ["WLC_USER"]
+#WLC_PASS = os.environ["WLC_PASS"]
+#INFLUX_API_KEY = os.environ["INFLUX_API_KEY"]
+WLC_USER = os.environ["LAB_WLC_USER"]
+WLC_PASS = os.environ["LAB_WLC_PASS"]
+INFLUX_API_KEY = os.environ["LAB_INFLUX_API_KEY"]
 
 
 def send_to_influx(env, data, precision="s"):
@@ -36,6 +39,7 @@ def send_to_influx(env, data, precision="s"):
             data=data,
             timeout=3
         )
+        log.info(f"Posted to Influx")
     except requests.exceptions.ReadTimeout:
         log.error(f"Influx connection timeout")
     except requests.exceptions.ConnectionError:

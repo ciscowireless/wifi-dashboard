@@ -1,0 +1,1924 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_INFLUXDB",
+      "label": "InfluxDB",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "panel",
+      "id": "bargauge",
+      "name": "Bar gauge",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "gauge",
+      "name": "Gauge",
+      "version": ""
+    },
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.1.4"
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "piechart",
+      "name": "Pie chart",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 11,
+      "panels": [],
+      "title": "Client metrics",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "purple",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisGridShow": false,
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 42,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"connectedClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n\n    \n    \n",
+          "refId": "A"
+        }
+      ],
+      "title": "Connected Clients",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-blues"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 7
+      },
+      "id": 2,
+      "options": {
+        "displayMode": "gradient",
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "A"
+        }
+      ],
+      "title": "Client States",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "(.*?) WLC9800",
+            "renamePattern": "$1"
+          }
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "Wi-Fi_4_(2.4GHz)",
+                  "Wi-Fi_4_(5GHz)",
+                  "Wi-Fi_5",
+                  "Wi-Fi_6_(2.4GHz)",
+                  "Wi-Fi_6_(5GHz)",
+                  "Wi-Fi_6_(6GHz)"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 7
+      },
+      "id": 5,
+      "options": {
+        "displayLabels": [],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "percent"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"Wi-Fi_6_(6GHz)\" or r[\"_field\"] == \"Wi-Fi_6_(5GHz)\" or r[\"_field\"] == \"Wi-Fi_6_(2.4GHz)\" or r[\"_field\"] == \"Wi-Fi_5\" or r[\"_field\"] == \"Wi-Fi_4_(5GHz)\" or r[\"_field\"] == \"Wi-Fi_4_(2.4GHz)\" or r[\"_field\"] == \"Wi-Fi_3\" or r[\"_field\"] == \"Wi-Fi_2\" or r[\"_field\"] == \"Wi-Fi_1\")\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "Client Types",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "(.*?) WLC9800",
+            "renamePattern": "$1"
+          }
+        }
+      ],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "light-blue",
+            "mode": "shades"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 50,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 15
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"rf5ghz\" or r[\"_measurement\"] == \"rf6ghz\" or r[\"_measurement\"] == \"rf2ghz\")\n  |> filter(fn: (r) => r[\"radioMode\"] == \"radio-mode-local\")\n  |> filter(fn: (r) => r[\"siteTag\"] == \"NorthSiteTag\")\n  |> filter(fn: (r) => r[\"_field\"] == \"radioStas\")\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "Clients - Site Tag (North)",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "light-blue",
+            "mode": "shades"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 50,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 15
+      },
+      "id": 19,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"rf5ghz\" or r[\"_measurement\"] == \"rf6ghz\" or r[\"_measurement\"] == \"rf2ghz\")\n  |> filter(fn: (r) => r[\"radioMode\"] == \"radio-mode-local\")\n  |> filter(fn: (r) => r[\"siteTag\"] == \"SouthSiteTag\")\n  |> filter(fn: (r) => r[\"_field\"] == \"radioStas\")\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "Clients - Site Tag (South)",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "light-blue",
+            "mode": "shades"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 50,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 20
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"rf5ghz\" or r[\"_measurement\"] == \"rf6ghz\" or r[\"_measurement\"] == \"rf2ghz\")\n  |> filter(fn: (r) => r[\"radioMode\"] == \"radio-mode-local\" and r[\"radioState\"] == \"radio-up\")\n  |> filter(fn: (r) => r[\"siteTag\"] == \"EastSiteTag\")\n  |> filter(fn: (r) => r[\"_field\"] == \"radioStas\")\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "Clients - Site Tag (East)",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "light-blue",
+            "mode": "shades"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 50,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 20
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"rf5ghz\" or r[\"_measurement\"] == \"rf6ghz\" or r[\"_measurement\"] == \"rf2ghz\")\n  |> filter(fn: (r) => r[\"radioMode\"] == \"radio-mode-local\")\n  |> filter(fn: (r) => r[\"siteTag\"] == \"WestSiteTag\")\n  |> filter(fn: (r) => r[\"_field\"] == \"radioStas\")\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "Clients - Site Tag (West)",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "id": 12,
+      "panels": [],
+      "title": "WLC metrics",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "displayName": "IN",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 10,
+        "x": 2,
+        "y": 26
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "delta"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"inBytes\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "Data - IN",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "displayName": "IN",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 10,
+        "x": 12,
+        "y": 26
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "delta"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"outBytes\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "Data - OUT",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "description": "5 Min",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 70
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 2,
+        "y": 29
+      },
+      "id": 14,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"wncd_0\")\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "WNCD 0",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "description": "5 Min",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 70
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 6,
+        "y": 29
+      },
+      "id": 15,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"wncd_1\")\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "WNCD 1",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "description": "5 Min",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 70
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 10,
+        "y": 29
+      },
+      "id": 16,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"wncd_2\")\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "WNCD 2",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "description": "5 Min",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 70
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 14,
+        "y": 29
+      },
+      "id": 17,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"wncd_3\")\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "WNCD 3",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "description": "5 Min",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 100,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 40
+              },
+              {
+                "color": "red",
+                "value": 70
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 18,
+        "y": 29
+      },
+      "id": 18,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"wncd_4\")\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "WNCD 4",
+      "type": "gauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "id": 13,
+      "panels": [],
+      "title": "AP metrics",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "#EAB839",
+                "value": 75
+              },
+              {
+                "color": "red",
+                "value": 100
+              },
+              {
+                "color": "dark-red",
+                "value": 150
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Slot 1"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
+                }
+              },
+              {
+                "id": "max",
+                "value": 200
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Slot 2"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
+                }
+              },
+              {
+                "id": "max",
+                "value": 200
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 18,
+        "w": 24,
+        "x": 0,
+        "y": 37
+      },
+      "id": 25,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": [],
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 1,
+        "showHeader": true
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"rf5ghz\" and r[\"radioState\"] == \"radio-up\")\n  |> filter(fn: (r) => r[\"_field\"] == \"radioStas\")\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "joinByLabels",
+          "options": {
+            "join": [
+              "apName"
+            ],
+            "value": "radioSlot"
+          }
+        },
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "(1)",
+            "renamePattern": "Slot 1"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "(2)",
+            "renamePattern": "Slot 2"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total Clients",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "1",
+                "2"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "Total Clients"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "channelUtilization"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
+                }
+              },
+              {
+                "id": "max",
+                "value": 100
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "radioSlot"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "json-view"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 18,
+        "w": 24,
+        "x": 0,
+        "y": 55
+      },
+      "id": 26,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": [],
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 1,
+        "showHeader": true
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_field\"] == \"radioUtil\")\n  |> filter(fn: (r) => r[\"_measurement\"] == \"rf5ghz\" and r[\"radioState\"] == \"radio-up\")\n  |> last()",
+          "refId": "A"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "joinByLabels",
+          "options": {
+            "join": [
+              "apName",
+              "radioSlot"
+            ],
+            "value": "radioMode"
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "radio-mode-local"
+              }
+            ]
+          }
+        },
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "(radio-mode-local)",
+            "renamePattern": "channelUtilization"
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "channelUtilization"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisGridShow": false,
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 0,
+        "y": 73
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"rf2ghz\")\r\n  |> filter(fn: (r) => r[\"radioMode\"] == \"radio-mode-local\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"radioChanges\")\r\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "Channel Changes - 2 GHz",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "reducer": "delta"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisGridShow": false,
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 8,
+        "y": 73
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"rf5ghz\")\r\n  |> filter(fn: (r) => r[\"radioMode\"] == \"radio-mode-local\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"radioChanges\")\r\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "Channel Changes - 5 GHz",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "reducer": "delta"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisGridShow": false,
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 16,
+        "y": 73
+      },
+      "id": 23,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "query": "from(bucket: \"wifininja\")\r\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\r\n  |> filter(fn: (r) => r[\"_measurement\"] == \"rf6ghz\")\r\n  |> filter(fn: (r) => r[\"radioMode\"] == \"radio-mode-local\")\r\n  |> filter(fn: (r) => r[\"_field\"] == \"radioChanges\")\r\n  |> yield()",
+          "refId": "A"
+        }
+      ],
+      "title": "Channel Changes - 6 GHz",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "reducer": "delta"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Wi-Fi Ninja",
+  "uid": "f2e1f618-b764-4e5f-b577-4b1f890cf03c",
+  "version": 11,
+  "weekStart": ""
+}

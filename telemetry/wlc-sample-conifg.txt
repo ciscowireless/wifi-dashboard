@@ -1,0 +1,13 @@
+telemetry ietf subscription 1
+ encoding encode-kvgpb
+ filter xpath /client-global-oper-data/client-stats/co-client-del-reason/auth-fail
+ stream yang-push
+ update-policy periodic 1000
+ receiver ip address 192.168.33.8 50007 protocol grpc-tcp
+telemetry ietf subscription 2
+ encoding encode-kvgpb
+ filter xpath /process-cpu-ios-xe-oper:cpu-usage/cpu-utilization/five-seconds
+ stream yang-push
+ update-policy periodic 500
+ receiver ip address 192.168.33.8 50007 protocol grpc-tcp
+

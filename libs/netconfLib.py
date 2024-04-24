@@ -51,11 +51,20 @@ def netconf_loop():
             influxLib.send_to_influx_ap(env, init.ap_data)
         if env["SAVE_CSV"] == "True":
             fileLib.send_to_csv_ap(init.ap_data)
+        
+        log.info(f"Waiting for next NETCONF cycle")
 
 
 def get_netconf_wireless_client_oper():
 
     filter = '''
+        <client-oper-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-wireless-client-oper">
+            <dot11-oper-data>
+                <ewlc-ms-phy-type/>
+            </dot11-oper-data>
+        </client-oper-data>
+    '''
+    old_filter = '''
         <client-oper-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-wireless-client-oper">
             <dot11-oper-data>
                 <ewlc-ms-phy-type/>
@@ -130,16 +139,16 @@ def get_netconf_wireless_access_point_oper():
                 </phy-ht-cfg>
             </radio-oper-data>
             <capwap-data>
-            <wtp-mac/>
-            <tag-info>
-                <site-tag>
-                    <site-tag-name/>
-                </site-tag>
-                <rf-tag>
-                    <rf-tag-name/>
-                </rf-tag>
-            </tag-info>
-        </capwap-data>
+                <wtp-mac/>
+                <tag-info>
+                    <site-tag>
+                        <site-tag-name/>
+                    </site-tag>
+                    <rf-tag>
+                        <rf-tag-name/>
+                    </rf-tag>
+                </tag-info>
+            </capwap-data>
         </access-point-oper-data>
     '''
     netconf_data = commsLib.netconf_get(env, filter)

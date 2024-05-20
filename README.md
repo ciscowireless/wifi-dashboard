@@ -1,4 +1,4 @@
-*** This project is no longer updated here - it has moved to [github.com/ciscowireless](https://github.com/ciscowireless/wifi-dashboard)
+## This project is no longer updated here - it has moved to [github.com/ciscowireless](https://github.com/ciscowireless/wifi-dashboard)
 
 # Cisco 9800 WLC monitoring dashboard
 ![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/full_dashboard.png)

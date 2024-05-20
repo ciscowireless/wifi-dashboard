@@ -179,7 +179,7 @@ def get_netconf_wireless_rrm_oper():
                 <radio-slot-id/>
                     <load>
                         <stations/>
-                        <rx-noise-channel-utilization/>
+                        <cca-util-percentage/>
                     </load>
             </rrm-measurement>
             <radio-slot>

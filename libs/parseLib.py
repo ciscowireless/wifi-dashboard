@@ -232,7 +232,7 @@ def parse_ap_rrm(netconf_dict, ap_data):
                 log.info("No client count for AP")
                 continue
             try:
-                ap_data[radio["wtp-mac"]][radio["radio-slot-id"]]["ch_util"] = radio["load"]["rx-noise-channel-utilization"]
+                ap_data[radio["wtp-mac"]][radio["radio-slot-id"]]["ch_util"] = radio["load"]["cca-util-percentage"]
             except KeyError:
                 #ap_data[radio["wtp-mac"]][radio["radio-slot-id"]]["ch_util"] = "0"
                 log.info("No channel utilization for AP")

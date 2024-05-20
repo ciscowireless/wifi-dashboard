@@ -88,7 +88,14 @@ Sample screenshots:
 
 This is a work in progress, some items may not work in your network deployment
 
-Verified on Catalyst 9800 running 17.9.3 code at scale (~11,000 clients)
+Tested on Catalyst 9800 running code version 17.9.3 and 17.9.4
 
-Verified on Raspberry Pi
+Tested at scale (~13,000 clients)
 
+Tested on Raspberry Pi and Ubuntu 22.04.1
+
+### License
+
+This software is licensed under the Cisco Sample Code License
+
+URL: https://developer.cisco.com/site/license/cisco-sample-code-license/

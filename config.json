@@ -1,0 +1,17 @@
+{
+    "wlc": {
+        "wlc1": {
+            "ip": "192.168.6.8",
+            "interface": "Port-channel1"
+        },
+        "wlc2": {
+            "ip": "192.168.6.8",
+            "interface": "Port-channel1"
+        }
+    },
+    "general": {
+        "netconf_cycle" : "30",
+        "iosxe_user": "test",
+        "iosxe_pass": "test"
+    }
+}

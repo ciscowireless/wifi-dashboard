@@ -1,17 +1,18 @@
 {
-    "wlc": {
-        "wlc1": {
-            "ip": "192.168.6.8",
-            "interface": "Port-channel1"
-        },
-        "wlc2": {
+    "wlc": [
+        {
+            "name": "wlc1",
             "ip": "192.168.6.8",
             "interface": "Port-channel1"
         }
-    },
+    ],
     "general": {
-        "netconf_cycle" : "30",
-        "iosxe_user": "test",
-        "iosxe_pass": "test"
+        "netconf_cycle": "30",
+        "mysql_host": "localhost",
+        "mysql_db": "Telemetry",
+        "influx_ip": "127.0.0.1",
+        "influx_port": "8086",
+        "influx_org": "wifininja",
+        "influx_bucket": "telemetry"
     }
 }

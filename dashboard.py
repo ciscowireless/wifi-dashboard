@@ -29,18 +29,19 @@ class Dashboard():
 
     def __init__(self):
 
-        self.config_file = "config.ini"
-        self.read_config_file()
         self.config_file_json = "config.json"
         self.read_config_json()
         self.iosxe_user = os.environ["IOSXE_USER"]
         self.iosxe_pass = os.environ["IOSXE_PASS"]
+        self.mysql_user = os.environ["MYSQL_USER"]
+        self.mysql_pass = os.environ["MYSQL_PASS"]
         self.influx_api_key = os.environ["INFLUX_API_KEY"]       
         self.lastrun = datetime.now()
         self.firstrun = True
 
         self.netconf = Netconf(self)
         self.mysql = MySql(self)
+        self.influx = Influx(self)
 
         self.run()
 
@@ -48,7 +49,7 @@ class Dashboard():
     def run(self):
 
         subprocess.run(["clear"])
-        subprocess.run(["echo", "Dashboard collector : Running"])
+        subprocess.run(["echo", "Dashboard : Running"])
         try:
             while True:
                 self.dashboard_loop()
@@ -56,7 +57,7 @@ class Dashboard():
                     
         except KeyboardInterrupt:
             subprocess.run(["clear"])
-            subprocess.run(["echo", "Dashboard collector : Stopped"])
+            subprocess.run(["echo", "Dashboard : Stopped"])
             sys.exit()
 
 
@@ -64,28 +65,25 @@ class Dashboard():
 
         idle_period = datetime.now() - self.lastrun
 
-        if self.firstrun or idle_period.seconds >= int(self.json_config["general"]["netconf_cycle"]):
+        if self.firstrun or idle_period.seconds >= int(self.config["general"]["netconf_cycle"]):
 
             self.firstrun = False
             self.lastrun = datetime.now()
 
-            for wlc in self.json_config["wlc"].values():
+            for wlc in self.config["wlc"]:
 
                 self.netconf.wlc_ip = wlc["ip"]
+                self.netconf.wlc_name = wlc["name"]
                 self.netconf.wlc_interface = wlc["interface"]
                 
                 self.netconf.get_wireless_client_global_oper()
                 self.mysql.put_wireless_client_global_oper(self.netconf)
-                #self.influx.put_wireless_client_global_oper()
-
-
+                self.influx.put_wireless_client_global_oper()
 
                 # get_netconf_interfaces_oper()
                 # get_netconf_wireless_client_global_oper()
                 # get_netconf_wireless_client_oper()
-
                 # get_netconf_wireless_access_point_oper()
-                #get_netconf_wireless_ap_cfg() #site/rf tag data is collected from ops, not cfg
                 # get_netconf_wireless_rrm_oper()
 
             log.info(f"Waiting for next NETCONF cycle")       
@@ -95,29 +93,8 @@ class Dashboard():
 
         try:
             with open(self.config_file_json, "r") as j:
-                self.json_config = json.load(j)
+                self.config = json.load(j)
 
-        except FileNotFoundError:
-            log.critical(f"Error opening config file")
-            sys.exit()
-
-
-    def read_config_file(self):
-
-        self.config = {}
-        try:
-            with open(self.config_file, 'r') as cf:
-                for line in cf.readlines():
-                    if line[0] in ("#", "\n", " "):
-                        continue
-                    else:
-                        try:
-                            config_item = line.split("=")
-                            self.config[config_item[0]] = config_item[1].rstrip("\n")
-                        except IndexError:
-                            log.critical(f"Error parsing config file")
-                            sys.exit()
-                            
         except FileNotFoundError:
             log.critical(f"Error opening config file")
             sys.exit()

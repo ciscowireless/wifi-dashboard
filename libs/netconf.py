@@ -4,7 +4,7 @@ import re
 
 from ncclient import manager, transport, operations
 
-log = logging.getLogger("wifininja.collector")
+log = logging.getLogger("wifininja.netconf")
 
 
 class Netconf():

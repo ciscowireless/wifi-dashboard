@@ -1,9 +1,6 @@
 import logging
 import requests
 
-import mysql.connector
-
-
 log = logging.getLogger("wifininja.influx")
 
 
@@ -12,36 +9,21 @@ class Influx():
 
     def __init__(self, init):
 
-        self.mysql_db = init.config["general"]["mysql_db"]
-        self.mysql_host = init.config["general"]["mysql_host"]
-        self.mysql_user = init.mysql_user
-        self.mysql_pass = init.mysql_pass
         self.influx_ip = init.config["general"]["influx_ip"]
         self.influx_port = init.config["general"]["influx_port"]
         self.influx_org = init.config["general"]["influx_org"]
         self.influx_bucket = init.config["general"]["influx_bucket"]
         self.influx_api_key = init.influx_api_key
-
-        self.open_mysql_session()
-
-
-    def open_mysql_session(self):
-
-        self.mysql_session = mysql.connector.connect(
-                                                host=self.mysql_host,
-                                                user=self.mysql_user,
-                                                password=self.mysql_pass,
-                                                database=self.mysql_db
-                                                )
+        self.mysql_session = init.mysql_session
 
 
     def read_mysql(self, query):
 
-        cursor = self.mysql_session.cursor(buffered=True)
+        cursor = self.mysql_session.cursor()
         cursor.execute(query)
         mysql_result = cursor.fetchall()
         cursor.close()
-        log.info("Read from MySql")
+        log.info("Read from MySQL")
 
         return mysql_result
     
@@ -60,8 +42,8 @@ class Influx():
             "precision" : precision
         }
         try:
-            requests.post(influx_api, headers=headers, params=params, data=data, timeout=3)
-            log.info(f"Post to Influx")
+            result = requests.post(influx_api, headers=headers, params=params, data=data, timeout=3)
+            log.info(f"Post to Influx ({result.status_code})")
 
         except requests.exceptions.ReadTimeout:
             log.error(f"Influx connection timeout")
@@ -84,6 +66,9 @@ class Influx():
             run_clients = item[6]
             delete_clients = item[7]
             random_mac_clients = item[8]
+            clients_24ghz = item[9]
+            clients_5ghz = item[10]
+            clients_6ghz = item[11]
 
             line_protocol = f"wlcData,wlcName={wlc_name} "\
                             f"authClients={auth_clients},"\
@@ -92,7 +77,10 @@ class Influx():
                             f"webAuthClients={webauth_clients},"\
                             f"runClients={run_clients},"\
                             f"deleteClients={delete_clients},"\
-                            f"randomMacClients={random_mac_clients} "
+                            f"randomMacClients={random_mac_clients},"\
+                            f"24ghzClients={clients_24ghz},"\
+                            f"5ghzClients={clients_5ghz},"\
+                            f"6ghzClients={clients_6ghz} "
             
             self.write_influx(line_protocol)
 

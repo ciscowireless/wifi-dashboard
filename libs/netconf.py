@@ -44,6 +44,12 @@ class Netconf():
         filter = '''
             <client-global-oper-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-wireless-client-global-oper">
                 <client-live-stats/>
+                <client-dot11-stats>
+                    <num-clients-on-24ghz-radio/>
+                    <num-clients-on-5ghz-radio/>
+                    <num-6ghz-clients/>
+                </client-dot11-stats>
             </client-global-oper-data>
         '''
+
         self.wireless_client_global_oper = self.netconf_rpc(filter)

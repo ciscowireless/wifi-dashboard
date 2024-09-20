@@ -2,8 +2,6 @@ import logging
 
 import xml.etree.ElementTree as ET
 
-import mysql.connector
-
 log = logging.getLogger("wifininja.mysql")
 
 
@@ -17,17 +15,7 @@ class MySql():
         self.mysql_user = init.mysql_user
         self.mysql_pass = init.mysql_pass
 
-        self.open_mysql_session()
-
-
-    def open_mysql_session(self):
-
-        self.mysql_session = mysql.connector.connect(
-                                                host=self.mysql_host,
-                                                user=self.mysql_user,
-                                                password=self.mysql_pass,
-                                                database=self.mysql_db
-                                                )
+        self.mysql_session = init.mysql_session
 
 
     def write_mysql(self, query):
@@ -36,31 +24,38 @@ class MySql():
         cursor.execute(query)       
         self.mysql_session.commit() 
         cursor.close()
-        log.info("Write to MySql")
+        log.info("Write to MySQL")
 
 
     def put_wireless_client_global_oper(self, netconf_data):
 
         try:
-            data = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-live-stats")
+            live_stats = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-live-stats")
+            dot11_stats = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-dot11-stats")
 
         except ET.ParseError:
             log.warning(f"No Client Live Stats data")
         else:
             try:
-                auth = int(data.find("auth-state-clients").text)
-                mobility = int(data.find("mobility-state-clients").text)
-                iplearn = int(data.find("iplearn-state-clients").text)
-                webauth = int(data.find("webauth-state-clients").text)
-                run = int(data.find("run-state-clients").text)
-                delete = int(data.find("delete-state-clients").text)
-                random_mac = int(data.find("random-mac-clients").text)
+                auth = int(live_stats.find("auth-state-clients").text)
+                mobility = int(live_stats.find("mobility-state-clients").text)
+                iplearn = int(live_stats.find("iplearn-state-clients").text)
+                webauth = int(live_stats.find("webauth-state-clients").text)
+                run = int(live_stats.find("run-state-clients").text)
+                delete = int(live_stats.find("delete-state-clients").text)
+                random_mac = int(live_stats.find("random-mac-clients").text)
 
+                clients24ghz = int(dot11_stats.find("num-clients-on-24ghz-radio").text)
+                clients5ghz = int(dot11_stats.find("num-clients-on-5ghz-radio").text)
+                clients6ghz = int(dot11_stats.find("num-6ghz-clients").text)
+                
             except AttributeError:
                 log.warning(f"Bad Client Live Stats data")
             else:
                 self.write_mysql(f"REPLACE INTO ClientLiveStats VALUES "\
-                               f"('{netconf_data.wlc_ip}', '{netconf_data.wlc_name}', '{auth}', '{mobility}', '{iplearn}', '{webauth}', '{run}', '{delete}', '{random_mac}')"
-                               )
-                
+                                 f"('{netconf_data.wlc_ip}', '{netconf_data.wlc_name}', "\
+                                 f"'{auth}', '{mobility}', '{iplearn}', '{webauth}', '{run}', '{delete}', '{random_mac}', "\
+                                 f"'{clients24ghz}', '{clients5ghz}', '{clients6ghz}')"
+                                )
+
                 

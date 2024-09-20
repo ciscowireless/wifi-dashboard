@@ -7,6 +7,8 @@ import subprocess
 
 from datetime import datetime
 
+import mysql.connector
+
 from libs.netconf import Netconf
 from libs.mysql import MySql
 from libs.influx import Influx
@@ -35,14 +37,15 @@ class Dashboard():
         self.iosxe_pass = os.environ["IOSXE_PASS"]
         self.mysql_user = os.environ["MYSQL_USER"]
         self.mysql_pass = os.environ["MYSQL_PASS"]
-        self.influx_api_key = os.environ["INFLUX_API_KEY"]       
-        self.lastrun = datetime.now()
-        self.firstrun = True
+        self.influx_api_key = os.environ["INFLUX_API_KEY"]
+        self.open_mysql_session()
 
         self.netconf = Netconf(self)
         self.mysql = MySql(self)
         self.influx = Influx(self)
 
+        self.lastrun = datetime.now()
+        self.firstrun = True
         self.run()
 
 
@@ -86,8 +89,17 @@ class Dashboard():
                 # get_netconf_wireless_access_point_oper()
                 # get_netconf_wireless_rrm_oper()
 
-            log.info(f"Waiting for next NETCONF cycle")       
+            log.info(f"Waiting for next NETCONF cycle\n")
+    
 
+    def open_mysql_session(self):
+
+        self.mysql_session = mysql.connector.connect(
+                                                    host=self.config["general"]["mysql_host"],
+                                                    database=self.config["general"]["mysql_db"],
+                                                    user=self.mysql_user,
+                                                    password=self.mysql_pass
+                                                    )
 
     def read_config_json(self):
 

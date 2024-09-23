@@ -80,14 +80,26 @@ class Dashboard():
                 self.netconf.wlc_interface = wlc["interface"]
                 
                 self.netconf.get_wireless_client_global_oper()
-                self.mysql.put_wireless_client_global_oper(self.netconf)
-                self.influx.put_wireless_client_global_oper()
+                self.mysql.sql_wireless_client_global_oper_client(self.netconf)
+                self.mysql.sql_wireless_client_global_oper_wlan(self.netconf)
+                self.influx.post_wireless_client_global_oper_client()
+                self.influx.post_wireless_client_global_oper_wlan()
 
-                # get_netconf_interfaces_oper()
-                # get_netconf_wireless_client_global_oper()
-                # get_netconf_wireless_client_oper()
-                # get_netconf_wireless_access_point_oper()
-                # get_netconf_wireless_rrm_oper()
+                self.netconf.get_wireless_access_point_oper()
+                self.mysql.sql_wireless_access_point_oper(self.netconf)
+                self.netconf.get_wireless_rrm_oper()
+                self.mysql.sql_wireless_rrm_oper(self.netconf)
+                self.influx.post_wireless_oper()
+
+                self.netconf.get_wireless_client_oper()
+                self.mysql.sql_wireless_client_oper(self.netconf)
+                self.influx.post_wireless_client_oper()
+
+                self.netconf.get_wireless_ap_global_oper()
+                self.mysql.sql_wireless_ap_global_oper(self.netconf)
+                self.netconf.get_interfaces_oper()
+                self.mysql.sql_interfaces_oper(self.netconf)
+                self.influx.post_wlc_oper()
 
             log.info(f"Waiting for next NETCONF cycle\n")
     

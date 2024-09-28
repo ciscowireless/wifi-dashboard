@@ -44,7 +44,7 @@ class Influx():
         }
         try:
             result = requests.post(influx_api, headers=headers, params=params, data=data, timeout=3)
-            log.info(f"POST Influx [{result.status_code}]{result.text}")
+            #log.info(f"POST Influx [{result.status_code}]{result.text}")
 
         except requests.exceptions.ReadTimeout:
             log.error(f"Influx connection timeout")

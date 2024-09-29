@@ -13,9 +13,6 @@ log = logging.getLogger("wifininja.commsLib")
 WLC_USER = os.environ["WLC_USER"]
 WLC_PASS = os.environ["WLC_PASS"]
 INFLUX_API_KEY = os.environ["INFLUX_API_KEY"]
-#WLC_USER = os.environ["LAB_WLC_USER"]
-#WLC_PASS = os.environ["LAB_WLC_PASS"]
-#INFLUX_API_KEY = os.environ["LAB_INFLUX_API_KEY"]
 
 
 def send_to_influx(env, data, precision="s"):

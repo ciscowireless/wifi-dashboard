@@ -1,7 +1,6 @@
+NOTE: This is a v1 dashboard, v2 is expected November 2024
+
 # Cisco 9800 WLC monitoring dashboard
-
-Update: This is a v1 dashboard, v2 is extected November 2024
-
 
 ![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/full_dashboard.png)
 

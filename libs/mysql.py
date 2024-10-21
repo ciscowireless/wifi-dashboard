@@ -195,11 +195,12 @@ class MySql():
             try:
                 wifi_4, wifi_5, wifi_6, wifi_other = 0, 0, 0, 0
                 for item in wireless_client_oper.findall(".//common-oper-data"):
+                    #print(item.find("ms-radio-type").text)
                     match item.find("ms-radio-type").text:
                         case "client-dot11ax-6ghz-prot": wifi_6 += 1
                         case "client-dot11ax-5ghz-prot": wifi_6 += 1
                         case "client-dot11ax-24ghz-prot": wifi_6 += 1
-                        case "client-dot11ac-prot": wifi_5 += 1
+                        case "client-dot11ac": wifi_5 += 1
                         case "client-dot11n-5-ghz-prot": wifi_4 += 1
                         case "client-dot11n-24-ghz-prot": wifi_4 += 1
                         case "client-dot11g-prot": wifi_other += 1

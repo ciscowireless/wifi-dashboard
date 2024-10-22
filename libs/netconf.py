@@ -10,29 +10,26 @@ log = logging.getLogger("wifininja.netconf")
 class Netconf():
 
 
-    def __init__(self, init):
-
-        self.iosxe_user = init.iosxe_user
-        self.iosxe_pass = init.iosxe_pass
-
-
-    def netconf_rpc(self, filter, query = ""):
+    def netconf_rpc(self, filter, query = "", timeout = 30):
 
         try:
+            netconf_output = ""
             start = time.time()
             with manager.connect(host=self.wlc_ip,
                                  port=830,
-                                 username=self.iosxe_user,
-                                 password=self.iosxe_pass,
+                                 username=self.wlc_user,
+                                 password=self.wlc_pass,
                                  device_params={"name":"iosxe"},
+                                 timeout=timeout,
                                  hostkey_verify=False) as ncc:
                 netconf_output = ncc.get(filter=("subtree", filter)).data_xml
                 netconf_output = re.sub('xmlns="[^"]+"', "", netconf_output)
             end = time.time()
 
-        except (transport.errors.SSHError, operations.errors.TimeoutExpiredError, transport.errors.SessionError, transport.errors.AuthenticationError):
-            netconf_output = ""
-            log.error(f"NETCONF error")
+        except (transport.errors.SSHError, transport.errors.SessionError, transport.errors.AuthenticationError):
+            log.error(f"NETCONF Error")
+        except operations.errors.TimeoutExpiredError:
+            log.error(f"NETCONF Timeout")
         else:
             log.info(f"Netconf query took {round(end - start, 1)}s [{query}]")
 

@@ -33,14 +33,12 @@ class Dashboard():
 
         self.config_file_json = "config.json"
         self.read_config_json()
-        self.iosxe_user = os.environ["IOSXE_USER"]
-        self.iosxe_pass = os.environ["IOSXE_PASS"]
         self.mysql_user = os.environ["MYSQL_USER"]
         self.mysql_pass = os.environ["MYSQL_PASS"]
         self.influx_api_key = os.environ["INFLUX_API_KEY"]
         self.open_mysql_session()
 
-        self.netconf = Netconf(self)
+        self.netconf = Netconf()
         self.mysql = MySql(self)
         self.influx = Influx(self)
 
@@ -52,7 +50,7 @@ class Dashboard():
     def run(self):
 
         subprocess.run(["clear"])
-        subprocess.run(["echo", "Dashboard : Running"])
+        subprocess.run(["echo", "Dashboard: Running"])
         try:
             while True:
                 self.dashboard_loop()
@@ -60,7 +58,7 @@ class Dashboard():
                     
         except KeyboardInterrupt:
             subprocess.run(["clear"])
-            subprocess.run(["echo", "Dashboard : Stopped"])
+            subprocess.run(["echo", "Dashboard: Stopped"])
             sys.exit()
 
 
@@ -78,18 +76,22 @@ class Dashboard():
                 self.netconf.wlc_ip = wlc["ip"]
                 self.netconf.wlc_name = wlc["name"]
                 self.netconf.wlc_interface = wlc["interface"]
+                self.netconf.wlc_user = os.environ[wlc["user_env"]]
+                self.netconf.wlc_pass = os.environ[wlc["pass_env"]]
                 
+                subprocess.run(["echo", f"WLC: {self.netconf.wlc_ip} ({self.netconf.wlc_name})"])
+
                 self.netconf.get_wireless_client_global_oper()
                 self.mysql.sql_wireless_client_global_oper_client(self.netconf)
                 self.mysql.sql_wireless_client_global_oper_wlan(self.netconf)
                 self.influx.post_wireless_client_global_oper_client()
                 self.influx.post_wireless_client_global_oper_wlan()
 
-                self.netconf.get_wireless_access_point_oper()
-                self.mysql.sql_wireless_access_point_oper(self.netconf)
-                self.netconf.get_wireless_rrm_oper()
-                self.mysql.sql_wireless_rrm_oper(self.netconf)
-                self.influx.post_wireless_oper()
+                #self.netconf.get_wireless_access_point_oper()
+                #self.mysql.sql_wireless_access_point_oper(self.netconf)
+                #self.netconf.get_wireless_rrm_oper()
+                #self.mysql.sql_wireless_rrm_oper(self.netconf)
+                #self.influx.post_wireless_oper()
 
                 self.netconf.get_wireless_client_oper()
                 self.mysql.sql_wireless_client_oper(self.netconf)

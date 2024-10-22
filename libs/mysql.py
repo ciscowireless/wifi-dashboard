@@ -79,8 +79,13 @@ class MySql():
                     wlan_data_usage = item.find("data-usage").text
                     wlan_data.append([wlan_id, wlan_name, wlan_users, wlan_data_usage])
 
+                if len(wlan_data) == 0:
+                    raise ValueError("No WLAN data")
+
             except AttributeError:
                 log.warning(f"Data validation error: wireless_client_global_oper (wlan)")
+            except ValueError:
+                log.warning("No WLAN data, possible zero clients connected to WLC")
             else:
                 query_string = ""
                 for wlan in wlan_data:
@@ -95,7 +100,7 @@ class MySql():
             access_point_oper_data = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//access-point-oper-data")
 
         except ET.ParseError:
-            log.warning(f"XML parse error: wireless_access_point_oper")
+            log.warning(f"XML parse error [wireless_access_point_oper]")
         else:
             try:
                 ap_data = {}
@@ -122,7 +127,7 @@ class MySql():
                     slot_data.append([ap_radio_mac, slot, oper_state, radio_mode, band, channel, power])
                 
             except AttributeError:
-                log.warning(f"Data validation error: wireless_access_point_oper")
+                log.warning(f"Data validation error [wireless_access_point_oper]")
             else:
                 self.write_mysql(f"DELETE FROM Ap;")
 
@@ -146,7 +151,7 @@ class MySql():
             wireless_rrm_oper_data = ET.fromstring(netconf_data.wireless_rrm_oper).find(".//rrm-oper-data")
 
         except ET.ParseError:
-            log.warning(f"XML parse error: wireless_rrm_oper")
+            log.warning(f"XML parse error [wireless_rrm_oper]")
         else:
             try:
                 rrm_data = []
@@ -158,7 +163,7 @@ class MySql():
                     rrm_data.append([ap_radio_mac, slot, stations, cca])
 
             except AttributeError:
-                log.warning(f"Data validation error: wireless_rrm_oper")
+                log.warning(f"Data validation error [wireless_rrm_oper]")
             else:
                 for measurement in rrm_data:
                     self.write_mysql(f"UPDATE Slot SET stations = '{measurement[2]}', cca = '{measurement[3]}' WHERE apRadioMac = '{measurement[0]}' AND slot = '{measurement[1]}';")
@@ -170,13 +175,13 @@ class MySql():
             wireless_ap_global_oper_data = ET.fromstring(netconf_data.wireless_ap_global_oper).find(".//ap-global-oper-data")
 
         except ET.ParseError:
-            log.warning(f"XML parse error: wireless_ap_global_oper")
+            log.warning(f"XML parse error [wireless_ap_global_oper]")
         else:
             try:
                 joined_aps = wireless_ap_global_oper_data.find("emltd-join-count-stat/joined-aps-count").text
                 
             except AttributeError:
-                log.warning(f"Data validation error: wireless_ap_global_oper")
+                log.warning(f"Data validation error [wireless_ap_global_oper]")
             else:
                 self.write_mysql(
                                 f"REPLACE INTO Wlc (wlcIp, wlcName, joinedAps) VALUES "\
@@ -190,12 +195,11 @@ class MySql():
             wireless_client_oper = ET.fromstring(netconf_data.wireless_ap_global_oper).find(".//client-oper-data")
 
         except ET.ParseError:
-            log.warning(f"XML parse error: wireless_client_oper")
+            log.warning(f"XML parse error [wireless_client_oper]")
         else:
             try:
                 wifi_4, wifi_5, wifi_6, wifi_other = 0, 0, 0, 0
                 for item in wireless_client_oper.findall(".//common-oper-data"):
-                    #print(item.find("ms-radio-type").text)
                     match item.find("ms-radio-type").text:
                         case "client-dot11ax-6ghz-prot": wifi_6 += 1
                         case "client-dot11ax-5ghz-prot": wifi_6 += 1
@@ -209,7 +213,7 @@ class MySql():
                         case _: wifi_other += 1
             
             except AttributeError:
-                log.warning(f"Data validation error: wireless_ap_global_oper")
+                log.warning(f"Data validation error [wireless_ap_global_oper]")
             else:
                 self.write_mysql(f"UPDATE Client SET wifi4 = '{wifi_4}', wifi5 = '{wifi_5}', wifi6 = '{wifi_6}', wifiOther = '{wifi_other}' WHERE wlcIp = '{netconf_data.wlc_ip}';")
 
@@ -220,7 +224,7 @@ class MySql():
             interfaces_oper = ET.fromstring(netconf_data.interfaces_oper).find(".//interface")
 
         except ET.ParseError:
-            log.warning(f"XML parse error: interfaces_oper")
+            log.warning(f"XML parse error [interfaces_oper]")
         else:
             try:
                 interface_name = interfaces_oper.find("name").text
@@ -228,7 +232,7 @@ class MySql():
                 tx = interfaces_oper.find("statistics/tx-kbps").text
 
             except AttributeError:
-                log.warning(f"Data validation error: interfaces_oper")
+                log.warning(f"Data validation error [interfaces_oper]")
             else:
                 self.write_mysql(f"UPDATE Wlc SET interfaceName = '{interface_name}', Rx = '{rx}', Tx = '{tx}' WHERE wlcIp = '{netconf_data.wlc_ip}';")
 

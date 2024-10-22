@@ -13,7 +13,7 @@ INFLUX_ORG = "wifininja"
 INFLUX_BUCKET = "telemetry"
 INFLUX_HOST = "localhost"
 INFLUX_PORT = "8086"
-POLL_CYCLE = 30
+POLL_CYCLE = 60
 
 
 class wncd_poller():
@@ -34,23 +34,24 @@ class wncd_poller():
     def run(self):
 
         subprocess.run(["clear"])
-        subprocess.run(["echo", "RADKit poller : Running"])
+        subprocess.run(["echo", "RADKit poller: Running"])
         try:
             with Client.create() as client:
                 self.radkit = client.service_direct(
                             username=os.environ["RADKIT_USER"], 
                             password=os.environ["RADKIT_PASS"], 
                             host='localhost', 
-                            port=8181
-                            )
+                            port=8181)
+                
                 self.radkit.update_inventory().wait()
+                
                 while True:
                     self.wncd_loop()
                     time.sleep(1)
                     
         except KeyboardInterrupt:
             subprocess.run(["clear"])
-            subprocess.run(["echo", "RADKit poller : Stopped"])
+            subprocess.run(["echo", "RADKit poller: Stopped"])
             sys.exit()
 
 

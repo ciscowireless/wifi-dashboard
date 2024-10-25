@@ -87,11 +87,11 @@ class Dashboard():
                 self.influx.post_wireless_client_global_oper_client()
                 self.influx.post_wireless_client_global_oper_wlan()
 
-                #self.netconf.get_wireless_access_point_oper()
-                #self.mysql.sql_wireless_access_point_oper(self.netconf)
-                #self.netconf.get_wireless_rrm_oper()
-                #self.mysql.sql_wireless_rrm_oper(self.netconf)
-                #self.influx.post_wireless_oper()
+                self.netconf.get_wireless_access_point_oper()
+                self.mysql.sql_wireless_access_point_oper(self.netconf)
+                self.netconf.get_wireless_rrm_oper()
+                self.mysql.sql_wireless_rrm_oper(self.netconf)
+                self.influx.post_wireless_oper()
 
                 self.netconf.get_wireless_client_oper()
                 self.mysql.sql_wireless_client_oper(self.netconf)

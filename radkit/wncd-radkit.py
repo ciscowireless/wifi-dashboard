@@ -8,12 +8,13 @@ import requests
 from datetime import datetime
 
 from radkit_client.sync import Client
+import radkit_client.async_.command
 
 INFLUX_ORG = "wifininja"
 INFLUX_BUCKET = "telemetry"
 INFLUX_HOST = "localhost"
 INFLUX_PORT = "8086"
-POLL_CYCLE = 60
+POLL_CYCLE = 30
 
 
 class wncd_poller():
@@ -68,9 +69,11 @@ class wncd_poller():
                 target = self.radkit.inventory[device]
                 self.command_output = target.exec(self.command).wait()
                 print(f"Device: [{device}] RADKit status: {self.command_output.result.status}")
-                measurement = self.parse_wncd()
-                print(measurement)
-                self.send_to_influx(device, measurement)
+                
+                if str(self.command_output.result.status).endswith("SUCCESS"):
+                    measurement = self.parse_wncd()
+                    #print(measurement)
+                    self.send_to_influx(device, measurement)
 
     
     def parse_wncd(self):

@@ -17,6 +17,12 @@ class MySql():
 
         self.mysql_session = init.mysql_session
 
+        self.write_mysql(f"DELETE FROM Ap;")
+        self.write_mysql(f"DELETE FROM Client;")
+        self.write_mysql(f"DELETE FROM Slot;")
+        self.write_mysql(f"DELETE FROM Wlan;")
+        self.write_mysql(f"DELETE FROM Wlc;")
+
 
     def write_mysql(self, query):
 
@@ -198,9 +204,12 @@ class MySql():
             log.warning(f"XML parse error [wireless_client_oper]")
         else:
             try:
-                wifi_4, wifi_5, wifi_6, wifi_other = 0, 0, 0, 0
+                wifi_4, wifi_5, wifi_6, wifi_7, wifi_other = 0, 0, 0, 0, 0
                 for item in wireless_client_oper.findall(".//common-oper-data"):
                     match item.find("ms-radio-type").text:
+                        case "client-dot11be-6ghz-prot": wifi_7 += 1
+                        case "client-dot11be-5ghz-prot": wifi_7 += 1
+                        case "client-dot11be-24ghz-prot": wifi_7 += 1
                         case "client-dot11ax-6ghz-prot": wifi_6 += 1
                         case "client-dot11ax-5ghz-prot": wifi_6 += 1
                         case "client-dot11ax-24ghz-prot": wifi_6 += 1
@@ -215,7 +224,7 @@ class MySql():
             except AttributeError:
                 log.warning(f"Data validation error [wireless_ap_global_oper]")
             else:
-                self.write_mysql(f"UPDATE Client SET wifi4 = '{wifi_4}', wifi5 = '{wifi_5}', wifi6 = '{wifi_6}', wifiOther = '{wifi_other}' WHERE wlcIp = '{netconf_data.wlc_ip}';")
+                self.write_mysql(f"UPDATE Client SET wifi4 = '{wifi_4}', wifi5 = '{wifi_5}', wifi6 = '{wifi_6}', wifi7 = '{wifi_7}', wifiOther = '{wifi_other}' WHERE wlcIp = '{netconf_data.wlc_ip}';")
 
 
     def sql_interfaces_oper(self, netconf_data):

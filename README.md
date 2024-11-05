@@ -46,8 +46,6 @@ Sample screenshots:
 
 ## NETCONF collector
 
-Data flow diagram
-
 Edit config.json to configure options
 
 Configure the following environment variables:
@@ -63,16 +61,19 @@ python3 dashboard.py
 ```
 or as a Docker container
 ```
-~~git clone https://github.com/Johnny8Bit/wifi-dashboard~~
+git clone https://github.com/Johnny8Bit/wifi-dashboard
 cd wifi-dashboard
 docker build -t netcollector -f netconf/Dockerfile .
 docker run -d --name netcollector --network host --mount type=bind,source="$(pwd)"/logs,destination=/netconf/logs netcollector
 ```
+Flow diagram
 ![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/netconf-flow.png)
 
 ## RADKIT collector
 
 Makes API calls to RADKit, parses output, sends to InfluxDB
+
+RADKit is currently used only for WNCD usage metrics
 
 Configure the following environment variables:
 - RADKIT_USER
@@ -90,6 +91,7 @@ cd wifi-dashboard
 docker build -t dnacollector -f dnac/Dockerfile .
 docker run -d --name dnacollector --network host dnacollector
 ```
+Flow diagram
 ![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/ssh-flow.png)
 
 ## MySQL

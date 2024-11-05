@@ -30,6 +30,16 @@ The following components are used, see respective sites for installation instruc
 **Wireless metrics (collected via SSH/RADKit)**
 - WNCD process utilization
 
+## Project status
+
+This is a work in progress, some items may not work in your network deployment
+
+Tested on Catalyst 9800 running 17.9, 17.12, and 17.15, and at scale (>10K clients)
+
+For versions before 17.9.5 - CSCwf78066 _may_ be a concern
+
+Python 3.10+
+
 ## Grafana Dashboard
 
 Grafana dashboard .json export is available in /grafana directory, import into existing Grafana installation
@@ -71,6 +81,14 @@ docker run -d --name netcollector --network host --mount type=bind,source="$(pwd
 Flow diagram
 ![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/netconf-flow.png)
 
+## MySQL
+
+Create an admin user with privileges to write/delete data
+
+Commands to create the required tables are in the /mysql directory
+
+MySQL is used for _temporary_ data manipulation only
+
 ## RADKIT collector
 
 Makes API calls to RADKit, parses output, sends to InfluxDB
@@ -96,21 +114,4 @@ docker run -d --name dnacollector --network host dnacollector
 Flow diagram
 ![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/ssh-flow.png)
 
-## MySQL
-
-Create an admin user with privileges to write/delete data
-
-Commands to create the required tables are in the /mysql directory
-
-MySQL is used for _temporary_ data manipulation only
-
-## Project status
-
-This is a work in progress, some items may not work in your network deployment
-
-Tested on Catalyst 9800 running 17.9, 17.12, and 17.15, and at scale (>10K clients)
-
-For versions before 17.9.5 - CSCwf78066 _may_ be a concern
-
-Python 3.10+
 

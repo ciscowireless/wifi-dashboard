@@ -1,6 +1,5 @@
 import logging
 import requests
-import time
 
 log = logging.getLogger("wifininja.influx")
 
@@ -44,7 +43,8 @@ class Influx():
         }
         try:
             result = requests.post(influx_api, headers=headers, params=params, data=data, timeout=3)
-            #log.info(f"POST Influx [{result.status_code}]{result.text}")
+            if not str(result.status_code).startswith("2"): #Skip 2xx HTTP status
+                log.info(f"POST Influx [{result.status_code}]{result.text}")
 
         except requests.exceptions.ReadTimeout:
             log.error(f"Influx connection timeout")
@@ -123,7 +123,13 @@ class Influx():
 
     def post_wireless_oper(self):
 
-        query = ("SELECT * FROM Ap JOIN Slot ON Ap.apRadioMac = Slot.apRadioMac WHERE radioMode = 'radio-mode-local' AND operState = 'radio-up'")
+        query = (
+            f"SELECT * FROM Ap "
+            f"JOIN Slot ON Ap.apRadioMac = Slot.apRadioMac "
+            f"JOIN SlotMetrics ON Slot.apRadioMac = SlotMetrics.apRadioMac AND Slot.slot = SlotMetrics.slot "
+            f"WHERE radioMode = 'radio-mode-local' AND operState = 'radio-up';"
+            )
+        
         result = self.read_mysql(query)
         influx_data = ""
         count_2, count_5, count_6 = 0, 0, 0
@@ -134,15 +140,17 @@ class Influx():
             #ap_eth_mac = item[2]
             rf_tag = item[3]
             site_tag = item[4]
-            #ap_radio_mac = item[5] #SQL JOIN *
+            #ap_radio_mac = item[5] #SQL JOIN
             slot = item[6]
             oper_state = item[7]
             radio_mode = item[8]
             band = item[9]
             channel = item[10]
             power = item[11]
-            stations = item[12]
-            cca = item[13]
+            #ap_radio_mac = item[12] #SQL JOIN
+            #slot = item[13] #SQL JOIN
+            stations = item[14]
+            cca = item[15]
 
             line_protocol = (
                             f'rfData,wlcName=Yay,'
@@ -196,7 +204,14 @@ class Influx():
 
     def post_wireless_client_oper(self):
 
-        query = ("SELECT wlcName, wifi4, wifi5, wifi6, wifiOther from Client")
+        query = (
+            f"SELECT wlcName, wifi4, wifi5, wifi6, wifi7, wifiOther from Client "
+            f"WHERE wifi4 IS NOT NULL "
+            f"AND wifi5 IS NOT NULL "
+            f"AND wifi6 IS NOT NULL "
+            f"AND wifi7 IS NOT NULL "
+            f"AND wifiOther IS NOT NULL;"
+            )
         result = self.read_mysql(query)
         influx_data = ""
         
@@ -205,13 +220,15 @@ class Influx():
             wifi_4 = item[1]
             wifi_5 = item[2]
             wifi_6 = item[3]
-            wifi_other = item[4]
+            wifi_7 = item[4]
+            wifi_other = item[5]
 
             line_protocol = (
                             f'clientProtocols,wlcName={wlc_name}'
                             f' wifi4={wifi_4},'
                             f'wifi5={wifi_5},'
                             f'wifi6={wifi_6},'
+                            f'wifi7={wifi_7},'
                             f'wifiOther={wifi_other}'
                             f'\n'
                             )

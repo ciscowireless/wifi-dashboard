@@ -171,8 +171,14 @@ class MySql():
             except AttributeError:
                 log.warning(f"Data validation error [wireless_rrm_oper]")
             else:
+                self.write_mysql(f"DELETE FROM SlotMetrics;")
+
+                query_string = ""
                 for measurement in rrm_data:
-                    self.write_mysql(f"UPDATE Slot SET stations = '{measurement[2]}', cca = '{measurement[3]}' WHERE apRadioMac = '{measurement[0]}' AND slot = '{measurement[1]}';")
+                    #self.write_mysql(f"UPDATE Slot SET stations = '{measurement[2]}', cca = '{measurement[3]}' WHERE apRadioMac = '{measurement[0]}' AND slot = '{measurement[1]}';")
+                    query_string += f"('{measurement[0]}','{measurement[1]}','{measurement[2]}','{measurement[3]}'),"
+                
+                self.write_mysql(f"REPLACE INTO SlotMetrics (apRadioMac, slot, stations, cca) VALUES {query_string[:-1]};")
 
 
     def sql_wireless_ap_global_oper(self, netconf_data):

@@ -20,6 +20,7 @@ class MySql():
         self.write_mysql(f"DELETE FROM Ap;")
         self.write_mysql(f"DELETE FROM Client;")
         self.write_mysql(f"DELETE FROM Slot;")
+        self.write_mysql(f"DELETE FROM SlotMetrics;")
         self.write_mysql(f"DELETE FROM Wlan;")
         self.write_mysql(f"DELETE FROM Wlc;")
 

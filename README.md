@@ -34,7 +34,7 @@ The following components are used, see respective sites for installation instruc
 
 Grafana dashboard .json export is available in /grafana directory, import into existing Grafana installation
 
-Queries can be easily modified to aggregate data from different WLC/SSID names
+Queries can be easily modified to show data from different WLC/SSID names, or to filter AP metrics by RF/Site tag
 
 The InfluxDB datasource UID will need to be modified
 

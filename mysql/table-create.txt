@@ -1,0 +1,69 @@
+CREATE TABLE Ap (
+  apRadioMac varchar(17),
+  apName varchar(255),
+  apEthMac varchar(255),
+  rfTag varchar(255),
+  siteTag varchar(255),
+  PRIMARY KEY (apRadioMac)
+  );
+ 
+ CREATE TABLE Client (
+  wlcIp varchar(15),
+  wlcName varchar(255),
+  authClients int,
+  mobilityClients int,
+  ipLearnClients int,
+  webAuthClients int,
+  runClients int,
+  deleteClients int,
+  randomMacClients int,
+  clients24ghz int,
+  clients5ghz int,
+  clients6ghz int,
+  wifi4 int,
+  wifi5 int,
+  wifi6 int,
+  wifiOther int,
+  wifi7 int,
+  PRIMARY KEY (wlcIp)
+  );
+  
+  CREATE TABLE Slot (
+  apRadioMac varchar(17),
+  slot int,
+  operState varchar(255),
+  radioMode varchar(255),
+  band varchar(255),
+  channel int,
+  power int,
+  UNIQUE KEY UC_Slot (apRadioMac,slot)
+  );
+  
+  CREATE TABLE SlotMetrics (
+  apRadioMac varchar(17),
+  slot int,
+  stations int,
+  cca int,
+  UNIQUE KEY UC_SlotMetrics (apRadioMac,slot)
+  );
+  
+  CREATE TABLE Wlan (
+  wlcIp varchar(15),
+  wlcName varchar(255),
+  wlanId int,
+  wlanProfileName varchar(255),
+  wlanUsers int,
+  wlanDataUsage bigint,
+  UNIQUE KEY UC_Wlan (wlcIp,wlanId)
+  );
+  
+  CREATE TABLE Wlc (
+  wlcIp varchar(15),
+  wlcName varchar(255),
+  joinedAps int,
+  Tx bigint,
+  Rx bigint,
+  interfaceName varchar(255),
+  PRIMARY KEY (wlcIp)
+  );
+  

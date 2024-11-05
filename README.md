@@ -32,9 +32,9 @@ The following components are used, see respective sites for installation instruc
 
 ## Grafana Dashboard
 
-Grafana dashboard .json export is available in /grafana folder, import into existing Grafana installation
+Grafana dashboard .json export is available in /grafana directory, import into existing Grafana installation
 
-Queries can be easily modified for different WLC/SSID names
+Queries can be easily modified to aggregate data from different WLC/SSID names
 
 The InfluxDB datasource UID will need to be modified
 
@@ -100,7 +100,7 @@ Flow diagram
 
 Create an admin user with privileges to write/delete data
 
-Commands to create the required tables are in the **mysql** directory
+Commands to create the required tables are in the /mysql directory
 
 MySQL is used for _temporary_ data manipulation only
 

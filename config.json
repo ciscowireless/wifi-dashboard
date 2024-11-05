@@ -1,13 +1,15 @@
 {
     "wlc": [
         {
-            "name": "wlc1",
-            "ip": "192.168.6.8",
-            "interface": "Port-channel1"
+            "name": "hostname",
+            "ip": "x.x.x.x",
+            "interface": "Port-channel1",
+            "user_env": "IOSXE_USER",
+            "pass_env": "IOSXE_PASS"
         }
     ],
     "general": {
-        "netconf_cycle": "30",
+        "netconf_cycle": "60",
         "mysql_host": "localhost",
         "mysql_db": "Telemetry",
         "influx_ip": "127.0.0.1",

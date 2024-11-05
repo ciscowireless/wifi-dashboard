@@ -1,7 +1,6 @@
-## This is a development area for this project - go to [github.com/ciscowireless](https://github.com/ciscowireless/wifi-dashboard)
+## This is a development area - go to [github.com/ciscowireless](https://github.com/ciscowireless/wifi-dashboard)
 
 # Cisco 9800 WLC monitoring dashboard
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/full_dashboard.png)
 
 This repository consists of:
 
@@ -57,22 +56,20 @@ cd wifi-dashboard
 docker build -t netcollector -f netconf/Dockerfile .
 docker run -d --name netcollector --network host --mount type=bind,source="$(pwd)"/logs,destination=/netconf/logs netcollector
 ```
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/netconf-flow.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/netconf-flow.png)
 
 ## RADKIT collector
 
 Makes API calls to RADKit, parses output, sends to InfluxDB
-
-Edit config.ini to configure options
 
 Configure the following environment variables:
 - RADKIT_USER
 - RADKIT_PASS
 - INFLUX_API_KEY
 
-DNAC collector can be run directly
+RADKit collector can be run directly
 ```
-python3 dnac-collector.py
+python3 wncd-radkit.py
 ```
 or as a Docker container
 ```
@@ -81,7 +78,7 @@ cd wifi-dashboard
 docker build -t dnacollector -f dnac/Dockerfile .
 docker run -d --name dnacollector --network host dnacollector
 ```
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/ssh-flow.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/ssh-flow.png)
 
 ## Grafana Dashboard
 
@@ -91,11 +88,11 @@ The InfluxDB datasource uid will need to be modified
 
 Sample screenshots:
 
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/client-capabilities.png)
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/client-summary.png)
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/radios-channel-utilization.png)
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/radios-client-count.png)
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/wlc-summary.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/client-capabilities.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/client-summary.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/radios-channel-utilization.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/radios-client-count.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/wlc-summary.png)
 
 ## MySQL
 
@@ -103,7 +100,7 @@ Create an admin user with privileges to write/delete data
 
 Commands to create the required tables are in the **mysql** directory
 
-MySQL is used for temporary data manipulation only
+MySQL is used for _temporary_ data manipulation only
 
 ## Project status
 

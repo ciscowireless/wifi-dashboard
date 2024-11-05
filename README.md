@@ -1,17 +1,22 @@
-## This project is no longer updated here - go to [github.com/ciscowireless](https://github.com/ciscowireless/wifi-dashboard)
+## This is a development area for this project - go to [github.com/ciscowireless](https://github.com/ciscowireless/wifi-dashboard)
 
 # Cisco 9800 WLC monitoring dashboard
 ![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/full_dashboard.png)
 
 This repository consists of:
 
-- NETCONF collector - Python project, collects useful wireless metrics from Cisco 9800 WLC
-- DNAC collector - Python project, collects useful wireless metrics from DNAC
+- NETCONF collector - Python project, collects useful wireless metrics from Cisco 9800 usign NETCONF
+- RADKIT collector - Python project, collects useful wireless metrics from Cisco 9800 using SSH (via RADKit)
 - Grafana Dashboard - Visualise metrics received from collector app(s)
 
-Grafana and InfluxDB are required, please follow installation instructions on grafana.com and influxdata.com respectively.
+The following components are used, see respective sites for installation instructions.
+- Grafana - grafana.com
+- InfluxDB 2.x - influxdata.com
+- MySQL - mysql.com
+- RADKit - radkit.cisco.com
 
-**Wireless metrics (collected using NETCONF)**
+
+**Wireless metrics (collected via NETCONF)**
 
 - Connected clients
 - Client states
@@ -23,26 +28,27 @@ Grafana and InfluxDB are required, please follow installation instructions on gr
   - client count
   - site-tag
   - rf-tag
-  - channel changes
 
-**Wireless metrics (collected from DNAC)**
+**Wireless metrics (collected via SSH/RADKit)**
 - WNCD process utilization
 
 
 ## NETCONF collector
 
-Makes NETCONF calls to 9800 WLC, parses output, sends to Influx DB, saves to CSV
+Data flow diagram
 
-Edit config.ini to configure options
+Edit config.json to configure options
 
 Configure the following environment variables:
-- WLC_USER
-- WLC_PASS
+- MYSQL_USER
+- MYSQL_PASS
 - INFLUX_API_KEY
+- IOSXE_USER (configurable per-device via config.json)
+- IOSXE_USER (configurable per-device via config.json)
 
 NETCONF collector can be run directly
 ```
-python3 netconf-collector.py
+python3 dashboard.py
 ```
 or as a Docker container
 ```
@@ -51,17 +57,17 @@ cd wifi-dashboard
 docker build -t netcollector -f netconf/Dockerfile .
 docker run -d --name netcollector --network host --mount type=bind,source="$(pwd)"/logs,destination=/netconf/logs netcollector
 ```
-The **--mount** parameter is optional and used to map CSV output folder to Docker host, CSV save option can be enabled in config.ini
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/netconf-flow.png)
 
-## DNAC collector
+## RADKIT collector
 
-Makes API calls to DNAC, parses output, sends to InfluxDB
+Makes API calls to RADKit, parses output, sends to InfluxDB
 
 Edit config.ini to configure options
 
 Configure the following environment variables:
-- DNAC_USER
-- DNAC_PASS
+- RADKIT_USER
+- RADKIT_PASS
 - INFLUX_API_KEY
 
 DNAC collector can be run directly
@@ -75,22 +81,37 @@ cd wifi-dashboard
 docker build -t dnacollector -f dnac/Dockerfile .
 docker run -d --name dnacollector --network host dnacollector
 ```
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/ssh-flow.png)
+
 ## Grafana Dashboard
 
 Grafana dashboard .json export is available in /grafana folder, import into existing Grafana installation
 
-The InfluxDB datasource uid will need to be modified 
+The InfluxDB datasource uid will need to be modified
 
 Sample screenshots:
 
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/client_metrics.png)
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/throughput_and_wncd.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/client-capabilities.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/client-summary.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/radios-channel-utilization.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/radios-client-count.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/grafana/images/wlc-summary.png)
+
+## MySQL
+
+Create an admin user with privileges to write/delete data
+
+Commands to create the required tables are in the **mysql** directory
+
+MySQL is used for temporary data manipulation only
 
 ## Project status
 
 This is a work in progress, some items may not work in your network deployment
 
-Verified on Catalyst 9800 running 17.9.3 code at scale (~11,000 clients)
+Tested on Catalyst 9800 running 17.9, 17.12, and 17.15, and at scale (>10K clients)
 
-Verified on Raspberry Pi
+For versions before 17.9.5 - CSCwf78066 _may_ be a concern
+
+Python 3.10+
 

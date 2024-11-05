@@ -4,7 +4,7 @@
 
 This repository consists of:
 
-- NETCONF collector - Python project, collects useful wireless metrics from Cisco 9800 usign NETCONF
+- NETCONF collector - Python project, collects useful wireless metrics from Cisco 9800 using NETCONF
 - RADKIT collector - Python project, collects useful wireless metrics from Cisco 9800 using SSH (via RADKit)
 - Grafana Dashboard - Visualise metrics received from collector app(s)
 
@@ -13,7 +13,6 @@ The following components are used, see respective sites for installation instruc
 - InfluxDB 2.x - influxdata.com
 - MySQL - mysql.com
 - RADKit - radkit.cisco.com
-
 
 **Wireless metrics (collected via NETCONF)**
 
@@ -31,6 +30,19 @@ The following components are used, see respective sites for installation instruc
 **Wireless metrics (collected via SSH/RADKit)**
 - WNCD process utilization
 
+## Grafana Dashboard
+
+Grafana dashboard .json export is available in /grafana folder, import into existing Grafana installation
+
+The InfluxDB datasource uid will need to be modified
+
+Sample screenshots:
+
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/client-capabilities.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/client-summary.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/radios-channel-utilization.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/radios-client-count.png)
+![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/wlc-summary.png)
 
 ## NETCONF collector
 
@@ -51,7 +63,7 @@ python3 dashboard.py
 ```
 or as a Docker container
 ```
-git clone https://github.com/Johnny8Bit/wifi-dashboard
+~~git clone https://github.com/Johnny8Bit/wifi-dashboard~~
 cd wifi-dashboard
 docker build -t netcollector -f netconf/Dockerfile .
 docker run -d --name netcollector --network host --mount type=bind,source="$(pwd)"/logs,destination=/netconf/logs netcollector
@@ -79,20 +91,6 @@ docker build -t dnacollector -f dnac/Dockerfile .
 docker run -d --name dnacollector --network host dnacollector
 ```
 ![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/ssh-flow.png)
-
-## Grafana Dashboard
-
-Grafana dashboard .json export is available in /grafana folder, import into existing Grafana installation
-
-The InfluxDB datasource uid will need to be modified
-
-Sample screenshots:
-
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/client-capabilities.png)
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/client-summary.png)
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/radios-channel-utilization.png)
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/radios-client-count.png)
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/wlc-summary.png)
 
 ## MySQL
 

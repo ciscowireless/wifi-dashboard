@@ -6,7 +6,7 @@ This repository consists of:
 
 - NETCONF collector - Python project, collects useful wireless metrics from Cisco 9800 using NETCONF
 - RADKIT collector - Python project, collects useful wireless metrics from Cisco 9800 using SSH (via RADKit)
-- Grafana Dashboard - Visualise metrics received from collector app(s)
+- Grafana Dashboard - Makes pretty graphs
 
 The following components are used, see respective sites for installation instructions.
 - Grafana - grafana.com
@@ -34,7 +34,9 @@ The following components are used, see respective sites for installation instruc
 
 Grafana dashboard .json export is available in /grafana folder, import into existing Grafana installation
 
-The InfluxDB datasource uid will need to be modified
+Queries can be easily modified for different WLC/SSID names
+
+The InfluxDB datasource UID will need to be modified
 
 Sample screenshots:
 

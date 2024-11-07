@@ -73,10 +73,10 @@ python3 dashboard.py
 ```
 or as a Docker container
 ```
-git clone https://github.com/Johnny8Bit/wifi-dashboard
+git clone https://github.com/ciscowireless/wifi-dashboard
 cd wifi-dashboard
-docker build -t netcollector -f netconf/Dockerfile .
-docker run -d --name netcollector --network host --mount type=bind,source="$(pwd)"/logs,destination=/netconf/logs netcollector
+docker build -t netconf-collector .
+docker run -d --network host --restart always netconf-collector
 ```
 Flow diagram
 ![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/netconf-flow.png)

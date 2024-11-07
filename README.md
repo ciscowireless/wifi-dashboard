@@ -1,5 +1,3 @@
-## This is a development area - go to [github.com/ciscowireless](https://github.com/ciscowireless/wifi-dashboard)
-
 # Cisco 9800 WLC monitoring dashboard
 
 This repository consists of:
@@ -84,7 +82,7 @@ Flow diagram
 ## MySQL
 
 - Create an admin user with privileges to write/delete data
-- Create database and update database name in config.json
+- Create new database and update database name in config.json
 - Commands to create the required tables are in the /mysql directory
 
 MySQL is used for _temporary_ data manipulation only

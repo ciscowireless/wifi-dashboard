@@ -38,7 +38,7 @@ Tested on Catalyst 9800 running 17.9, 17.12, and 17.15, and at scale (>10K clien
 
 For versions before 17.9.5 - CSCwf78066 _may_ be a concern
 
-Python 3.10+
+Python 3.10+, not tested on Windows
 
 ## Grafana Dashboard
 
@@ -100,17 +100,14 @@ Configure the following environment variables:
 - RADKIT_PASS
 - INFLUX_API_KEY
 
+Complete RADKit service installation as per https://radkit.cisco.com/docs/index.html
+
 RADKit collector can be run directly
 ```
 python3 wncd-radkit.py
 ```
-or as a Docker container
-```
-git clone https://github.com/Johnny8Bit/wifi-dashboard
-cd wifi-dashboard
-docker build -t dnacollector -f dnac/Dockerfile .
-docker run -d --name dnacollector --network host dnacollector
-```
+or as a Docker container, see README in /radkit directory
+
 Flow diagram
 ![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/ssh-flow.png)
 

@@ -83,9 +83,9 @@ Flow diagram
 
 ## MySQL
 
-Create an admin user with privileges to write/delete data
-
-Commands to create the required tables are in the /mysql directory
+- Create an admin user with privileges to write/delete data
+- Create database and update database name in config.json
+- Commands to create the required tables are in the /mysql directory
 
 MySQL is used for _temporary_ data manipulation only
 

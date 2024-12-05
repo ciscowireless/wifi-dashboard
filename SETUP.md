@@ -6,18 +6,18 @@ Ubuntu Desktop 22.04 (recommended)
 
 ## git
 
-Install:
+Install
 ```
 sudo apt install git -y
 ```
-Clone Wi-Fi Dashboard repository:
+Clone Wi-Fi Dashboard repository
 ```
 git clone https://github.com/ciscowireless/wifi-dashboard
 ```
 
 ## pip
 
-Install:
+Install
 ```
 sudo apt install python3-pip -y
 ```
@@ -31,7 +31,7 @@ pip install -r requirements.txt
 
 Install Docker Engine: https://docs.docker.com/engine/install/ubuntu/
 
-Docker Engine post-install (optional):
+Docker Engine post-install (optional)
 ```
 sudo groupadd docker
 sudo usermod -aG docker your_linux_user
@@ -40,11 +40,11 @@ newgrp docker
 
 ## MySQL
 
-Install:
+Install
 ```
 sudo apt install mysql-server -y
 ```
-Configure:
+Configure
 ```
 sudo mysql
 CREATE USER ‘mysql_user’@’localhost’ IDENTIFIED BY ‘mysql_password’;
@@ -86,8 +86,8 @@ Navigate:
 - Home > Connections > Add new connection > InfluxDB
 - Add new data source
 
-Parameters:
-
+| Parameter | Value |
+| --- | --- |
 | Query language | InfluxQL |
 | URL | htto://localhost:8086 |
 | Custom HTTP Headers |

@@ -89,13 +89,13 @@ Navigate:
 | Parameter | Value |
 | --- | --- |
 | Query language | InfluxQL |
-| URL | htto://localhost:8086 |
+| URL | http://localhost:8086 |
 | Custom HTTP Headers |
 | Header | Authorization |
-| Value | Token | <influx_api_token> |
+| Value | Token <influx_api_token> |
 | Database | Influx bucket |
 
-Save & test
+- Save & test
 
 Navigate:
 - Home > Dashboard
@@ -111,7 +111,7 @@ For each panel in each dashboard:
 
 ## Wi-Fi Dashboard - NETCONF
 
-Edit: **/wifi-dashborad/config.json**
+Edit: **wifi-dashborad/config.json**
 
 Update “general” section with values from previous steps:
 - mysql_db
@@ -122,14 +122,15 @@ Update “wlc” section with device details, for each monitored device:
 - name
 - ip
 - WLC LAN interface
-- username environment variable
-- password environment variable
+- username environment variable name
+- password environment variable name
 
-Create environment variables:
+Create environment variables
 ```
 sudo nano /etc/environment
 ```
-Add:
+| Environment variable | Value |
+| --- | --- |
 | IOSXE_USER | netconf_username |
 | IOSXE_PASS | netconf_password |
 | MYSQL_USER | mysql_user |
@@ -145,24 +146,26 @@ python3 dashboard.py
 
 Edit: **wifi-dashborad/Dockerfile**
 
-Update environment variables:
+Update environment variables
 
+| Environment variable | Value |
+| --- | ---|
 | ENV IOSXE_USER | netconf_username |
 | ENV IOSXE_PASS | netconf_password |
 | ENV MYSQL_USER | mysql_user |
 | ENV MYSQL_PASS | mysql_password |
 | ENV INFLUX_API_KEY | influx_api_token |
 
-Build:
+Build
 ```
 cd wifi-dashboard
 docker build -t netconf-collector .
 ```
-Run:
+Run
 ```
 docker run -d –name netconf-collector –network host –restart always netconf-collector
 ```
-Verify:
+Verify
 ```
 docker attach –sig-proxy=false netconf-collector
 ```
@@ -171,16 +174,16 @@ docker attach –sig-proxy=false netconf-collector
 
 Credentials for NETCONF and should be privilege 15
 
-Configure: 
+Configure
 ```
 aaa authorization exec default local
 ```
 
 ## RADKit Service (system wide)
 
-Install RADKit: https://radkit.cisco.com/docs/install/install_linux_systemd.html
+Install RADKit Service: https://radkit.cisco.com/docs/install/install_linux_systemd.html
 
-Bootstrap RADKit: https://radkit.cisco.com/docs/install/install_linux.html#install-linux-bootstrap
+Bootstrap RADKit Service: https://radkit.cisco.com/docs/install/install_linux.html#install-linux-bootstrap
 
 Navigate: https://localhost:8081
 
@@ -195,8 +198,6 @@ Devices > Add new Device
 - SSH password
 - Enable Password (if required)
 
-Add & Close
-
 Create RADKit Admin user:
 
 Admin Users > Add Admin
@@ -204,33 +205,33 @@ Admin Users > Add Admin
 - Password
 - Confirm Password
 
-Add & Close
-
 ## RADKit Client (pip)
 
-Download RADKit pip installation: **cisco_radkit_1.7.x_pip_linux.tgz**
-Update version number as needed.
+Download RADKit pip installation: **cisco_radkit_1.7.<ins>x</ins>_pip_linux.tgz**
+
 ```
 mkdir radkit-pip-install
 cd radkit-pip-install
 tar zxvf cisco_radkit_1.7.x_pip_linux.tgz
 python3 -m pip install -f . cisco_radkit_client
 ```
+Update version number as needed
 
 ## Wi-Fi Dashboard – SSH
 
-Create environment variables:
+Create environment variables
 ```
 sudo nano /etc/environment
 ```
-Add:
+| Environment variable | Value |
+| --- | ---|
 | RADKIT_USER | radkit_admin_username |
 | RADKIT_PASS | radkit_admin_password |
 | INFLUX_API_KEY | influx_api_token |
 
 Edit: **wifi-dashborad/radkit/wncd-radkit.py**
 
-Update:
+Update
 
 | INFLUX_ORG | influx_org |
 | INFLUX_BUCKET | influx_bucket |
@@ -243,7 +244,7 @@ Run:
 
 Edit: **wifi-dashborad/radkit/Dockerfile**
 
-Update environment variables:
+Update environment variables
 ```
 ENV RADKIT_USER=radkit_admin_username
 ENV RADKIT_PASS=radkit_admin_password
@@ -256,22 +257,22 @@ Update:
 INFLUX_ORG=influx_org
 INFLUX_BUCKET=influx_bucket
 ```
-Copy to same directory as Dockerfile: **cisco_radkit_1.7.x_pip_linux.tgz**
+Copy to same directory as Dockerfile: **cisco_radkit_1.7.<ins>x</ins>_pip_linux.tgz**
 
-Update (as needed):
+Update (as needed)
 ```
 COPY cisco_radkit_1.7.x_pip_linux_x86.tgz .
 RUN tar zxvf cisco_radkit_1.7.x_pip_linux_x86.tgz
 ```
-Build:
+Build
 ```
 docker build -t radkit-collector .
 ```
-Run:
+Run
 ```
 docker run -d –-name radkit-collector –-network host –restart always radkit-collector
 ```
-Verify:
+Verify
 ```
 docker attach –sig-proxy=false radkit-collector
 ```

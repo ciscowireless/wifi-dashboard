@@ -231,14 +231,14 @@ sudo nano /etc/environment
 | INFLUX_ORG | influx_org |
 | INFLUX_BUCKET | influx_bucket |
 
-Edit: **wifi-dashborad/radkit/wncd-radkit.py**
-
 Run
 ```
 python3 wncd-radkit.py
 ```
 
 ## (Docker) Wi-Fi Dashboard – SSH
+
+Copy to same directory as Dockerfile: **cisco_radkit_1.7.x_pip_linux.tgz**
 
 Edit: **wifi-dashborad/radkit/Dockerfile**
 
@@ -250,8 +250,6 @@ ENV INFLUX_API_KEY=influx_api_token
 ENV INFLUX_ORG=influx_org
 ENV INFLUX_BUCKET=influx_bucket
 ```
-Copy to same directory as Dockerfile: **cisco_radkit_1.7.x_pip_linux.tgz**
-
 Update (as needed)
 ```
 COPY cisco_radkit_1.7.x_pip_linux_x86.tgz .

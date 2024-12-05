@@ -10,11 +10,9 @@ from datetime import datetime
 from radkit_client.sync import Client
 import radkit_client.async_.command
 
-INFLUX_ORG = "wifininja"
-INFLUX_BUCKET = "telemetry"
 INFLUX_HOST = "localhost"
 INFLUX_PORT = "8086"
-POLL_CYCLE = 30
+POLL_CYCLE = 60
 
 
 class wncd_poller():
@@ -22,8 +20,10 @@ class wncd_poller():
 
     def __init__(self):
 
-        self.command = "show processes cpu platform sorted | i wncd"    
-        
+        self.command = "show processes cpu platform sorted | i wncd"
+
+        self.influx_org = os.environ["INFLUX_ORG"]
+        self.influx_bucket = os.environ["INFLUX_BUCKET"]
         self.radkit_user = os.environ["RADKIT_USER"]
         self.radkit_pass = os.environ["RADKIT_PASS"]
         self.influx_api_key = os.environ["INFLUX_API_KEY"]
@@ -39,8 +39,8 @@ class wncd_poller():
         try:
             with Client.create() as client:
                 self.radkit = client.service_direct(
-                            username=os.environ["RADKIT_USER"], 
-                            password=os.environ["RADKIT_PASS"], 
+                            username=self.radkit_user, 
+                            password=self.radkit_pass, 
                             host='localhost', 
                             port=8181)
                 
@@ -101,8 +101,8 @@ class wncd_poller():
             "Authorization": f'Token {self.influx_api_key}'
         }
         params = {
-            "org" : {INFLUX_ORG},
-            "bucket" : {INFLUX_BUCKET},
+            "org" : {self.influx_org},
+            "bucket" : {self.influx_bucket},
             "precision" : precision
         }
         try:

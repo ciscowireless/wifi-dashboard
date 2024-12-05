@@ -1,8 +1,10 @@
 FROM python:3.12.7-slim-bullseye
 ENV TZ=Europe/Warsaw
-ENV INFLUX_API_KEY=api-key
-ENV RADKIT_USER=username
-ENV RADKIT_PASS=password
+ENV INFLUX_ORG=influx_org
+ENV INFLUX_BUCKET=influx_bucket
+ENV INFLUX_API_KEY=influx_api_key
+ENV RADKIT_USER=radkit_admin_username
+ENV RADKIT_PASS=radkit_admin_password
 RUN apt update
 RUN python3 -m pip install -U pip
 RUN pip install --upgrade pip

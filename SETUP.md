@@ -31,7 +31,7 @@ pip install -r requirements.txt
 
 Install Docker Engine: https://docs.docker.com/engine/install/ubuntu/
 
-Docker Engine post-install (optional)
+Docker Engine post-install
 ```
 sudo groupadd docker
 sudo usermod -aG docker your_linux_user
@@ -131,8 +131,8 @@ sudo nano /etc/environment
 ```
 | Environment variable | Value |
 | --- | --- |
-| IOSXE_USER | netconf_username |
-| IOSXE_PASS | netconf_password |
+| IOSXE_USER (configurable in previous step) | netconf_username |
+| IOSXE_PASS (configurable in previous step)| netconf_password |
 | MYSQL_USER | mysql_user |
 | MYSQL_PASS | mysql_password |
 | INFLUX_API_KEY | influx_api_token |
@@ -207,7 +207,7 @@ Admin Users > Add Admin
 
 ## RADKit Client (pip)
 
-Download RADKit pip installation: **cisco_radkit_1.7.<ins>x</ins>_pip_linux.tgz**
+Download RADKit pip installation: **cisco_radkit_1.7.x_pip_linux.tgz**
 
 ```
 mkdir radkit-pip-install
@@ -228,16 +228,14 @@ sudo nano /etc/environment
 | RADKIT_USER | radkit_admin_username |
 | RADKIT_PASS | radkit_admin_password |
 | INFLUX_API_KEY | influx_api_token |
-
-Edit: **wifi-dashborad/radkit/wncd-radkit.py**
-
-Update
-
 | INFLUX_ORG | influx_org |
 | INFLUX_BUCKET | influx_bucket |
 
-Run:
-```python3 wncd-radkit.py
+Edit: **wifi-dashborad/radkit/wncd-radkit.py**
+
+Run
+```
+python3 wncd-radkit.py
 ```
 
 ## (Docker) Wi-Fi Dashboard – SSH
@@ -249,15 +247,10 @@ Update environment variables
 ENV RADKIT_USER=radkit_admin_username
 ENV RADKIT_PASS=radkit_admin_password
 ENV INFLUX_API_KEY=influx_api_token
+ENV INFLUX_ORG=influx_org
+ENV INFLUX_BUCKET=influx_bucket
 ```
-Edit: **wifi-dashborad/radkit/wncd-radkit.py**
-
-Update:
-```
-INFLUX_ORG=influx_org
-INFLUX_BUCKET=influx_bucket
-```
-Copy to same directory as Dockerfile: **cisco_radkit_1.7.<ins>x</ins>_pip_linux.tgz**
+Copy to same directory as Dockerfile: **cisco_radkit_1.7.x_pip_linux.tgz**
 
 Update (as needed)
 ```

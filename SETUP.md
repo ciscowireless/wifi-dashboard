@@ -5,17 +5,24 @@
 Ubuntu Desktop 22.04 (recommended)
 
 ## git
+
+Install:
 ```
 sudo apt install git -y
 ```
-Clone repository:
+Clone Wi-Fi Dashboard repository:
 ```
 git clone https://github.com/ciscowireless/wifi-dashboard
 ```
 
 ## pip
+
+Install:
 ```
 sudo apt install python3-pip -y
+```
+Install required libraries
+```
 cd wifi-dashboard
 pip install -r requirements.txt
 ```
@@ -32,6 +39,8 @@ newgrp docker
 ```
 
 ## MySQL
+
+Install:
 ```
 sudo apt install mysql-server -y
 ```
@@ -65,7 +74,7 @@ Save:
 
 ## Grafana
 
-Install grafana: https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
+Install Grafana: https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
 
 Start Grafana: https://grafana.com/docs/grafana/latest/setup-grafana/start-restart-grafana/
 
@@ -79,12 +88,12 @@ Navigate:
 
 Parameters:
 
-Query language: InfluxQL
-URL: htto://localhost:8086
-Custom HTTP Headers:
-Header: Authorization
-Value: Token <influx_api_token>
-Database: Influx bucket
+| Query language | InfluxQL |
+| URL | htto://localhost:8086 |
+| Custom HTTP Headers |
+| Header | Authorization |
+| Value | Token | <influx_api_token> |
+| Database | Influx bucket |
 
 Save & test
 
@@ -93,7 +102,7 @@ Navigate:
 - New > Import
 - Upload dashboard JSON file
 
-Import all files in /wifi-dashboard/grafana one by one
+Import all files in **wifi-dashboard/grafana** one by one
 
 For each panel in each dashboard:
 - Edit
@@ -102,7 +111,7 @@ For each panel in each dashboard:
 
 ## Wi-Fi Dashboard - NETCONF
 
-Edit /wifi-dashborad/config.json
+Edit: **/wifi-dashborad/config.json**
 
 Update “general” section with values from previous steps:
 - mysql_db
@@ -121,11 +130,11 @@ Create environment variables:
 sudo nano /etc/environment
 ```
 Add:
-- IOSXE_USER=netconf_username
-- IOSXE_PASS=netconf_password
-- MYSQL_USER=mysql_user
-- MYSQL_PASS=mysql_password
-- INFLUX_API_KEY=influx_api_token
+| IOSXE_USER | netconf_username |
+| IOSXE_PASS | netconf_password |
+| MYSQL_USER | mysql_user |
+| MYSQL_PASS | mysql_password |
+| INFLUX_API_KEY | influx_api_token |
 
 Run:
 ```
@@ -134,13 +143,15 @@ python3 dashboard.py
 
 ## (Docker) Wi-Fi Dashboard - NETCONF
 
-Edit /wifi-dashborad/Dockerfile
+Edit: **wifi-dashborad/Dockerfile**
+
 Update environment variables:
-- ENV IOSXE_USER=netconf_username
-- ENV IOSXE_PASS=netconf_password
-- ENV MYSQL_USER=mysql_user
-- ENV MYSQL_PASS=mysql_password
-- ENV INFLUX_API_KEY=influx_api_token
+
+| ENV IOSXE_USER | netconf_username |
+| ENV IOSXE_PASS | netconf_password |
+| ENV MYSQL_USER | mysql_user |
+| ENV MYSQL_PASS | mysql_password |
+| ENV INFLUX_API_KEY | influx_api_token |
 
 Build:
 ```
@@ -167,8 +178,9 @@ aaa authorization exec default local
 
 ## RADKit Service (system wide)
 
-https://radkit.cisco.com/docs/install/install_linux_systemd.html
-https://radkit.cisco.com/docs/install/install_linux.html#install-linux-bootstrap
+Install RADKit: https://radkit.cisco.com/docs/install/install_linux_systemd.html
+
+Bootstrap RADKit: https://radkit.cisco.com/docs/install/install_linux.html#install-linux-bootstrap
 
 Navigate: https://localhost:8081
 
@@ -182,21 +194,24 @@ Devices > Add new Device
 - SSH username
 - SSH password
 - Enable Password (if required)
+
 Add & Close
 
 Create RADKit Admin user:
+
 Admin Users > Add Admin
 - Admin Name
 - Password
 - Confirm Password
+
 Add & Close
 
 ## RADKit Client (pip)
 
-Download RADKit pip installation: cisco_radkit_1.7.x_pip_linux.tgz
+Download RADKit pip installation: **cisco_radkit_1.7.x_pip_linux.tgz**
 Update version number as needed.
 ```
-mkdir radkit-pip-install 
+mkdir radkit-pip-install
 cd radkit-pip-install
 tar zxvf cisco_radkit_1.7.x_pip_linux.tgz
 python3 -m pip install -f . cisco_radkit_client
@@ -209,15 +224,16 @@ Create environment variables:
 sudo nano /etc/environment
 ```
 Add:
-- RADKIT_USER=radkit_admin_username
-- RADKIT_PASS=radkit_admin_password
-- INFLUX_API_KEY=influx_api_token
+| RADKIT_USER | radkit_admin_username |
+| RADKIT_PASS | radkit_admin_password |
+| INFLUX_API_KEY | influx_api_token |
 
-Edit /wifi-dashborad/radkit/wncd-radkit.py
+Edit: **wifi-dashborad/radkit/wncd-radkit.py**
 
 Update:
-- INFLUX_ORG=influx_org
-- INFLUX_BUCKET=influx_bucket
+
+| INFLUX_ORG | influx_org |
+| INFLUX_BUCKET | influx_bucket |
 
 Run:
 ```python3 wncd-radkit.py
@@ -225,21 +241,22 @@ Run:
 
 ## (Docker) Wi-Fi Dashboard – SSH
 
-Edit /wifi-dashborad/radkit/Dockerfile
+Edit: **wifi-dashborad/radkit/Dockerfile**
 
 Update environment variables:
-- ENV RADKIT_USER=radkit_admin_username
-- ENV RADKIT_PASS=radkit_admin_password
-- ENV INFLUX_API_KEY=influx_api_token
-
-Edit /wifi-dashborad/radkit/wncd-radkit.py
+```
+ENV RADKIT_USER=radkit_admin_username
+ENV RADKIT_PASS=radkit_admin_password
+ENV INFLUX_API_KEY=influx_api_token
+```
+Edit: **wifi-dashborad/radkit/wncd-radkit.py**
 
 Update:
 ```
 INFLUX_ORG=influx_org
 INFLUX_BUCKET=influx_bucket
 ```
-Copy to same directory as Dockerfile: cisco_radkit_1.7.x_pip_linux.tgz
+Copy to same directory as Dockerfile: **cisco_radkit_1.7.x_pip_linux.tgz**
 
 Update (as needed):
 ```
@@ -251,8 +268,10 @@ Build:
 docker build -t radkit-collector .
 ```
 Run:
-```docker run -d –-name radkit-collector –-network host –restart always radkit-collector
+```
+docker run -d –-name radkit-collector –-network host –restart always radkit-collector
 ```
 Verify:
-```docker attach –sig-proxy=false radkit-collector
+```
+docker attach –sig-proxy=false radkit-collector
 ```

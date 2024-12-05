@@ -1,11 +1,13 @@
-# Step-by-Step manual build:
+# Step-by-Step manual build
 
 ## Operating system
 
-Ubuntu Desktop 22.04 recommended
+Ubuntu Desktop 22.04 (recommended)
 
 ## git
+```
 sudo apt install git -y
+```
 Clone repository:
 ```
 git clone https://github.com/ciscowireless/wifi-dashboard
@@ -20,13 +22,12 @@ pip install -r requirements.txt
 
 ## Docker
 
-Install Docker Engine:
-https://docs.docker.com/engine/install/ubuntu/
+Install Docker Engine: https://docs.docker.com/engine/install/ubuntu/
 
 Docker Engine post-install (optional):
 ```
 sudo groupadd docker
-sudo usermod -aG docker your_user
+sudo usermod -aG docker your_linux_user
 newgrp docker
 ```
 
@@ -39,24 +40,23 @@ Configure:
 sudo mysql
 CREATE USER ‘mysql_user’@’localhost’ IDENTIFIED BY ‘mysql_password’;
 GRANT ALL PRIVILEGES ON *.* TO ‘mysql_user’@’localhost;
-Exit
+exit
 mysql -u mysql_user -p
 CREATE DATABASE database_name;
 USE database_name;
 ```
-Create new tables by copying statements from /mysql/table-create.txt
+Create new tables by copying statements from **wifi-dashboard/mysql/table-create.txt**
 
 ## InfluxDB
 
-https://www.influxdata.com/downloads
-Do <ins>not</ins> use: https://docs.influxdata.com/influxdb/v2/install/
+Install InfluxDB: https://www.influxdata.com/downloads
 
-sudo service influxdb start
+Do <ins>not</ins> use: https://docs.influxdata.com/influxdb/v2/install/
 
 Launch: http://localhost:8086
 
 Create:
-- Admin usera
+- Admin user
 - Organization
 - Bucket
 
@@ -65,8 +65,9 @@ Save:
 
 ## Grafana
 
-https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
-https://grafana.com/docs/grafana/latest/setup-grafana/start-restart-grafana/
+Install grafana: https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
+
+Start Grafana: https://grafana.com/docs/grafana/latest/setup-grafana/start-restart-grafana/
 
 Launch: http://localhost:3000
 - Default credentials: admin/admin

@@ -18,15 +18,14 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 6,
+  "id": 2,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "description": "",
       "fieldConfig": {
@@ -74,10 +73,10 @@
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
-          "alias": "Lab2G",
+          "alias": "SSIDName",
           "datasource": {
             "type": "influxdb",
             "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
@@ -95,11 +94,16 @@
                   "wlanUsers"
                 ],
                 "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
               }
             ]
           ],
           "tags": [
             {
+              "condition": "AND",
               "key": "wlanProfileName::tag",
               "operator": "=",
               "value": "Lab2G"
@@ -107,13 +111,14 @@
           ]
         }
       ],
+      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "description": "",
       "fieldConfig": {
@@ -161,10 +166,10 @@
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
-          "alias": "Lab5G",
+          "alias": "SSIDName",
           "datasource": {
             "type": "influxdb",
             "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
@@ -189,18 +194,19 @@
             {
               "key": "wlanProfileName::tag",
               "operator": "=",
-              "value": "Lab5G"
+              "value": "Lab2G"
             }
           ]
         }
       ],
+      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "description": "",
       "fieldConfig": {
@@ -248,10 +254,10 @@
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
-          "alias": "Lab6G",
+          "alias": "SSIDName",
           "datasource": {
             "type": "influxdb",
             "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
@@ -276,18 +282,19 @@
             {
               "key": "wlanProfileName::tag",
               "operator": "=",
-              "value": "Lab6G"
+              "value": "Lab2G"
             }
           ]
         }
       ],
+      "title": "",
       "type": "stat"
     },
     {
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "fieldConfig": {
         "defaults": {
@@ -332,7 +339,6 @@
           "decimals": 0,
           "fieldMinMax": false,
           "mappings": [],
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -367,7 +373,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -412,7 +418,8 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         },
         {
           "datasource": {
@@ -435,7 +442,8 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         }
       ],
       "title": "Total Wi-Fi Clients",
@@ -463,16 +471,14 @@
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
-          "fieldMinMax": true,
           "mappings": [],
-          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -513,7 +519,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -535,7 +541,8 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         },
         {
           "datasource": {
@@ -558,7 +565,8 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         },
         {
           "datasource": {
@@ -581,7 +589,8 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         }
       ],
       "title": "Total Wi-Fi Clients",
@@ -609,7 +618,7 @@
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "fieldConfig": {
         "defaults": {
@@ -656,7 +665,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "alias": "Clients 2.4GHz",
@@ -679,7 +688,8 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         },
         {
           "alias": "Clients 5GHz",
@@ -703,7 +713,8 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         },
         {
           "alias": "Clients 6GHz",
@@ -727,7 +738,8 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         }
       ],
       "title": "Clients per Band",
@@ -737,7 +749,7 @@
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "fieldConfig": {
         "defaults": {
@@ -771,6 +783,12 @@
       "id": 2,
       "options": {
         "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
         "maxVizHeight": 300,
         "minVizHeight": 10,
         "minVizWidth": 0,
@@ -787,7 +805,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "alias": "authClients",
@@ -811,7 +829,8 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         },
         {
           "alias": "mobilityClients",
@@ -836,7 +855,8 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         },
         {
           "alias": "ipLearnClients",
@@ -861,7 +881,8 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         },
         {
           "alias": "webAuthClients",
@@ -886,7 +907,8 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         },
         {
           "alias": "runClients",
@@ -911,7 +933,8 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         },
         {
           "alias": "deleteClients",
@@ -936,7 +959,8 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         },
         {
           "alias": "randomMacClients",
@@ -961,27 +985,29 @@
                 "type": "field"
               }
             ]
-          ]
+          ],
+          "tags": []
         }
       ],
       "title": "Client States",
       "type": "bargauge"
     }
   ],
+  "preload": false,
   "refresh": "10s",
-  "schemaVersion": 39,
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Client Summary",
   "uid": "f2e1f618-b764-4e5f-b577-4b1f890cf03c",
-  "version": 33,
+  "version": 12,
   "weekStart": ""
 }

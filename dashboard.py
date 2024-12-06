@@ -103,6 +103,12 @@ class Dashboard():
                 self.mysql.sql_interfaces_oper(self.netconf)
                 self.influx.post_wlc_oper()
 
+                self.netconf.get_device_hardware_oper()
+                self.netconf.get_native()
+                self.netconf.get_install_oper()
+                self.mysql.sql_wlc_detail(self.netconf)
+                self.influx.post_wlc_details()
+
             log.info(f"Waiting for next NETCONF cycle\n")
     
 

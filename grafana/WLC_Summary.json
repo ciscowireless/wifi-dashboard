@@ -18,14 +18,14 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 9,
+  "id": 5,
   "links": [],
   "panels": [
     {
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "fieldConfig": {
         "defaults": {
@@ -70,7 +70,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -80,9 +80,9 @@
           "groupBy": [
             {
               "params": [
-                "joinedAps::field"
+                "$interval"
               ],
-              "type": "tag"
+              "type": "time"
             }
           ],
           "measurement": "wlcSummary",
@@ -97,75 +97,23 @@
                   "joinedAps"
                 ],
                 "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "wlcName::tag",
-              "operator": "=",
-              "value": "wlc3"
-            }
-          ]
-        },
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
-          },
-          "groupBy": [
-            {
-              "params": [
-                "joinedAps::field"
-              ],
-              "type": "tag"
-            }
-          ],
-          "hide": false,
-          "measurement": "wlcSummary",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "B",
-          "resultFormat": "table",
-          "select": [
-            [
+              },
               {
-                "params": [
-                  "joinedAps"
-                ],
-                "type": "field"
+                "params": [],
+                "type": "last"
               }
             ]
-          ],
-          "tags": [
-            {
-              "key": "wlcName::tag",
-              "operator": "=",
-              "value": "wlc6"
-            }
           ]
         }
       ],
       "title": "Event - Total APs",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "mode": "reduceRow",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": true
-          }
-        }
-      ],
       "type": "stat"
     },
     {
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "fieldConfig": {
         "defaults": {
@@ -197,7 +145,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 12,
+        "w": 13,
         "x": 0,
         "y": 5
       },
@@ -217,7 +165,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "alias": "WNCD 0",
@@ -245,7 +193,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc3"
+              "value": "rmwlc"
             }
           ]
         },
@@ -467,14 +415,14 @@
           ]
         }
       ],
-      "title": "WLC3 - WNCD",
+      "title": "WLC1 - WNCD",
       "type": "gauge"
     },
     {
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "description": "",
       "fieldConfig": {
@@ -531,8 +479,8 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 12,
-        "x": 12,
+        "w": 11,
+        "x": 13,
         "y": 5
       },
       "id": 2,
@@ -548,6 +496,7 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "alias": "Rx",
@@ -575,7 +524,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc3"
+              "value": "wlc6"
             },
             {
               "condition": "AND",
@@ -612,7 +561,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc3"
+              "value": "wlc6"
             },
             {
               "condition": "AND",
@@ -623,14 +572,14 @@
           ]
         }
       ],
-      "title": "WLC3 - Port-Channel1",
+      "title": "WLCName - Port-Channel1",
       "type": "timeseries"
     },
     {
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "fieldConfig": {
         "defaults": {
@@ -662,11 +611,11 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 12,
+        "w": 13,
         "x": 0,
         "y": 11
       },
-      "id": 4,
+      "id": 5,
       "options": {
         "minVizHeight": 75,
         "minVizWidth": 75,
@@ -682,7 +631,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "alias": "WNCD 0",
@@ -710,7 +659,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc6"
+              "value": "rmwlc"
             }
           ]
         },
@@ -932,14 +881,14 @@
           ]
         }
       ],
-      "title": "WLC6 - WNCD",
+      "title": "WLC1 - WNCD",
       "type": "gauge"
     },
     {
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "description": "",
       "fieldConfig": {
@@ -996,11 +945,11 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 12,
-        "x": 12,
+        "w": 11,
+        "x": 13,
         "y": 11
       },
-      "id": 5,
+      "id": 4,
       "options": {
         "legend": {
           "calcs": [],
@@ -1013,6 +962,7 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "alias": "Rx",
@@ -1040,7 +990,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc6"
+              "value": "wlc3"
             },
             {
               "condition": "AND",
@@ -1077,7 +1027,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc6"
+              "value": "wlc3"
             },
             {
               "condition": "AND",
@@ -1088,24 +1038,25 @@
           ]
         }
       ],
-      "title": "WLC6 - Port-Channel1",
+      "title": "WLC1Name- Port-Channel1",
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "10s",
-  "schemaVersion": 39,
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "WLC Summary",
   "uid": "fdyr1ygwdnzeod",
-  "version": 17,
+  "version": 9,
   "weekStart": ""
 }

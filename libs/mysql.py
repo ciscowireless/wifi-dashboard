@@ -1,4 +1,5 @@
 import logging
+import re
 
 import xml.etree.ElementTree as ET
 
@@ -23,6 +24,7 @@ class MySql():
         self.write_mysql(f"DELETE FROM SlotMetrics;")
         self.write_mysql(f"DELETE FROM Wlan;")
         self.write_mysql(f"DELETE FROM Wlc;")
+        self.write_mysql(f"DELETE FROM WlcDetail;")
 
 
     def write_mysql(self, query):
@@ -205,7 +207,7 @@ class MySql():
     def sql_wireless_client_oper(self, netconf_data):
 
         try:
-            wireless_client_oper = ET.fromstring(netconf_data.wireless_ap_global_oper).find(".//client-oper-data")
+            wireless_client_oper = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-oper-data")
 
         except ET.ParseError:
             log.warning(f"XML parse error [wireless_client_oper]")
@@ -229,7 +231,7 @@ class MySql():
                         case _: wifi_other += 1
             
             except AttributeError:
-                log.warning(f"Data validation error [wireless_ap_global_oper]")
+                log.warning(f"Data validation error [wireless_client_global_oper]")
             else:
                 self.write_mysql(f"UPDATE Client SET wifi4 = '{wifi_4}', wifi5 = '{wifi_5}', wifi6 = '{wifi_6}', wifi7 = '{wifi_7}', wifiOther = '{wifi_other}' WHERE wlcIp = '{netconf_data.wlc_ip}';")
 
@@ -251,8 +253,34 @@ class MySql():
                 log.warning(f"Data validation error [interfaces_oper]")
             else:
                 self.write_mysql(f"UPDATE Wlc SET interfaceName = '{interface_name}', Rx = '{rx}', Tx = '{tx}' WHERE wlcIp = '{netconf_data.wlc_ip}';")
+    
 
-                    
+    def sql_wlc_detail(self, netconf_data):
+
+        try:
+            device_hardware_oper = ET.fromstring(netconf_data.device_hardware_oper).find(".//device-hardware-data")
+            install_oper = ET.fromstring(netconf_data.install_oper).find(".//install-oper-data")
+            native = ET.fromstring(netconf_data.native).find(".//native")
+            
+        except ET.ParseError:
+            log.warning(f"XML parse error: wlc_detail")
+        else:
+            try:
+                model = device_hardware_oper.find("device-hardware/device-inventory/part-number").text
+                software = device_hardware_oper.find("device-hardware/device-system-data/software-version").text
+                sso_status = install_oper.find("install-location-information/oper-state/sso-state").text
+                hostname = native.find("hostname").text
+
+            except AttributeError:
+                log.warning(f"Data validation error [wlc_detail]")
+            else:
+                software_version = re.search("Version [0-9.]+", software).group(0)[8:]
+                self.write_mysql(
+                                f"REPLACE INTO WlcDetail (wlcIp, wlcName, hostName, model, software, ssoState) VALUES "\
+                                f"('{netconf_data.wlc_ip}', '{netconf_data.wlc_name}', '{hostname}', '{model}', '{software_version}', '{sso_status}');"
+                                )
+
+        
         
 
 

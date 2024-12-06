@@ -18,14 +18,14 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 8,
+  "id": 4,
   "links": [],
   "panels": [
     {
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "fieldConfig": {
         "defaults": {
@@ -113,6 +113,7 @@
         "cellHeight": "sm",
         "footer": {
           "countRows": false,
+          "enablePagination": true,
           "fields": "",
           "reducer": [
             "sum"
@@ -122,7 +123,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -194,7 +195,7 @@
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "fieldConfig": {
         "defaults": {
@@ -282,6 +283,7 @@
         "cellHeight": "sm",
         "footer": {
           "countRows": false,
+          "enablePagination": true,
           "fields": "",
           "reducer": [
             "sum"
@@ -291,7 +293,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -350,7 +352,12 @@
               "Time": true
             },
             "includeByName": {},
-            "indexByName": {},
+            "indexByName": {
+              "Time": 0,
+              "apName": 1,
+              "last": 3,
+              "slot": 2
+            },
             "renameByName": {
               "last": "Client Count"
             }
@@ -360,19 +367,21 @@
       "type": "table"
     }
   ],
-  "schemaVersion": 39,
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Top Radios by Client Count",
   "uid": "fdym3kscee58ga",
-  "version": 16,
+  "version": 5,
   "weekStart": ""
 }

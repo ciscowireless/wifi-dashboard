@@ -15,18 +15,17 @@
       }
     ]
   },
-  "description": "",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 10,
+  "id": 1,
   "links": [],
   "panels": [
     {
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "description": "",
       "fieldConfig": {
@@ -77,9 +76,10 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.2",
       "targets": [
         {
-          "alias": "Wi-Fi 7",
+          "alias": "Wi-Fi 6",
           "datasource": {
             "type": "influxdb",
             "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
@@ -89,7 +89,7 @@
           "measurement": "clientProtocols",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "A",
+          "refId": "C",
           "resultFormat": "time_series",
           "select": [
             [
@@ -114,7 +114,7 @@
           "measurement": "clientProtocols",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "B",
+          "refId": "E",
           "resultFormat": "time_series",
           "select": [
             [
@@ -139,7 +139,7 @@
           "measurement": "clientProtocols",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "C",
+          "refId": "B",
           "resultFormat": "time_series",
           "select": [
             [
@@ -160,11 +160,10 @@
             "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
           },
           "groupBy": [],
-          "hide": false,
           "measurement": "clientProtocols",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "D",
+          "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
@@ -179,7 +178,7 @@
           "tags": []
         },
         {
-          "alias": "Wi-Fi Other",
+          "alias": "Other",
           "datasource": {
             "type": "influxdb",
             "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
@@ -189,7 +188,7 @@
           "measurement": "clientProtocols",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "E",
+          "refId": "D",
           "resultFormat": "time_series",
           "select": [
             [
@@ -205,23 +204,12 @@
         }
       ],
       "title": "Client Capabilities",
-      "transformations": [
-        {
-          "id": "reduce",
-          "options": {
-            "includeTimeField": false,
-            "mode": "reduceFields",
-            "reducers": [
-              "sum"
-            ]
-          }
-        }
-      ],
       "type": "piechart"
     }
   ],
-  "refresh": "10s",
-  "schemaVersion": 39,
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": []
@@ -234,6 +222,6 @@
   "timezone": "browser",
   "title": "Client Capabilities",
   "uid": "bdysj2lha5zb4e",
-  "version": 9,
+  "version": 3,
   "weekStart": ""
 }

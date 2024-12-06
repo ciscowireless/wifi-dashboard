@@ -120,7 +120,7 @@ class Netconf():
                 </emltd-join-count-stat>
             </ap-global-oper-data>
         '''
-        self.wireless_ap_global_oper = self.netconf_rpc(filter, "ap-global-oper-data")
+        self.wireless_ap_global_oper = self.netconf_rpc(filter, "wireless_ap_global_oper")
 
 
     def get_wireless_client_oper(self):
@@ -132,7 +132,7 @@ class Netconf():
                 </common-oper-data>
             </client-oper-data>
         '''
-        self.wireless_ap_global_oper = self.netconf_rpc(filter, "wireless-client-oper")
+        self.wireless_client_global_oper = self.netconf_rpc(filter, "wireless-client-oper")
 
 
     def get_interfaces_oper(self):
@@ -149,3 +149,45 @@ class Netconf():
             </interfaces>
         '''
         self.interfaces_oper = self.netconf_rpc(filter, "interfaces-oper")
+
+
+    def get_device_hardware_oper(self):
+
+        filter = f'''
+            <device-hardware-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-device-hardware-oper">
+                <device-hardware>
+                <device-inventory>
+                    <hw-type>hw-type-chassis</hw-type>
+                    <part-number/>
+                </device-inventory>
+                <device-system-data>
+                    <software-version/>
+                </device-system-data>
+                </device-hardware>
+            </device-hardware-data>
+        '''
+        self.device_hardware_oper = self.netconf_rpc(filter, "device-hardware-oper")
+
+
+    def get_native(self):
+       
+        filter = f'''
+            <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+                <hostname/>
+            </native>
+        '''
+        self.native = self.netconf_rpc(filter, "native")
+
+
+    def get_install_oper(self):
+
+        filter = f'''
+            <install-oper-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-install-oper">
+                <install-location-information>
+                <oper-state>
+                    <sso-state/>
+                </oper-state>
+                </install-location-information>
+            </install-oper-data>
+        '''
+        self.install_oper = self.netconf_rpc(filter, "install-oper")

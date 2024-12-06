@@ -18,14 +18,14 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 7,
+  "id": 3,
   "links": [],
   "panels": [
     {
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "description": "",
       "fieldConfig": {
@@ -138,7 +138,7 @@
           }
         ]
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -215,7 +215,7 @@
       "datasource": {
         "default": true,
         "type": "influxdb",
-        "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+        "uid": "fdzcjxrjfri80d"
       },
       "description": "",
       "fieldConfig": {
@@ -328,7 +328,7 @@
           }
         ]
       },
-      "pluginVersion": "11.2.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -402,20 +402,21 @@
       "type": "table"
     }
   ],
+  "preload": false,
   "refresh": "10s",
-  "schemaVersion": 39,
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Top Radios by Channel Utilization",
   "uid": "cdylzgmfkxczkc",
-  "version": 19,
+  "version": 3,
   "weekStart": ""
 }

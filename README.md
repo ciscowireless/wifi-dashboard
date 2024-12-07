@@ -19,11 +19,14 @@ The following components are used, see respective sites for installation instruc
 - Client types
 - Client count
 - WLC LAN Throughput
+- WLC Inventory (HW/SW)
+- WLC SSO state
 - AP metrics
   - channel Utilization
   - client count
   - site-tag
   - rf-tag
+  - model
 
 **Wireless metrics (collected via SSH/RADKit)**
 - WNCD process utilization

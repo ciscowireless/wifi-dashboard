@@ -194,7 +194,7 @@
             {
               "key": "wlanProfileName::tag",
               "operator": "=",
-              "value": "Lab2G"
+              "value": "Lab5G"
             }
           ]
         }
@@ -282,7 +282,7 @@
             {
               "key": "wlanProfileName::tag",
               "operator": "=",
-              "value": "Lab2G"
+              "value": "Lab6G"
             }
           ]
         }
@@ -994,20 +994,20 @@
     }
   ],
   "preload": false,
-  "refresh": "10s",
+  "refresh": "5m",
   "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Client Summary",
   "uid": "f2e1f618-b764-4e5f-b577-4b1f890cf03c",
-  "version": 12,
+  "version": 14,
   "weekStart": ""
 }

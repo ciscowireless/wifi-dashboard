@@ -75,32 +75,6 @@
       "pluginVersion": "11.3.2",
       "targets": [
         {
-          "alias": "Hostname",
-          "groupBy": [],
-          "measurement": "wlcDetail",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "wlcHostName"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "wlcName::tag",
-              "operator": "=",
-              "value": "wlc6"
-            }
-          ]
-        },
-        {
           "alias": "Model",
           "datasource": {
             "type": "influxdb",
@@ -108,7 +82,7 @@
           },
           "groupBy": [],
           "hide": false,
-          "measurement": "wlcDetail",
+          "measurement": "wlcInventory",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -139,7 +113,7 @@
           },
           "groupBy": [],
           "hide": false,
-          "measurement": "wlcDetail",
+          "measurement": "wlcInventory",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -170,7 +144,7 @@
           },
           "groupBy": [],
           "hide": false,
-          "measurement": "wlcDetail",
+          "measurement": "wlcInventory",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -262,7 +236,7 @@
         {
           "alias": "APs",
           "groupBy": [],
-          "measurement": "wlcDetail",
+          "measurement": "wlcInventory",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -358,7 +332,7 @@
         {
           "alias": "Clients",
           "groupBy": [],
-          "measurement": "wlcDetail",
+          "measurement": "wlcInventory",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -452,32 +426,6 @@
       "pluginVersion": "11.3.2",
       "targets": [
         {
-          "alias": "Hostname",
-          "groupBy": [],
-          "measurement": "wlcDetail",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "wlcHostName"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "wlcName::tag",
-              "operator": "=",
-              "value": "wlc3"
-            }
-          ]
-        },
-        {
           "alias": "Model",
           "datasource": {
             "type": "influxdb",
@@ -485,7 +433,7 @@
           },
           "groupBy": [],
           "hide": false,
-          "measurement": "wlcDetail",
+          "measurement": "wlcInventory",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -516,7 +464,7 @@
           },
           "groupBy": [],
           "hide": false,
-          "measurement": "wlcDetail",
+          "measurement": "wlcInventory",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "C",
@@ -547,7 +495,7 @@
           },
           "groupBy": [],
           "hide": false,
-          "measurement": "wlcDetail",
+          "measurement": "wlcInventory",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "D",
@@ -639,7 +587,7 @@
         {
           "alias": "APs",
           "groupBy": [],
-          "measurement": "wlcDetail",
+          "measurement": "wlcInventory",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -735,7 +683,7 @@
         {
           "alias": "Clients",
           "groupBy": [],
-          "measurement": "wlcDetail",
+          "measurement": "wlcInventory",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -777,19 +725,20 @@
     }
   ],
   "preload": false,
+  "refresh": "1m",
   "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Inventory",
+  "title": "WLC Inventory",
   "uid": "be63lnlkok268b",
-  "version": 17,
+  "version": 26,
   "weekStart": ""
 }

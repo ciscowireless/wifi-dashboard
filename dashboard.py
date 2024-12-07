@@ -38,9 +38,9 @@ class Dashboard():
         self.influx_api_key = os.environ["INFLUX_API_KEY"]
         self.open_mysql_session()
 
-        self.netconf = Netconf()
         self.mysql = MySql(self)
         self.influx = Influx(self)
+        self.netconf = Netconf(self)
 
         self.lastrun = datetime.now()
         self.firstrun = True
@@ -92,6 +92,7 @@ class Dashboard():
                 self.netconf.get_wireless_rrm_oper()
                 self.mysql.sql_wireless_rrm_oper(self.netconf)
                 self.influx.post_wireless_oper()
+                self.influx.post_ap_inventory()
 
                 self.netconf.get_wireless_client_oper()
                 self.mysql.sql_wireless_client_oper(self.netconf)
@@ -107,7 +108,7 @@ class Dashboard():
                 self.netconf.get_native()
                 self.netconf.get_install_oper()
                 self.mysql.sql_wlc_detail(self.netconf)
-                self.influx.post_wlc_details()
+                self.influx.post_wlc_inventory()
 
             log.info(f"Waiting for next NETCONF cycle\n")
     

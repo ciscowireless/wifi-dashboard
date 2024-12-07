@@ -403,20 +403,20 @@
     }
   ],
   "preload": false,
-  "refresh": "10s",
+  "refresh": "1m",
   "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Top Radios by Channel Utilization",
   "uid": "cdylzgmfkxczkc",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }

@@ -124,7 +124,7 @@ class Influx():
     def post_wireless_oper(self):
 
         query = (
-            f"SELECT * FROM Ap "
+            f"SELECT wlcName, Ap.apRadioMac, apName, rfTag, siteTag, Slot.slot, operState, radioMode, band, channel, power, stations, cca FROM Ap "
             f"JOIN Slot ON Ap.apRadioMac = Slot.apRadioMac "
             f"JOIN SlotMetrics ON Slot.apRadioMac = SlotMetrics.apRadioMac AND Slot.slot = SlotMetrics.slot "
             f"WHERE radioMode = 'radio-mode-local' AND operState = 'radio-up';"
@@ -135,26 +135,22 @@ class Influx():
         count_2, count_5, count_6 = 0, 0, 0
 
         for item in result:
-            ap_radio_mac = item[0]
-            ap_name = item[1]
-            #ap_eth_mac = item[2]
+            wlc_name = item[0]
+            ap_radio_mac = item[1]
+            ap_name = item[2]
             rf_tag = item[3]
             site_tag = item[4]
-            #model = item[5]
-            #ap_radio_mac = item[6] #SQL JOIN
-            slot = item[7]
-            oper_state = item[8]
-            radio_mode = item[9]
-            band = item[10]
-            channel = item[11]
-            power = item[12]
-            #ap_radio_mac = item[13] #SQL JOIN
-            #slot = item[14] #SQL JOIN
-            stations = item[15]
-            cca = item[16]
+            slot = item[5]
+            oper_state = item[6]
+            radio_mode = item[7]
+            band = item[8]
+            channel = item[9]
+            power = item[10]
+            stations = item[11]
+            cca = item[12]
 
             line_protocol = (
-                            f'rfData,wlcName=Yay,'
+                            f'rfData,wlcName={wlc_name},'
                             f'apName={ap_name},'
                             f'apRadioMac={ap_radio_mac},'
                             f'slot={slot},'
@@ -195,7 +191,7 @@ class Influx():
             tx = item[3]
             interface_name = item[4]
             
-            line_protocol = f'wlcSummary,wlcName={wlc_name},intName={interface_name} joinedAps={joined_aps},tx={tx},rx={rx}\n'
+            line_protocol = f'loadSummary,wlcName={wlc_name},intName={interface_name} joinedAps={joined_aps},tx={tx},rx={rx}\n'
             
             influx_data += line_protocol
         
@@ -225,7 +221,7 @@ class Influx():
             wifi_other = item[5]
 
             line_protocol = (
-                            f'clientProtocols,wlcName={wlc_name}'
+                            f'clientGenerations,wlcName={wlc_name}'
                             f' wifi4={wifi_4},'
                             f'wifi5={wifi_5},'
                             f'wifi6={wifi_6},'
@@ -240,7 +236,7 @@ class Influx():
                 self.write_influx(influx_data)
     
 
-    def post_wlc_details(self):
+    def post_wlc_inventory(self):
 
         query = (
             f"SELECT WlcDetail.wlcName, hostName, model, software, ssoState, joinedAps, "
@@ -267,7 +263,7 @@ class Influx():
         client_count = result[0][6] + result[0][7] + result[0][8] + result[0][9] + result[0][10] + result[0][11]
         
         line_protocol = (
-                        f'wlcDetail,wlcName={wlc_name}'
+                        f'wlcInventory,wlcName={wlc_name}'
                         f' wlcHostName=\"{hostname}\",'
                         f'model=\"{model}\",'
                         f'software=\"{software}\",'
@@ -282,3 +278,32 @@ class Influx():
         if influx_data != "":
                 self.write_influx(influx_data)
 
+
+    def post_ap_inventory(self):
+
+        query = (f"SELECT wlcName, apRadioMac, apName, rfTag, siteTag, model FROM Ap;")
+        result = self.read_mysql(query)
+
+        if len(result) > 0:
+
+            ap_models = {}
+            for item in result:
+                wlc_name = item[0]
+                ap_radio_mac = item[1]
+                ap_name = item[2]
+                rf_tag = item[3]
+                site_tag = item[4]
+                model = item[5]
+
+                if model not in ap_models.keys():
+                    ap_models[model] = 1
+                else:
+                    ap_models[model] += 1
+
+            line_protocol = (f'apInventory,wlcName={wlc_name} ')
+
+            for ap_model, count in ap_models.items():
+                line_protocol += f'{ap_model}={count},'
+
+            line_protocol = line_protocol[:-1] + f'\n'
+            self.write_influx(line_protocol)

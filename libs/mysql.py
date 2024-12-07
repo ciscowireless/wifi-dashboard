@@ -132,8 +132,15 @@ class MySql():
                     oper_state = item.find("oper-state").text
                     radio_mode = item.find("radio-mode").text
                     band = item.find("current-active-band").text
-                    channel = item.find("phy-ht-cfg/cfg-data/curr-freq").text
-                    power = item.find("radio-band-info/phy-tx-pwr-cfg/cfg-data/current-tx-power-level").text
+                    try:
+                        channel = item.find("phy-ht-cfg/cfg-data/curr-freq").text
+                    except AttributeError:
+                        channel = 0
+                    try:
+                        power = item.find("radio-band-info/phy-tx-pwr-cfg/cfg-data/current-tx-power-level").text
+                    except AttributeError:
+                        power = 0
+                        
                     slot_data.append([ap_radio_mac, slot, oper_state, radio_mode, band, channel, power])
                 
             except AttributeError:
@@ -148,9 +155,9 @@ class MySql():
                     rf_tag = ap_info["rf-tag"]
                     site_tag = ap_info["site-tag"]
                     model = ap_info["model"]
-                    query_string += f"('{radio_mac}', '{ap_name}', '{eth_mac}', '{rf_tag}', '{site_tag}', '{model}'),"
+                    query_string += f"('{netconf_data.wlc_name}', '{radio_mac}', '{ap_name}', '{eth_mac}', '{rf_tag}', '{site_tag}', '{model}'),"
 
-                self.write_mysql(f"REPLACE INTO Ap (apRadioMac, apName, apEthMac, rfTag, siteTag, model) VALUES {query_string[:-1]};")
+                self.write_mysql(f"REPLACE INTO Ap (wlcName, apRadioMac, apName, apEthMac, rfTag, siteTag, model) VALUES {query_string[:-1]};")
                 
                 query_string = ""
                 for slot in slot_data:

@@ -85,7 +85,7 @@
               "type": "time"
             }
           ],
-          "measurement": "wlcSummary",
+          "measurement": "loadSummary",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -100,10 +100,11 @@
               },
               {
                 "params": [],
-                "type": "last"
+                "type": "sum"
               }
             ]
-          ]
+          ],
+          "tags": []
         }
       ],
       "title": "Event - Total APs",
@@ -415,7 +416,7 @@
           ]
         }
       ],
-      "title": "WLC1 - WNCD",
+      "title": "WLCName - WNCD",
       "type": "gauge"
     },
     {
@@ -505,7 +506,7 @@
             "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
           },
           "groupBy": [],
-          "measurement": "wlcSummary",
+          "measurement": "loadSummary",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -542,7 +543,7 @@
           },
           "groupBy": [],
           "hide": false,
-          "measurement": "wlcSummary",
+          "measurement": "loadSummary",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -881,7 +882,7 @@
           ]
         }
       ],
-      "title": "WLC1 - WNCD",
+      "title": "WLCName - WNCD",
       "type": "gauge"
     },
     {
@@ -971,7 +972,7 @@
             "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
           },
           "groupBy": [],
-          "measurement": "wlcSummary",
+          "measurement": "loadSummary",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -1008,7 +1009,7 @@
           },
           "groupBy": [],
           "hide": false,
-          "measurement": "wlcSummary",
+          "measurement": "loadSummary",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "B",
@@ -1038,12 +1039,12 @@
           ]
         }
       ],
-      "title": "WLC1Name- Port-Channel1",
+      "title": "WLCName- Port-Channel1",
       "type": "timeseries"
     }
   ],
   "preload": false,
-  "refresh": "10s",
+  "refresh": "1m",
   "schemaVersion": 40,
   "tags": [],
   "templating": {
@@ -1055,8 +1056,8 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "WLC Summary",
+  "title": "Load Summary",
   "uid": "fdyr1ygwdnzeod",
-  "version": 9,
+  "version": 18,
   "weekStart": ""
 }

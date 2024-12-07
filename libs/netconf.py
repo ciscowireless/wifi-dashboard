@@ -4,10 +4,17 @@ import re
 
 from ncclient import manager, transport, operations
 
+from libs.influx import Influx
+
 log = logging.getLogger("wifininja.netconf")
 
 
 class Netconf():
+
+
+    def __init__(self, init):
+
+        self.influx = Influx(init)
 
 
     def netconf_rpc(self, filter, query = "", timeout = 30):
@@ -25,13 +32,15 @@ class Netconf():
                 netconf_output = ncc.get(filter=("subtree", filter)).data_xml
                 netconf_output = re.sub('xmlns="[^"]+"', "", netconf_output)
             end = time.time()
+            query_duration = round(end - start, 1)
 
         except (transport.errors.SSHError, transport.errors.SessionError, transport.errors.AuthenticationError):
             log.error(f"NETCONF Error")
         except operations.errors.TimeoutExpiredError:
             log.error(f"NETCONF Timeout")
         else:
-            log.info(f"Netconf query took {round(end - start, 1)}s [{query}]")
+            log.info(f"Netconf query took {query_duration}s [{query}]")
+            self.influx.write_influx(f'dashboardStats,wlcIp={self.wlc_ip} {query}={query_duration}\n')
 
         return netconf_output
     
@@ -51,7 +60,7 @@ class Netconf():
                 </sort-wlan>
             </client-global-oper-data>
         '''
-        self.wireless_client_global_oper = self.netconf_rpc(filter, "client-global-oper-data")
+        self.wireless_client_global_oper = self.netconf_rpc(filter, "wireless-client-global-oper")
     
 
     def get_wireless_access_point_oper(self):
@@ -99,7 +108,7 @@ class Netconf():
                 </capwap-data>
             </access-point-oper-data>
         '''
-        self.wireless_client_global_oper = self.netconf_rpc(filter, "access-point-oper-data")
+        self.wireless_client_global_oper = self.netconf_rpc(filter, "wireless-access-point-oper")
     
 
     def get_wireless_rrm_oper(self):
@@ -116,7 +125,7 @@ class Netconf():
                 </rrm-measurement>
             </rrm-oper-data>
         '''
-        self.wireless_rrm_oper = self.netconf_rpc(filter, "wireless-rrm-oper-data")
+        self.wireless_rrm_oper = self.netconf_rpc(filter, "wireless-rrm-oper")
 
 
     def get_wireless_ap_global_oper(self):
@@ -128,7 +137,7 @@ class Netconf():
                 </emltd-join-count-stat>
             </ap-global-oper-data>
         '''
-        self.wireless_ap_global_oper = self.netconf_rpc(filter, "wireless_ap_global_oper")
+        self.wireless_ap_global_oper = self.netconf_rpc(filter, "wireless-ap-global-oper")
 
 
     def get_wireless_client_oper(self):

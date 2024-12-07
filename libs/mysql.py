@@ -123,6 +123,7 @@ class MySql():
                     ap_radio_mac = item.find("wtp-mac").text
                     ap_data[ap_radio_mac]["rf-tag"] = item.find("tag-info/rf-tag/rf-tag-name").text
                     ap_data[ap_radio_mac]["site-tag"] = item.find("tag-info/site-tag/site-tag-name").text
+                    ap_data[ap_radio_mac]["model"] = item.find("device-detail/static-info/ap-models/model").text
 
                 slot_data = []
                 for item in access_point_oper_data.findall(".//radio-oper-data"):
@@ -142,10 +143,14 @@ class MySql():
 
                 query_string = ""
                 for radio_mac, ap_info in ap_data.items():
-                    ap_name, eth_mac, rf_tag, site_tag = ap_info["ap-name"], ap_info["ap-eth-mac"], ap_info["rf-tag"], ap_info["site-tag"]
-                    query_string += f"('{radio_mac}', '{ap_name}', '{eth_mac}', '{rf_tag}', '{site_tag}'),"
+                    ap_name = ap_info["ap-name"]
+                    eth_mac = ap_info["ap-eth-mac"]
+                    rf_tag = ap_info["rf-tag"]
+                    site_tag = ap_info["site-tag"]
+                    model = ap_info["model"]
+                    query_string += f"('{radio_mac}', '{ap_name}', '{eth_mac}', '{rf_tag}', '{site_tag}', '{model}'),"
 
-                self.write_mysql(f"REPLACE INTO Ap VALUES {query_string[:-1]};")
+                self.write_mysql(f"REPLACE INTO Ap (apRadioMac, apName, apEthMac, rfTag, siteTag, model) VALUES {query_string[:-1]};")
                 
                 query_string = ""
                 for slot in slot_data:
@@ -274,6 +279,8 @@ class MySql():
             except AttributeError:
                 log.warning(f"Data validation error [wlc_detail]")
             else:
+                self.write_mysql(f"DELETE FROM WlcDetail;")
+
                 software_version = re.search("Version [0-9.]+", software).group(0)[8:]
                 self.write_mysql(
                                 f"REPLACE INTO WlcDetail (wlcIp, wlcName, hostName, model, software, ssoState) VALUES "\

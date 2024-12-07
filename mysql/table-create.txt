@@ -4,6 +4,7 @@ CREATE TABLE Ap (
   apEthMac varchar(255),
   rfTag varchar(255),
   siteTag varchar(255),
+  model varchar(255),
   PRIMARY KEY (apRadioMac)
   );
  
@@ -67,3 +68,12 @@ CREATE TABLE Ap (
   PRIMARY KEY (wlcIp)
   );
   
+  CREATE TABLE WlcDetail (
+  wlcIp varchar(15),
+  wlcName varchar(255),
+  hostName varchar(255),
+  model varchar(255),
+  software varchar(255),
+  ssoState varchar(255),
+  PRIMARY KEY (wlcIp)
+  );

@@ -80,6 +80,13 @@ class Netconf():
                 </radio-oper-data>
                 <capwap-data>
                     <wtp-mac/>
+                    <device-detail>
+                        <static-info>
+                            <ap-models>
+                                <model/>
+                            </ap-models>
+                        </static-info>
+                    </device-detail>
                     <tag-info>
                         <site-tag>
                             <site-tag-name/>
@@ -88,6 +95,7 @@ class Netconf():
                             <rf-tag-name/>
                         </rf-tag>
                     </tag-info>
+
                 </capwap-data>
             </access-point-oper-data>
         '''

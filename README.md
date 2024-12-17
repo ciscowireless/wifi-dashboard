@@ -51,12 +51,12 @@ The InfluxDB datasource UID will need to be modified
 
 Sample screenshots:
 
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/client-capabilities.png)
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/client-summary.png)
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/radios-channel-utilization.png)
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/radios-client-count.png)
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/wlc-summary.png)
-![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/dashboard-statistics.jpg)
+![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/client-capabilities.png)
+![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/client-summary.png)
+![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/radios-channel-utilization.png)
+![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/radios-client-count.png)
+![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/wlc-summary.png)
+![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/dashboard-statistics.jpg
 
 ## NETCONF collector
 

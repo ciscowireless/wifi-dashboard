@@ -56,7 +56,7 @@ Sample screenshots:
 ![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/radios-channel-utilization.png)
 ![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/radios-client-count.png)
 ![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/wlc-summary.png)
-![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/dashboard-statistics.jpg
+![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/dashboard-statistics.jpg)
 
 ## NETCONF collector
 

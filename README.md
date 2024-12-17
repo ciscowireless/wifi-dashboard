@@ -105,4 +105,11 @@ pip install httpx=0.27.2
 Flow diagram
 ![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/ssh-flow.png)
 
+## License
+
+This software is licensed under the Cisco Sample Code License
+
+URL: https://developer.cisco.com/docs/licenses/cisco-sample-code-license/
+
+
 

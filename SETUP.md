@@ -27,7 +27,7 @@ cd wifi-dashboard
 pip install -r requirements.txt
 ```
 
-## Docker
+## Docker (Optional)
 
 Install Docker Engine: https://docs.docker.com/engine/install/ubuntu/
 
@@ -108,6 +108,9 @@ For each panel in each dashboard:
 - Edit
 - Datasource > Re-Select InfluxDB (default)
 - Save dashboard
+
+The imported dashboards may have reference to other device IP addresess, these need to be updated to reflect the devices in your environment.
+This is easily done in the Grafana UI after the .json files are imported.
 
 ## Wi-Fi Dashboard - NETCONF
 

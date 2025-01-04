@@ -11,6 +11,7 @@ The following components are used, see respective sites for installation instruc
 - InfluxDB 2.x - influxdata.com
 - MySQL - mysql.com
 - RADKit - radkit.cisco.com
+- (Optional) Docker - www.docker.com
 
 **Wireless metrics (collected via NETCONF)**
 
@@ -105,6 +106,16 @@ pip install httpx=0.27.2
 ```
 Flow diagram
 ![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/ssh-flow.png)
+
+## Docker
+
+Docker is an optional component.
+
+The collector scripts for NETCONF and SSH can be deployed as Docker containers.
+
+The benefit is that contaners can be run in detached mode (in the background) and set to auto-restart in the event of a script problem, there is no other functional difference.
+
+Influx / Grafana / MySQL / RADKit can also be depoyed as Docker contaners if so required, however, installing these as native services is preferred.
 
 ## License
 

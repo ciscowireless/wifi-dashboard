@@ -109,7 +109,7 @@ For each panel in each dashboard:
 - Datasource > Re-Select InfluxDB (default)
 - Save dashboard
 
-The imported dashboards may have reference to other device IP addresess, these need to be updated to reflect the devices in your environment.
+The imported dashboards may have reference to other device IP addresess and/or other AP models, these need to be updated to reflect the devices in your environment.
 This is easily done in the Grafana UI after the .json files are imported.
 
 ## Wi-Fi Dashboard - NETCONF

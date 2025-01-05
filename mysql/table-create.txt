@@ -5,7 +5,7 @@ CREATE TABLE Ap (
   rfTag varchar(255),
   siteTag varchar(255),
   model varchar(255),
-  wlcName varchar(255);
+  wlcName varchar(255),
   PRIMARY KEY (apRadioMac)
   );
  

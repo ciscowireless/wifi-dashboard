@@ -127,7 +127,7 @@ class Dashboard():
                 self.mysql.sql_wlc_detail(self.netconf)
                 self.influx.post_wlc_inventory()
 
-            log.info(f"Waiting for next NETCONF cycle\n")
+            log.info(f'Waiting for next NETCONF cycle ({self.config["general"]["netconf_cycle"]}sec)\n')
     
 
     def open_mysql_session(self):

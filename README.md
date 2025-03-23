@@ -1,5 +1,3 @@
-## Updated dashboards will be posted here after Cisco Live Amsterdam 2025 
-
 # Cisco 9800 WLC monitoring dashboard
 
 This repository consists of:
@@ -36,7 +34,9 @@ The following components are used, see respective sites for installation instruc
 
 ## Project status
 
-This is a work in progress, some items may not work in your network deployment
+This dashboard code was used at Cisco Live Amsterdam 2025
+
+However, it is a work in progress and some items may not work in your environment
 
 Tested on Catalyst 9800 running 17.9, 17.12, and 17.15, and at scale (>10K clients)
 

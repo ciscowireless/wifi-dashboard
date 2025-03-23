@@ -57,11 +57,11 @@ The InfluxDB datasource UID will need to be modified
 Sample screenshots:
 
 ![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/AP_Inventory.png)
-![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Client_Generatons.png)
+![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Client_Generations.png)
 ![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Client_Summary.png)
 ![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Dashboard_Statistics.png)
 ![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Keynote_Summary.png)
-![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Load_Summary.jpg)
+![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Load_Summary.png)
 ![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Top_Radios_by_Channel_Utilization.png)
 ![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Top_Radios_by_Client_Count.png)
 ![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/WLC_Inventory.png)

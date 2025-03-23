@@ -18,17 +18,18 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 7,
+  "id": 1,
   "links": [],
   "panels": [
     {
       "datasource": {
-        "uid": "fdzcjxrjfri80d"
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "blue",
+            "fixedColor": "purple",
             "mode": "fixed"
           },
           "mappings": [],
@@ -46,12 +47,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 15,
         "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 4,
+      "id": 7,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -65,19 +66,124 @@
           "fields": "",
           "values": false
         },
-        "showPercentChange": true,
-        "textMode": "auto",
+        "showPercentChange": false,
+        "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
-          "alias": "C9130AXI-E",
+          "alias": "AP2802I-E",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdzcjxrjfri80d"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "apInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "J",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "AIR-AP2802I-E-K9"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "C9120AXI-E",
           "groupBy": [],
           "measurement": "apInventory",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "C9120AXI-E"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "C9120AXE-E",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "de6hd2z8syp6oe"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "apInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "I",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "C9120AXE-E"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "C9130AXI-E",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "de6hd2z8syp6oe"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "apInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "G",
           "resultFormat": "time_series",
           "select": [
             [
@@ -97,7 +203,182 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc6"
+              "value": "Main_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "C9130AXE-E",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdzcjxrjfri80d"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "apInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "C9130AXE-E"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "CW9166I-E",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdzcjxrjfri80d"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "apInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "CW9166I-E"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "CW9166D1-MR",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdzcjxrjfri80d"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "apInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "K",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "CW9166D1-MR"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "CW9176I",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdzcjxrjfri80d"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "apInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "M",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "CW9176I"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "CW9176D1",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdzcjxrjfri80d"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "apInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "L",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "CW9176D1"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main_WLC"
             }
           ]
         },
@@ -132,17 +413,123 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc6"
+              "value": "Main_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "CW9178I",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdzcjxrjfri80d"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "apInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "CW9178I"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "CW9166I-MR",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdzcjxrjfri80d"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "apInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "CW9166I-MR"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "C9124AXI-E",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdzcjxrjfri80d"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "apInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "C9124AXI-E"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main_WLC"
             }
           ]
         }
       ],
-      "title": "WLCName",
+      "title": "WLC: Main",
       "type": "stat"
     },
     {
       "datasource": {
-        "uid": "fdzcjxrjfri80d"
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -150,7 +537,6 @@
             "fixedColor": "purple",
             "mode": "fixed"
           },
-          "displayName": "C9130",
           "mappings": [],
           "min": 0,
           "thresholds": {
@@ -166,10 +552,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 8,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 15
       },
       "id": 5,
       "options": {
@@ -185,15 +571,20 @@
           "fields": "",
           "values": false
         },
-        "showPercentChange": true,
-        "textMode": "auto",
+        "showPercentChange": false,
+        "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "alias": "C9130AXI-E",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "de6hd2z8syp6oe"
+          },
           "groupBy": [],
+          "hide": false,
           "measurement": "apInventory",
           "orderByTime": "ASC",
           "policy": "default",
@@ -217,28 +608,28 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc3"
+              "value": "Keynote_WLC"
             }
           ]
         },
         {
-          "alias": "C9136I-E",
+          "alias": "C9130AXE-E",
           "datasource": {
             "type": "influxdb",
-            "uid": "fdzcjxrjfri80d"
+            "uid": "de6hd2z8syp6oe"
           },
           "groupBy": [],
           "hide": false,
           "measurement": "apInventory",
           "orderByTime": "ASC",
           "policy": "default",
-          "refId": "B",
+          "refId": "C",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "C9136I-E"
+                  "C9130AXE-E"
                 ],
                 "type": "field"
               },
@@ -252,12 +643,12 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc3"
+              "value": "Keynote_WLC"
             }
           ]
         }
       ],
-      "title": "WLCName",
+      "title": "WLC: Keynote",
       "type": "stat"
     }
   ],
@@ -269,13 +660,13 @@
     "list": []
   },
   "time": {
-    "from": "now-15m",
-    "to": "now"
+    "from": "2025-02-12T23:00:00.000Z",
+    "to": "2025-02-13T22:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "AP Inventory",
   "uid": "ce6749srjg8w0e",
-  "version": 35,
+  "version": 25,
   "weekStart": ""
 }

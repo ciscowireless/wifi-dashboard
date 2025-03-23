@@ -23,9 +23,8 @@
   "panels": [
     {
       "datasource": {
-        "default": true,
         "type": "influxdb",
-        "uid": "fdzcjxrjfri80d"
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -70,7 +69,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
@@ -112,9 +111,8 @@
     },
     {
       "datasource": {
-        "default": true,
         "type": "influxdb",
-        "uid": "fdzcjxrjfri80d"
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -146,7 +144,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 13,
+        "w": 12,
         "x": 0,
         "y": 5
       },
@@ -166,7 +164,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "alias": "WNCD 0",
@@ -194,7 +192,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "main-wlc"
             }
           ]
         },
@@ -225,7 +223,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "main-wlc"
             }
           ]
         },
@@ -256,7 +254,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "main-wlc"
             }
           ]
         },
@@ -287,7 +285,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "main-wlc"
             }
           ]
         },
@@ -318,7 +316,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "main-wlc"
             }
           ]
         },
@@ -349,7 +347,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "main-wlc"
             }
           ]
         },
@@ -380,7 +378,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "main-wlc"
             }
           ]
         },
@@ -411,19 +409,18 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "main-wlc"
             }
           ]
         }
       ],
-      "title": "WLCName - WNCD",
+      "title": "WNCD: Main",
       "type": "gauge"
     },
     {
       "datasource": {
-        "default": true,
         "type": "influxdb",
-        "uid": "fdzcjxrjfri80d"
+        "uid": "de6hd2z8syp6oe"
       },
       "description": "",
       "fieldConfig": {
@@ -480,8 +477,8 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 11,
-        "x": 13,
+        "w": 12,
+        "x": 12,
         "y": 5
       },
       "id": 2,
@@ -497,7 +494,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "alias": "Rx",
@@ -525,7 +522,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc6"
+              "value": "Main_WLC"
             },
             {
               "condition": "AND",
@@ -562,7 +559,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc6"
+              "value": "Main_WLC"
             },
             {
               "condition": "AND",
@@ -573,14 +570,13 @@
           ]
         }
       ],
-      "title": "WLCName - Port-Channel1",
+      "title": "Port-Channel1: Main",
       "type": "timeseries"
     },
     {
       "datasource": {
-        "default": true,
         "type": "influxdb",
-        "uid": "fdzcjxrjfri80d"
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -612,7 +608,7 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 13,
+        "w": 12,
         "x": 0,
         "y": 11
       },
@@ -632,7 +628,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "alias": "WNCD 0",
@@ -660,7 +656,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "keynote-wlc"
             }
           ]
         },
@@ -691,7 +687,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "keynote-wlc"
             }
           ]
         },
@@ -722,7 +718,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "keynote-wlc"
             }
           ]
         },
@@ -753,7 +749,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "keynote-wlc"
             }
           ]
         },
@@ -784,7 +780,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "keynote-wlc"
             }
           ]
         },
@@ -815,7 +811,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "keynote-wlc"
             }
           ]
         },
@@ -846,7 +842,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "keynote-wlc"
             }
           ]
         },
@@ -877,19 +873,18 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "rmwlc"
+              "value": "keynote-wlc"
             }
           ]
         }
       ],
-      "title": "WLCName - WNCD",
+      "title": "WNCD: Keynote",
       "type": "gauge"
     },
     {
       "datasource": {
-        "default": true,
         "type": "influxdb",
-        "uid": "fdzcjxrjfri80d"
+        "uid": "de6hd2z8syp6oe"
       },
       "description": "",
       "fieldConfig": {
@@ -946,8 +941,8 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 11,
-        "x": 13,
+        "w": 12,
+        "x": 12,
         "y": 11
       },
       "id": 4,
@@ -963,7 +958,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "alias": "Rx",
@@ -991,7 +986,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc3"
+              "value": "Keynote_WLC"
             },
             {
               "condition": "AND",
@@ -1028,7 +1023,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc3"
+              "value": "Keynote_WLC"
             },
             {
               "condition": "AND",
@@ -1039,7 +1034,7 @@
           ]
         }
       ],
-      "title": "WLCName- Port-Channel1",
+      "title": "Port-Channel1: Keynote",
       "type": "timeseries"
     }
   ],
@@ -1051,13 +1046,13 @@
     "list": []
   },
   "time": {
-    "from": "now-5m",
-    "to": "now"
+    "from": "2025-02-10T11:00:00.000Z",
+    "to": "2025-02-10T11:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Load Summary",
   "uid": "fdyr1ygwdnzeod",
-  "version": 18,
+  "version": 14,
   "weekStart": ""
 }

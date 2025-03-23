@@ -18,14 +18,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 7,
   "links": [],
   "panels": [
     {
       "datasource": {
-        "default": true,
         "type": "influxdb",
-        "uid": "fdzcjxrjfri80d"
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -37,6 +36,7 @@
             "cellOptions": {
               "type": "auto"
             },
+            "filterable": true,
             "inspect": false
           },
           "mappings": [],
@@ -103,7 +103,7 @@
         ]
       },
       "gridPos": {
-        "h": 13,
+        "h": 15,
         "w": 24,
         "x": 0,
         "y": 0
@@ -121,9 +121,14 @@
           "show": false
         },
         "showHeader": true,
-        "sortBy": []
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Client Count"
+          }
+        ]
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
@@ -193,9 +198,8 @@
     },
     {
       "datasource": {
-        "default": true,
         "type": "influxdb",
-        "uid": "fdzcjxrjfri80d"
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -207,6 +211,7 @@
             "cellOptions": {
               "type": "auto"
             },
+            "filterable": true,
             "inspect": false
           },
           "mappings": [],
@@ -273,10 +278,10 @@
         ]
       },
       "gridPos": {
-        "h": 12,
+        "h": 15,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 15
       },
       "id": 1,
       "options": {
@@ -291,9 +296,14 @@
           "show": false
         },
         "showHeader": true,
-        "sortBy": []
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Client Count"
+          }
+        ]
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
@@ -375,8 +385,8 @@
     "list": []
   },
   "time": {
-    "from": "now-30m",
-    "to": "now"
+    "from": "2025-02-13T11:00:00.000Z",
+    "to": "2025-02-13T11:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "browser",

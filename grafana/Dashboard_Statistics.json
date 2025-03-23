@@ -18,13 +18,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 8,
+  "id": 4,
   "links": [],
   "panels": [
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fdzcjxrjfri80d"
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -87,7 +87,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 24,
         "x": 0,
         "y": 0
@@ -105,7 +105,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "groupBy": [],
@@ -128,7 +128,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.13"
             }
           ]
         },
@@ -158,7 +158,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.13"
             }
           ]
         },
@@ -188,7 +188,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.13"
             }
           ]
         },
@@ -218,7 +218,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.13"
             }
           ]
         },
@@ -248,7 +248,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.13"
             }
           ]
         },
@@ -278,7 +278,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.13"
             }
           ]
         },
@@ -308,7 +308,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.13"
             }
           ]
         },
@@ -338,7 +338,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.13"
             }
           ]
         },
@@ -368,12 +368,12 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.13"
             }
           ]
         }
       ],
-      "title": "NETCONF Query Duration - WLCName",
+      "title": "NETCONF Query Duration: Main",
       "transformations": [
         {
           "id": "renameByRegex",
@@ -388,7 +388,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fdzcjxrjfri80d"
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -451,10 +451,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 9
       },
       "id": 3,
       "options": {
@@ -469,7 +469,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "groupBy": [],
@@ -492,7 +492,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.15"
             }
           ]
         },
@@ -522,7 +522,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.15"
             }
           ]
         },
@@ -552,7 +552,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.15"
             }
           ]
         },
@@ -582,7 +582,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.15"
             }
           ]
         },
@@ -612,7 +612,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.15"
             }
           ]
         },
@@ -642,7 +642,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.15"
             }
           ]
         },
@@ -672,7 +672,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.15"
             }
           ]
         },
@@ -702,7 +702,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.15"
             }
           ]
         },
@@ -732,12 +732,12 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.15"
             }
           ]
         }
       ],
-      "title": "NETCONF Query Duration - WLCName",
+      "title": "NETCONF Query Duration: Keynote",
       "transformations": [
         {
           "id": "renameByRegex",
@@ -752,7 +752,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "fdzcjxrjfri80d"
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -815,10 +815,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 18
       },
       "id": 4,
       "options": {
@@ -833,7 +833,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "groupBy": [],
@@ -856,7 +856,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.17"
             }
           ]
         },
@@ -886,7 +886,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.17"
             }
           ]
         },
@@ -916,7 +916,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.17"
             }
           ]
         },
@@ -946,7 +946,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.17"
             }
           ]
         },
@@ -976,7 +976,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.17"
             }
           ]
         },
@@ -1006,7 +1006,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.17"
             }
           ]
         },
@@ -1036,7 +1036,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.17"
             }
           ]
         },
@@ -1066,7 +1066,7 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.17"
             }
           ]
         },
@@ -1096,12 +1096,12 @@
             {
               "key": "wlcIp::tag",
               "operator": "=",
-              "value": "192.168.3.8"
+              "value": "10.130.240.17"
             }
           ]
         }
       ],
-      "title": "NETCONF Query Duration - WLCName",
+      "title": "NETCONF Query Duration: Meeting Village",
       "transformations": [
         {
           "id": "renameByRegex",
@@ -1120,9 +1120,9 @@
       },
       "gridPos": {
         "h": 2,
-        "w": 7,
-        "x": 9,
-        "y": 24
+        "w": 8,
+        "x": 8,
+        "y": 27
       },
       "id": 1,
       "options": {
@@ -1131,30 +1131,30 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "\n## Source: [github.com/ciscowireless/wifi-dashboard](https://github.com/ciscowireless/wifi-dashboard/)",
+        "content": "\n\n## Source: [github.com/ciscowireless/wifi-dashboard](https://github.com/ciscowireless/wifi-dashboard/)",
         "mode": "markdown"
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "title": "",
       "transparent": true,
       "type": "text"
     }
   ],
   "preload": false,
-  "refresh": "5m",
+  "refresh": "1m",
   "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-1h",
-    "to": "now"
+    "from": "2025-02-12T11:00:00.000Z",
+    "to": "2025-02-12T11:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Dashboard Statistics",
   "uid": "ce67fqymvuc5cc",
-  "version": 11,
+  "version": 16,
   "weekStart": ""
 }

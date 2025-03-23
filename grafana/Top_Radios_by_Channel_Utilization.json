@@ -18,14 +18,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 6,
   "links": [],
   "panels": [
     {
       "datasource": {
-        "default": true,
         "type": "influxdb",
-        "uid": "fdzcjxrjfri80d"
+        "uid": "de6hd2z8syp6oe"
       },
       "description": "",
       "fieldConfig": {
@@ -113,7 +112,7 @@
         ]
       },
       "gridPos": {
-        "h": 13,
+        "h": 15,
         "w": 24,
         "x": 0,
         "y": 0
@@ -138,7 +137,7 @@
           }
         ]
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
@@ -213,9 +212,8 @@
     },
     {
       "datasource": {
-        "default": true,
         "type": "influxdb",
-        "uid": "fdzcjxrjfri80d"
+        "uid": "de6hd2z8syp6oe"
       },
       "description": "",
       "fieldConfig": {
@@ -303,10 +301,10 @@
         ]
       },
       "gridPos": {
-        "h": 12,
+        "h": 15,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 15
       },
       "id": 1,
       "options": {
@@ -328,7 +326,7 @@
           }
         ]
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
@@ -410,13 +408,13 @@
     "list": []
   },
   "time": {
-    "from": "now-30m",
-    "to": "now"
+    "from": "2025-02-13T11:00:00.000Z",
+    "to": "2025-02-13T11:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Top Radios by Channel Utilization",
   "uid": "cdylzgmfkxczkc",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }

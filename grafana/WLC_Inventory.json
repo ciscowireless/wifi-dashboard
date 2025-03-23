@@ -18,12 +18,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 6,
+  "id": 8,
   "links": [],
   "panels": [
     {
       "datasource": {
-        "uid": "fdzcjxrjfri80d"
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -50,7 +51,7 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 16,
+        "w": 14,
         "x": 0,
         "y": 0
       },
@@ -72,7 +73,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "alias": "Model",
@@ -101,38 +102,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc6"
-            }
-          ]
-        },
-        {
-          "alias": "Software",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "fdzcjxrjfri80d"
-          },
-          "groupBy": [],
-          "hide": false,
-          "measurement": "wlcInventory",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "software"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "wlcName::tag",
-              "operator": "=",
-              "value": "wlc6"
+              "value": "Main_WLC"
             }
           ]
         },
@@ -163,12 +133,43 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc6"
+              "value": "Main_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "Software",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdzcjxrjfri80d"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wlcInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "software"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main_WLC"
             }
           ]
         }
       ],
-      "title": "",
+      "title": "WLC: Main",
       "transformations": [
         {
           "id": "reduce",
@@ -186,7 +187,8 @@
     },
     {
       "datasource": {
-        "uid": "fdzcjxrjfri80d"
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -209,8 +211,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 4,
-        "x": 16,
+        "w": 5,
+        "x": 14,
         "y": 0
       },
       "id": 2,
@@ -231,7 +233,7 @@
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "alias": "APs",
@@ -255,7 +257,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc6"
+              "value": "Main_WLC"
             }
           ]
         }
@@ -278,7 +280,8 @@
     },
     {
       "datasource": {
-        "uid": "fdzcjxrjfri80d"
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -305,8 +308,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 4,
-        "x": 20,
+        "w": 5,
+        "x": 19,
         "y": 0
       },
       "id": 3,
@@ -327,7 +330,7 @@
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "alias": "Clients",
@@ -351,7 +354,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc6"
+              "value": "Main_WLC"
             }
           ]
         }
@@ -374,7 +377,8 @@
     },
     {
       "datasource": {
-        "uid": "fdzcjxrjfri80d"
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -401,7 +405,7 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 16,
+        "w": 14,
         "x": 0,
         "y": 7
       },
@@ -423,7 +427,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "alias": "Model",
@@ -452,38 +456,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc3"
-            }
-          ]
-        },
-        {
-          "alias": "Software",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "fdzcjxrjfri80d"
-          },
-          "groupBy": [],
-          "hide": false,
-          "measurement": "wlcInventory",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "C",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "software"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "wlcName::tag",
-              "operator": "=",
-              "value": "wlc3"
+              "value": "Keynote_WLC"
             }
           ]
         },
@@ -514,12 +487,43 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc3"
+              "value": "Keynote_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "Software",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdzcjxrjfri80d"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wlcInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "software"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote_WLC"
             }
           ]
         }
       ],
-      "title": "",
+      "title": "WLC: Keynote",
       "transformations": [
         {
           "id": "reduce",
@@ -537,7 +541,8 @@
     },
     {
       "datasource": {
-        "uid": "fdzcjxrjfri80d"
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -560,8 +565,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 4,
-        "x": 16,
+        "w": 5,
+        "x": 14,
         "y": 7
       },
       "id": 5,
@@ -582,7 +587,7 @@
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "alias": "APs",
@@ -606,7 +611,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc3"
+              "value": "Keynote_WLC"
             }
           ]
         }
@@ -629,7 +634,8 @@
     },
     {
       "datasource": {
-        "uid": "fdzcjxrjfri80d"
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
       },
       "fieldConfig": {
         "defaults": {
@@ -656,8 +662,8 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 4,
-        "x": 20,
+        "w": 5,
+        "x": 19,
         "y": 7
       },
       "id": 6,
@@ -678,7 +684,7 @@
         "textMode": "value_and_name",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "alias": "Clients",
@@ -702,7 +708,7 @@
             {
               "key": "wlcName::tag",
               "operator": "=",
-              "value": "wlc3"
+              "value": "Keynote_WLC"
             }
           ]
         }
@@ -732,13 +738,13 @@
     "list": []
   },
   "time": {
-    "from": "now-15m",
-    "to": "now"
+    "from": "2025-02-13T11:00:00.000Z",
+    "to": "2025-02-13T11:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "WLC Inventory",
   "uid": "be63lnlkok268b",
-  "version": 26,
+  "version": 11,
   "weekStart": ""
 }

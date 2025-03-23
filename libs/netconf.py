@@ -17,7 +17,7 @@ class Netconf():
         self.influx = Influx(init)
 
 
-    def netconf_rpc(self, filter, query = "", timeout = 30):
+    def netconf_rpc(self, filter, query = "", timeout = 60):
 
         try:
             netconf_output = ""
@@ -37,7 +37,7 @@ class Netconf():
         except (transport.errors.SSHError, transport.errors.SessionError, transport.errors.AuthenticationError):
             log.error(f"NETCONF Error")
         except operations.errors.TimeoutExpiredError:
-            log.error(f"NETCONF Timeout")
+            log.error(f"NETCONF Timeout ({timeout}sec)")
         else:
             log.info(f"Netconf query took {query_duration}s [{query}]")
             self.influx.write_influx(f'dashboardStats,wlcIp={self.wlc_ip} {query}={query_duration}\n')

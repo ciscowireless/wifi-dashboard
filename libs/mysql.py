@@ -111,59 +111,74 @@ class MySql():
         except ET.ParseError:
             log.warning(f"XML parse error [wireless_access_point_oper]")
         else:
-            try:
-                ap_data = {}
-                for item in access_point_oper_data.findall(".//ap-name-mac-map"):
-                    ap_radio_mac = item.find("wtp-mac").text
-                    ap_data[ap_radio_mac] = {}
-                    ap_data[ap_radio_mac]["ap-name"] = item.find("wtp-name").text
-                    ap_data[ap_radio_mac]["ap-eth-mac"] = item.find("eth-mac").text
+            if access_point_oper_data: #Skip if empty result.
+                try:
+                    ap_data = {}
+                    for item in access_point_oper_data.findall(".//ap-name-mac-map"):
+                        ap_radio_mac = item.find("wtp-mac").text
+                        ap_data[ap_radio_mac] = {}
+                        ap_data[ap_radio_mac]["ap-name"] = item.find("wtp-name").text
+                        ap_data[ap_radio_mac]["ap-eth-mac"] = item.find("eth-mac").text
 
-                for item in access_point_oper_data.findall(".//capwap-data"):
-                    ap_radio_mac = item.find("wtp-mac").text
-                    ap_data[ap_radio_mac]["rf-tag"] = item.find("tag-info/rf-tag/rf-tag-name").text
-                    ap_data[ap_radio_mac]["site-tag"] = item.find("tag-info/site-tag/site-tag-name").text
-                    ap_data[ap_radio_mac]["model"] = item.find("device-detail/static-info/ap-models/model").text
+                    for item in access_point_oper_data.findall(".//capwap-data"):
+                        ap_radio_mac = item.find("wtp-mac").text
+                        ap_data[ap_radio_mac]["rf-tag"] = item.find("tag-info/rf-tag/rf-tag-name").text
+                        ap_data[ap_radio_mac]["site-tag"] = item.find("tag-info/site-tag/site-tag-name").text
+                        ap_data[ap_radio_mac]["model"] = item.find("device-detail/static-info/ap-models/model").text
 
-                slot_data = []
-                for item in access_point_oper_data.findall(".//radio-oper-data"):
-                    ap_radio_mac = item.find("wtp-mac").text
-                    slot = item.find("radio-slot-id").text
-                    oper_state = item.find("oper-state").text
-                    radio_mode = item.find("radio-mode").text
-                    band = item.find("current-active-band").text
-                    try:
-                        channel = item.find("phy-ht-cfg/cfg-data/curr-freq").text
-                    except AttributeError:
-                        channel = 0
-                    try:
-                        power = item.find("radio-band-info/phy-tx-pwr-cfg/cfg-data/current-tx-power-level").text
-                    except AttributeError:
-                        power = 0
-                        
-                    slot_data.append([ap_radio_mac, slot, oper_state, radio_mode, band, channel, power])
-                
-            except AttributeError:
-                log.warning(f"Data validation error [wireless_access_point_oper]")
-            else:
-                self.write_mysql(f"DELETE FROM Ap;")
+                    slot_data = []
+                    for item in access_point_oper_data.findall(".//radio-oper-data"):
+                        ap_radio_mac = item.find("wtp-mac").text
+                        slot = item.find("radio-slot-id").text
+                        try:
+                            oper_state = item.find("oper-state").text
+                        except AttributeError:
+                            oper_state = "NULL"
+                            #log.warning(f"[wireless_access_point_oper] Radio MAC {ap_radio_mac}, Slot {slot}, no operational state")
+                        try:
+                            radio_mode = item.find("radio-mode").text
+                            #log.warning(f"[wireless_access_point_oper] Radio MAC {ap_radio_mac}, Slot {slot}, no radio mode")
+                        except AttributeError:
+                            radio_mode = "NULL"
+                        try:
+                            band = item.find("current-active-band").text
+                        except AttributeError:
+                            band = "NULL"
+                            #log.warning(f"[wireless_access_point_oper] Radio MAC {ap_radio_mac}, Slot {slot}, no band information")
+                        try:
+                            channel = item.find("phy-ht-cfg/cfg-data/curr-freq").text
+                        except AttributeError:
+                            channel = 0
+                            #log.warning(f"[wireless_access_point_oper] Radio MAC {ap_radio_mac}, Slot {slot}, no channel information")
+                        try:
+                            power = item.find("radio-band-info/phy-tx-pwr-cfg/cfg-data/current-tx-power-level").text
+                        except AttributeError:
+                            power = 0
+                            #log.warning(f"[wireless_access_point_oper] Radio MAC {ap_radio_mac}, Slot {slot}, no power information")
 
-                query_string = ""
-                for radio_mac, ap_info in ap_data.items():
-                    ap_name = ap_info["ap-name"]
-                    eth_mac = ap_info["ap-eth-mac"]
-                    rf_tag = ap_info["rf-tag"]
-                    site_tag = ap_info["site-tag"]
-                    model = ap_info["model"]
-                    query_string += f"('{netconf_data.wlc_name}', '{radio_mac}', '{ap_name}', '{eth_mac}', '{rf_tag}', '{site_tag}', '{model}'),"
+                        slot_data.append([ap_radio_mac, slot, oper_state, radio_mode, band, channel, power])
 
-                self.write_mysql(f"REPLACE INTO Ap (wlcName, apRadioMac, apName, apEthMac, rfTag, siteTag, model) VALUES {query_string[:-1]};")
-                
-                query_string = ""
-                for slot in slot_data:
-                    query_string += f"('{slot[0]}','{slot[1]}','{slot[2]}','{slot[3]}','{slot[4]}','{slot[5]}','{slot[6]}'),"
-                
-                self.write_mysql(f"REPLACE INTO Slot (apRadioMac, slot, operState, radioMode, band, channel, power) VALUES {query_string[:-1]};")
+                except KeyboardInterrupt:
+                    log.warning(f"Data validation error [wireless_access_point_oper]")
+                else:
+                    self.write_mysql(f"DELETE FROM Ap;")
+
+                    query_string = ""
+                    for radio_mac, ap_info in ap_data.items():
+                        ap_name = ap_info["ap-name"]
+                        eth_mac = ap_info["ap-eth-mac"]
+                        rf_tag = ap_info["rf-tag"]
+                        site_tag = ap_info["site-tag"]
+                        model = ap_info["model"]
+                        query_string += f"('{netconf_data.wlc_name}', '{radio_mac}', '{ap_name}', '{eth_mac}', '{rf_tag}', '{site_tag}', '{model}'),"
+
+                    self.write_mysql(f"REPLACE INTO Ap (wlcName, apRadioMac, apName, apEthMac, rfTag, siteTag, model) VALUES {query_string[:-1]};")
+
+                    query_string = ""
+                    for slot in slot_data:
+                        query_string += f"('{slot[0]}','{slot[1]}','{slot[2]}','{slot[3]}','{slot[4]}','{slot[5]}','{slot[6]}'),"
+
+                    self.write_mysql(f"REPLACE INTO Slot (apRadioMac, slot, operState, radioMode, band, channel, power) VALUES {query_string[:-1]};")
 
 
     def sql_wireless_rrm_oper(self, netconf_data):

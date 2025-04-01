@@ -11,7 +11,7 @@ The following components are used, see respective sites for installation instruc
 - InfluxDB 2.x - influxdata.com
 - MySQL - mysql.com
 - RADKit - radkit.cisco.com
-- (Optional) Docker - www.docker.com
+- (Optional) Docker - docker.com
 
 **Wireless metrics (collected via NETCONF)**
 

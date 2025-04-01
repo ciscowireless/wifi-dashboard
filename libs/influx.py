@@ -245,38 +245,39 @@ class Influx():
             f"JOIN Client ON WlcDetail.wlcIp = Client.wlcIp;"
             )
         result = self.read_mysql(query)
-        influx_data = ""
 
-        wlc_name = result[0][0]
-        hostname = result[0][1]
-        model = result[0][2]
-        software = result[0][3]
-        
-        sso = result[0][4]
-        match sso:
-            case "true":
-                sso_state = "Up"
-            case "false":
-                sso_state = "Down"
+        if len(result) > 0:
 
-        ap_count = result[0][5]
-        client_count = result[0][6] + result[0][7] + result[0][8] + result[0][9] + result[0][10] + result[0][11]
-        
-        line_protocol = (
-                        f'wlcInventory,wlcName={wlc_name}'
-                        f' wlcHostName=\"{hostname}\",'
-                        f'model=\"{model}\",'
-                        f'software=\"{software}\",'
-                        f'sso=\"{sso_state}\",'
-                        f'aps={ap_count},'
-                        f'clients={client_count}'
-                        f'\n'
-                        )
-        
-        influx_data += line_protocol
+            influx_data = ""
+            wlc_name = result[0][0]
+            hostname = result[0][1]
+            model = result[0][2]
+            software = result[0][3]
+            sso = result[0][4]
+            match sso:
+                case "true":
+                    sso_state = "Up"
+                case "false":
+                    sso_state = "Down"
 
-        if influx_data != "":
-                self.write_influx(influx_data)
+            ap_count = result[0][5]
+            client_count = result[0][6] + result[0][7] + result[0][8] + result[0][9] + result[0][10] + result[0][11]
+            
+            line_protocol = (
+                            f'wlcInventory,wlcName={wlc_name}'
+                            f' wlcHostName=\"{hostname}\",'
+                            f'model=\"{model}\",'
+                            f'software=\"{software}\",'
+                            f'sso=\"{sso_state}\",'
+                            f'aps={ap_count},'
+                            f'clients={client_count}'
+                            f'\n'
+                            )
+            
+            influx_data += line_protocol
+
+            if influx_data != "":
+                    self.write_influx(influx_data)
 
 
     def post_ap_inventory(self):

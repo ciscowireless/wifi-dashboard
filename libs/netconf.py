@@ -34,10 +34,12 @@ class Netconf():
             end = time.time()
             query_duration = round(end - start, 1)
 
-        except (transport.errors.SSHError, transport.errors.SessionError, transport.errors.AuthenticationError):
-            log.error(f"NETCONF Error")
+        except transport.errors.AuthenticationError:
+            log.error(f"NETCONF Authentication Error")
         except operations.errors.TimeoutExpiredError:
             log.error(f"NETCONF Timeout ({timeout}sec)")
+        except (transport.errors.SSHError, transport.errors.SessionError):
+            log.error(f"NETCONF Error")
         else:
             log.info(f"Netconf query took {query_duration}s [{query}]")
             self.influx.write_influx(f'dashboardStats,wlcIp={self.wlc_ip} {query}={query_duration}\n')

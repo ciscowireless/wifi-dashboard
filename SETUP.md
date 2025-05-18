@@ -210,7 +210,7 @@ Admin Users > Add Admin
 
 ## RADKit Client (pip)
 
-Download RADKit pip installation: **cisco_radkit_1.7.x_pip_linux.tgz**
+Download RADKit pip installation: **cisco_radkit_1.8.x_pip_linux.tgz**
 
 ```
 mkdir radkit-pip-install
@@ -242,7 +242,7 @@ python3 wncd-radkit.py
 
 ## (Docker) Wi-Fi Dashboard – SSH
 
-Copy to same directory as Dockerfile: **cisco_radkit_1.7.x_pip_linux.tgz**
+Copy to same directory as Dockerfile: **cisco_radkit_1.8.x_pip_linux.tgz**
 
 Edit: **wifi-dashborad/radkit/Dockerfile**
 

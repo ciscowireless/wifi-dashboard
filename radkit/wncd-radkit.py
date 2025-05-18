@@ -6,13 +6,10 @@ import re
 import requests
 
 from datetime import datetime
-
 from radkit_client.sync import Client
-import radkit_client.async_.command
 
-INFLUX_HOST = "localhost"
 INFLUX_PORT = "8086"
-POLL_CYCLE = 60
+DEVICE_POLL_CYCLE = 60
 
 
 class wncd_poller():
@@ -21,12 +18,12 @@ class wncd_poller():
     def __init__(self):
 
         self.command = "show processes cpu platform sorted | i wncd"
-
         self.influx_org = os.environ["INFLUX_ORG"]
+        self.influx_host = os.environ["INFLUX_HOST"]
         self.influx_bucket = os.environ["INFLUX_BUCKET"]
+        self.influx_api_key = os.environ["INFLUX_API_KEY"]
         self.radkit_user = os.environ["RADKIT_USER"]
         self.radkit_pass = os.environ["RADKIT_PASS"]
-        self.influx_api_key = os.environ["INFLUX_API_KEY"]
         self.lastrun = datetime.now()
         self.firstrun = True
         self.run()
@@ -40,10 +37,10 @@ class wncd_poller():
             with Client.create() as client:
                 self.radkit = client.service_direct(
                             username=self.radkit_user, 
-                            password=self.radkit_pass, 
+                            password=self.radkit_pass,
                             host='localhost', 
                             port=8181)
-                
+
                 self.radkit.update_inventory().wait()
                 
                 while True:
@@ -59,7 +56,7 @@ class wncd_poller():
     def wncd_loop(self):
 
         idle_period = datetime.now() - self.lastrun
-        if self.firstrun or idle_period.seconds >= POLL_CYCLE:
+        if self.firstrun or idle_period.seconds >= DEVICE_POLL_CYCLE:
 
             self.firstrun = False
             self.lastrun = datetime.now()
@@ -81,7 +78,7 @@ class wncd_poller():
         wncd_load = ""
         for line in self.command_output.result.data.split("\n"):
 
-            wncd_status = re.match("\s+\d+\s+\d+\s+(\d+)%\s+(\d+)%\s+(\d+)%\s+\S+\s+\d+\s+(\S+)",line)
+            wncd_status = re.match(r"\s+\d+\s+\d+\s+(\d+)%\s+(\d+)%\s+(\d+)%\s+\S+\s+\d+\s+(\S+)",line)
             try:
                 wncd_load += f"{wncd_status.group(4)}={wncd_status.group(3)},"
             except AttributeError:
@@ -94,7 +91,7 @@ class wncd_poller():
 
         line_protocol = f'wncd,wlcName={device} {measurement}\n'
 
-        influx_api = f'http://{INFLUX_HOST}:{INFLUX_PORT}/api/v2/write'
+        influx_api = f'http://{self.influx_host}:{INFLUX_PORT}/api/v2/write'
         headers = {
             "Content-Type" : "text/plain; charset=utf-8",
             "Accept" : "application/json",

@@ -101,16 +101,17 @@ RADKit is currently used only for WNCD load metrics colected via SSH
 Configure the following environment variables:
 - RADKIT_USER
 - RADKIT_PASS
-- INFLUX_API_KEY
 - INFLUX_ORG
+- INFLUX_HOST
 - INFLUX_BUCKET
+- INFLUX_API_KEY
 
 RADKit collector can be run directly or in a Docker container
 
-Depending on RADKIt version, it may be neccesary to downgrade the __httpx__ library
-```
-pip install httpx=0.27.2
-```
+There may be differences in the setup & operation of RADKit client between RADKit versions, if in doubt check the RADKit release notes.
+
+Last verified RADKit version is: 1.8.1
+
 Flow diagram
 ![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/ssh-flow.png)
 

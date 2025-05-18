@@ -215,7 +215,7 @@ Download RADKit pip installation: **cisco_radkit_1.7.x_pip_linux.tgz**
 ```
 mkdir radkit-pip-install
 cd radkit-pip-install
-tar zxvf cisco_radkit_1.7.x_pip_linux.tgz
+tar zxvf cisco_radkit_1.8.x_pip_linux.tgz
 python3 -m pip install -f . cisco_radkit_client
 ```
 Update version number as needed
@@ -228,11 +228,12 @@ sudo nano /etc/environment
 ```
 | Environment variable | Value |
 | --- | ---|
+| INFLUX_ORG | influx_org |
+| INFLUX_HOST | influx_host |
+| INFLUX_BUCKET | influx_bucket |
+| INFLUX_API_KEY | influx_api_token |
 | RADKIT_USER | radkit_admin_username |
 | RADKIT_PASS | radkit_admin_password |
-| INFLUX_API_KEY | influx_api_token |
-| INFLUX_ORG | influx_org |
-| INFLUX_BUCKET | influx_bucket |
 
 Run
 ```
@@ -247,16 +248,17 @@ Edit: **wifi-dashborad/radkit/Dockerfile**
 
 Update environment variables
 ```
+ENV INFLUX_ORG=influx_org
+ENV INFLUX_HOST=influx_host
+ENV INFLUX_BUCKET=influx_bucket
+ENV INFLUX_API_KEY=influx_api_key
 ENV RADKIT_USER=radkit_admin_username
 ENV RADKIT_PASS=radkit_admin_password
-ENV INFLUX_API_KEY=influx_api_token
-ENV INFLUX_ORG=influx_org
-ENV INFLUX_BUCKET=influx_bucket
 ```
 Update (as needed)
 ```
-COPY cisco_radkit_1.7.x_pip_linux_x86.tgz .
-RUN tar zxvf cisco_radkit_1.7.x_pip_linux_x86.tgz
+COPY cisco_radkit_1.8.x_pip_linux_x86.tgz .
+RUN tar zxvf cisco_radkit_1.8.x_pip_linux_x86.tgz
 ```
 Build
 ```

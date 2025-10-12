@@ -1,8 +1,9 @@
+
 '''
-Copyright (c) 2024 Cisco and/or its affiliates.
+Copyright (c) 2025 Cisco and/or its affiliates.
 
 This software is licensed to you under the terms of the Cisco Sample
-Code License, Version 1.0 (the "License"). You may obtain a copy of the
+Code License, Version 1.1 (the "License"). You may obtain a copy of the
 License at
 
                https://developer.cisco.com/docs/licenses
@@ -74,8 +75,8 @@ class Dashboard():
                 time.sleep(1)
                     
         except KeyboardInterrupt:
-            subprocess.run(["clear"])
-            subprocess.run(["echo", "Dashboard: Stopped"])
+            #subprocess.run(["clear"])
+            subprocess.run(["echo", "\nDashboard: Stopped"])
             sys.exit()
 
 
@@ -109,6 +110,7 @@ class Dashboard():
                 self.netconf.get_wireless_rrm_oper()
                 self.mysql.sql_wireless_rrm_oper(self.netconf)
                 self.influx.post_wireless_oper()
+                self.influx.post_wireless_oper_tag_summary()
                 self.influx.post_ap_inventory()
 
                 self.netconf.get_wireless_client_oper()

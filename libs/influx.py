@@ -178,20 +178,82 @@ class Influx():
             log.info(f"2.4GHz slots: {count_2}, 5GHz slots: {count_5}, 6GHz slots: {count_6}")
 
 
+    def post_wireless_oper_tag_summary(self):
+        
+        query = (
+            f"SELECT wlcName, apName, rfTag, siteTag, Slot.slot, operState, radioMode, stations FROM Ap "
+            f"JOIN Slot ON Ap.apRadioMac = Slot.apRadioMac "
+            f"JOIN SlotMetrics ON Slot.apRadioMac = SlotMetrics.apRadioMac AND Slot.slot = SlotMetrics.slot "
+            f"WHERE radioMode = 'radio-mode-local' AND operState = 'radio-up';"
+            )
+        
+        result = self.read_mysql(query)
+        influx_data = ""
+        tag_summary = {}
+        for item in result:
+            wlc_name, rf_tag, site_tag, stations = item[0], item[2], item[3], int(item[7])
+
+            if wlc_name not in tag_summary.keys():
+                tag_summary[wlc_name] = {}
+                tag_summary[wlc_name]["rf_tags"] = {}
+                tag_summary[wlc_name]["site_tags"] = {}
+
+            if rf_tag not in tag_summary[wlc_name]["rf_tags"].keys():
+                tag_summary[wlc_name]["rf_tags"][rf_tag] = stations
+            else:
+                tag_summary[wlc_name]["rf_tags"][rf_tag] += stations
+
+            if site_tag not in tag_summary[wlc_name]["site_tags"].keys():
+                tag_summary[wlc_name]["site_tags"][site_tag] = stations
+            else:
+                tag_summary[wlc_name]["site_tags"][site_tag] += stations
+
+        for wlc, summary in tag_summary.items():
+            for tags in summary.keys():
+                if tags == "rf_tags":
+                    for tag in tag_summary[wlc]["rf_tags"]:
+                        line_protocol = f'tagSummary,wlcName={wlc_name},tags=rfTags,tag={tag} '
+                        line_protocol += f'clients={tag_summary[wlc]["rf_tags"][tag]}\n'
+                        influx_data += line_protocol
+                
+                if tags == "site_tags":         
+                    for tag in tag_summary[wlc]["site_tags"]:
+                        line_protocol = f'tagSummary,wlcName={wlc_name},tags=siteTags,tag={tag} '
+                        line_protocol += f'clients={tag_summary[wlc]["site_tags"][tag]}\n'
+                        influx_data += line_protocol
+        
+        if influx_data != "":
+            self.write_influx(influx_data)
+
+
     def post_wlc_oper(self):
 
-        query = ("SELECT wlcName, joinedAps, Tx, Rx, interfaceName from Wlc")
+        query = ("SELECT Wlc.wlcName, interfaceName, interfaceOperStatus, rxKbps, txKbps, inErrors, outErrors, inDiscards, outDiscards FROM Wlc JOIN WlcInterfaces")
+
         result = self.read_mysql(query)
         influx_data = ""
 
         for item in result:
             wlc_name = item[0]
-            joined_aps = item[1]
-            rx = item[2]
-            tx = item[3]
-            interface_name = item[4]
+            interface_name = item[1]
+            interface_status = item[2]
+            rx = item[3]
+            tx = item[4]
+            in_errors = item[5]
+            out_errors = item[6]
+            in_discards = item[7]
+            out_discards = item[8]
             
-            line_protocol = f'loadSummary,wlcName={wlc_name},intName={interface_name} joinedAps={joined_aps},tx={tx},rx={rx}\n'
+            line_protocol = (
+                            f'wlcInterfaces,wlcName={wlc_name},intName={interface_name},intStatus={interface_status}'
+                            f' rx={rx},' 
+                            f'tx={tx},'
+                            f'inErrors={in_errors},'
+                            f'outErrors={out_errors},'
+                            f'inDiscards={in_discards},'
+                            f'outDiscards={out_discards}'
+                            f'\n'
+                            )
             
             influx_data += line_protocol
         

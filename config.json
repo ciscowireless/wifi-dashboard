@@ -1,9 +1,8 @@
 {
     "wlc": [
         {
-            "name": "hostname",
+            "name": "wlc_name",
             "ip": "x.x.x.x",
-            "interface": "Port-channel1",
             "user_env": "IOSXE_USER",
             "pass_env": "IOSXE_PASS"
         }
@@ -11,10 +10,10 @@
     "general": {
         "netconf_cycle": "60",
         "mysql_host": "localhost",
-        "mysql_db": "Telemetry",
+        "mysql_db": "db_name",
         "influx_ip": "127.0.0.1",
         "influx_port": "8086",
-        "influx_org": "wifininja",
-        "influx_bucket": "telemetry"
+        "influx_org": "influx_org",
+        "influx_bucket": "influx_bucket"
     }
 }

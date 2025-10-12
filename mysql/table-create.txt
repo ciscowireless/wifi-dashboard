@@ -76,16 +76,16 @@ CREATE TABLE Ap (
   PRIMARY KEY (wlcIp)
   );
 
-   CREATE TABLE WlcInterfaces (
-   wlcIp varchar(15),
-   wlcName varchar(255),
-   interfaceName varchar(255),
-   interfaceOperStatus varchar(255),
-   txKbps bigint,
-   rxKbps bigint,
-   inErrors bigint,
-   outErrors bigint,
-   inDiscards bigint,
-   outDiscards bigint,
-   unique key UC_wlcInterface (wlcIp,interfaceName)
-   );
+  CREATE TABLE WlcInterfaces (
+  wlcIp varchar(15),
+  wlcName varchar(255),
+  interfaceName varchar(255),
+  interfaceOperStatus varchar(255),
+  txKbps bigint,
+  rxKbps bigint,
+  inErrors bigint,
+  outErrors bigint,
+  inDiscards bigint,
+  outDiscards bigint,
+  unique key UC_wlcInterface (wlcIp,interfaceName)
+  );

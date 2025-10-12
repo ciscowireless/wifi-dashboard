@@ -159,15 +159,34 @@ class Netconf():
         filter = f'''
             <interfaces xmlns='http://cisco.com/ns/yang/Cisco-IOS-XE-interfaces-oper'>
                 <interface>
-                    <name>{self.wlc_interface}</name>
-                    <statistics>
-                        <rx-kbps/>
-                        <tx-kbps/>
-                    </statistics>
+                <name/>
+                <interface-type/>
+                <oper-status/>
+                <statistics>
+                    <in-discards/>
+                    <in-errors/>
+                    <out-discards/>
+                    <out-errors/>
+                    <rx-kbps/>
+                    <tx-kbps/>
+                </statistics>
                 </interface>
             </interfaces>
         '''
         self.interfaces_oper = self.netconf_rpc(filter, "interfaces-oper")
+
+        # filter = f'''
+        #     <interfaces xmlns='http://cisco.com/ns/yang/Cisco-IOS-XE-interfaces-oper'>
+        #         <interface>
+        #             <name>{self.wlc_interface}</name>
+        #             <statistics>
+        #                 <rx-kbps/>
+        #                 <tx-kbps/>
+        #             </statistics>
+        #         </interface>
+        #     </interfaces>
+        # '''
+        # self.interfaces_oper = self.netconf_rpc(filter, "interfaces-oper")
 
 
     def get_device_hardware_oper(self):

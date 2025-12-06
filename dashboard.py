@@ -93,7 +93,7 @@ class Dashboard():
 
                 self.netconf.wlc_ip = wlc["ip"]
                 self.netconf.wlc_name = wlc["name"]
-                self.netconf.wlc_interface = wlc["interface"]
+                #self.netconf.wlc_interface = wlc["interface"]
                 self.netconf.wlc_user = os.environ[wlc["user_env"]]
                 self.netconf.wlc_pass = os.environ[wlc["pass_env"]]
                 
@@ -128,6 +128,8 @@ class Dashboard():
                 self.netconf.get_install_oper()
                 self.mysql.sql_wlc_detail(self.netconf)
                 self.influx.post_wlc_inventory()
+
+                self.mysql.clear_mysql()
 
             log.info(f'Waiting for next NETCONF cycle ({self.config["general"]["netconf_cycle"]}sec)\n')
     

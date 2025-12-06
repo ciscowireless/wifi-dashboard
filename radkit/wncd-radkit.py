@@ -8,7 +8,6 @@ import requests
 from datetime import datetime
 from radkit_client.sync import Client
 
-INFLUX_PORT = "8086"
 DEVICE_POLL_CYCLE = 60
 
 
@@ -20,6 +19,7 @@ class wncd_poller():
         self.command = "show processes cpu platform sorted | i wncd"
         self.influx_org = os.environ["INFLUX_ORG"]
         self.influx_host = os.environ["INFLUX_HOST"]
+        self.influx_port = os.environ["INFLUX_PORT"]
         self.influx_bucket = os.environ["INFLUX_BUCKET"]
         self.influx_api_key = os.environ["INFLUX_API_KEY"]
         self.radkit_user = os.environ["RADKIT_USER"]
@@ -91,7 +91,7 @@ class wncd_poller():
 
         line_protocol = f'wncd,wlcName={device} {measurement}\n'
 
-        influx_api = f'http://{self.influx_host}:{INFLUX_PORT}/api/v2/write'
+        influx_api = f'http://{self.influx_host}:{self.influx_port}/api/v2/write'
         headers = {
             "Content-Type" : "text/plain; charset=utf-8",
             "Accept" : "application/json",

@@ -24,6 +24,7 @@ class wncd_poller():
         self.influx_api_key = os.environ["INFLUX_API_KEY"]
         self.radkit_user = os.environ["RADKIT_USER"]
         self.radkit_pass = os.environ["RADKIT_PASS"]
+        self.radkit_host = os.environ["RADKIT_HOST"]
         self.lastrun = datetime.now()
         self.firstrun = True
         self.run()
@@ -38,7 +39,7 @@ class wncd_poller():
                 self.radkit = client.service_direct(
                             username=self.radkit_user, 
                             password=self.radkit_pass,
-                            host='localhost', 
+                            host=self.radkit_host, 
                             port=8181)
 
                 self.radkit.update_inventory().wait()

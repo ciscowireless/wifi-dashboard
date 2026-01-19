@@ -1,0 +1,7 @@
+docker stop netconf2influx
+docker rm netconf2influx
+docker rmi netconf2influx
+docker build -t netconf2influx .
+docker run -d --restart always --network host --name netconf2influx netconf2influx
+docker ps
+

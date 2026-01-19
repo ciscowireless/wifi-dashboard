@@ -17,6 +17,9 @@ class MySql():
         self.mysql_pass = init.mysql_pass
 
         self.mysql_session = init.mysql_session
+        self.clear_mysql()
+
+    def clear_mysql(self):
 
         self.write_mysql(f"DELETE FROM Ap;")
         self.write_mysql(f"DELETE FROM Client;")

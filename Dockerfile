@@ -1,10 +1,10 @@
 FROM python:3.12.7-slim-bullseye
 ENV TZ=Europe/Warsaw
-ENV INFLUX_API_KEY=api-key
-ENV MYSQL_USER=username
-ENV MYSQL_PASS=password
-ENV IOSXE_USER=username
-ENV IOSXE_PASS=password
+ENV INFLUX_API_KEY=
+ENV MYSQL_USER=
+ENV MYSQL_PASS=
+ENV IOSXE_USER=
+ENV IOSXE_PASS=
 RUN apt update
 RUN python3 -m pip install -U pip
 RUN pip install mysql-connector-python

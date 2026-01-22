@@ -1,0 +1,166 @@
+{
+  "visualizations": {
+    "chart_1": {
+      "type": "splunk.line",
+      "options": {
+        "xAxisTitleVisibility": "hide",
+        "nullValueDisplay": "connect"
+      },
+      "dataSources": {
+        "primary": "search_1"
+      },
+      "title": "Main",
+      "description": "",
+      "containerOptions": {},
+      "showProgressBar": false,
+      "showLastUpdated": false
+    },
+    "chart_2": {
+      "type": "splunk.line",
+      "options": {
+        "drilldown": "none",
+        "chart.nullValueMode": "connect",
+        "chart.showDataLabels": "none",
+        "fieldColors": "{\"Keynote\":\"#1e93c6\",\"Main\":\"#f2b827\",\"Meeting\":\"#d6563c\",\"Keynote - wlcInterfaces.inDiscards\":\"#1e93c6\",\"Main - wlcInterfaces.inDiscards\":\"#f2b827\",\"Meeting - wlcInterfaces.inDiscards\":\"#d6563c\",\"Keynote - wlcInterfaces.inErrors\":\"#6a5c9e\",\"Main - wlcInterfaces.inErrors\":\"#31a35f\",\"Meeting - wlcInterfaces.inErrors\":\"#ed8440\",\"Keynote - wlcInterfaces.outDiscards\":\"#3863a0\",\"Main - wlcInterfaces.outDiscards\":\"#a2cc3e\",\"Meeting - wlcInterfaces.outDiscards\":\"#cc5068\",\"Keynote - wlcInterfaces.outErrors\":\"#73427f\",\"Main - wlcInterfaces.outErrors\":\"#1e93c6\",\"Meeting - wlcInterfaces.outErrors\":\"#f2b827\",\"Keynote - wlcInterfaces.rx\":\"#d6563c\",\"Main - wlcInterfaces.rx\":\"#6a5c9e\",\"Meeting - wlcInterfaces.rx\":\"#31a35f\",\"Keynote - wlcInterfaces.tx\":\"#ed8440\",\"Main - wlcInterfaces.tx\":\"#3863a0\",\"Meeting - wlcInterfaces.tx\":\"#a2cc3e\",\"Keynote - wlcInterfaces.inDiscards (2)\":\"#cc5068\",\"Main - wlcInterfaces.inDiscards (2)\":\"#73427f\",\"Meeting - wlcInterfaces.inDiscards (2)\":\"#1e93c6\"}",
+        "gridLinesX.showMajorLines": true,
+        "axisY.abbreviation": "auto",
+        "legend.mode": "seriesCompare",
+        "fieldDashStyles": "{\"Keynote\":\"solid\",\"Main\":\"solid\",\"Meeting\":\"solid\",\"Keynote - wlcInterfaces.inDiscards\":\"solid\",\"Main - wlcInterfaces.inDiscards\":\"solid\",\"Meeting - wlcInterfaces.inDiscards\":\"solid\",\"Keynote - wlcInterfaces.inErrors\":\"solid\",\"Main - wlcInterfaces.inErrors\":\"solid\",\"Meeting - wlcInterfaces.inErrors\":\"solid\",\"Keynote - wlcInterfaces.outDiscards\":\"solid\",\"Main - wlcInterfaces.outDiscards\":\"solid\",\"Meeting - wlcInterfaces.outDiscards\":\"solid\",\"Keynote - wlcInterfaces.outErrors\":\"solid\",\"Main - wlcInterfaces.outErrors\":\"solid\",\"Meeting - wlcInterfaces.outErrors\":\"solid\",\"Keynote - wlcInterfaces.rx\":\"solid\",\"Main - wlcInterfaces.rx\":\"solid\",\"Meeting - wlcInterfaces.rx\":\"solid\",\"Keynote - wlcInterfaces.tx\":\"solid\",\"Main - wlcInterfaces.tx\":\"solid\",\"Meeting - wlcInterfaces.tx\":\"solid\",\"Keynote - wlcInterfaces.inDiscards (2)\":\"solid\",\"Main - wlcInterfaces.inDiscards (2)\":\"solid\",\"Meeting - wlcInterfaces.inDiscards (2)\":\"solid\"}",
+        "displayView": "analytics_workspace",
+        "nullValueDisplay": "connect",
+        "xAxisTitleVisibility": "hide"
+      },
+      "dataSources": {
+        "primary": "search_2"
+      },
+      "title": "Keynote",
+      "description": "",
+      "containerOptions": {
+        "visibility": {}
+      }
+    },
+    "chart_3": {
+      "type": "splunk.line",
+      "options": {
+        "drilldown": "none",
+        "chart.nullValueMode": "connect",
+        "chart.showDataLabels": "none",
+        "fieldColors": "{\"Keynote\":\"#1e93c6\",\"Main\":\"#f2b827\",\"Meeting\":\"#d6563c\",\"Keynote - wlcInterfaces.inDiscards\":\"#1e93c6\",\"Main - wlcInterfaces.inDiscards\":\"#f2b827\",\"Meeting - wlcInterfaces.inDiscards\":\"#d6563c\",\"Keynote - wlcInterfaces.inErrors\":\"#6a5c9e\",\"Main - wlcInterfaces.inErrors\":\"#31a35f\",\"Meeting - wlcInterfaces.inErrors\":\"#ed8440\",\"Keynote - wlcInterfaces.outDiscards\":\"#3863a0\",\"Main - wlcInterfaces.outDiscards\":\"#a2cc3e\",\"Meeting - wlcInterfaces.outDiscards\":\"#cc5068\",\"Keynote - wlcInterfaces.outErrors\":\"#73427f\",\"Main - wlcInterfaces.outErrors\":\"#1e93c6\",\"Meeting - wlcInterfaces.outErrors\":\"#f2b827\",\"Keynote - wlcInterfaces.rx\":\"#d6563c\",\"Main - wlcInterfaces.rx\":\"#6a5c9e\",\"Meeting - wlcInterfaces.rx\":\"#31a35f\",\"Keynote - wlcInterfaces.tx\":\"#ed8440\",\"Main - wlcInterfaces.tx\":\"#3863a0\",\"Meeting - wlcInterfaces.tx\":\"#a2cc3e\"}",
+        "gridLinesX.showMajorLines": true,
+        "axisY.abbreviation": "auto",
+        "legend.mode": "seriesCompare",
+        "fieldDashStyles": "{\"Keynote\":\"solid\",\"Main\":\"solid\",\"Meeting\":\"solid\",\"Keynote - wlcInterfaces.inDiscards\":\"solid\",\"Main - wlcInterfaces.inDiscards\":\"solid\",\"Meeting - wlcInterfaces.inDiscards\":\"solid\",\"Keynote - wlcInterfaces.inErrors\":\"solid\",\"Main - wlcInterfaces.inErrors\":\"solid\",\"Meeting - wlcInterfaces.inErrors\":\"solid\",\"Keynote - wlcInterfaces.outDiscards\":\"solid\",\"Main - wlcInterfaces.outDiscards\":\"solid\",\"Meeting - wlcInterfaces.outDiscards\":\"solid\",\"Keynote - wlcInterfaces.outErrors\":\"solid\",\"Main - wlcInterfaces.outErrors\":\"solid\",\"Meeting - wlcInterfaces.outErrors\":\"solid\",\"Keynote - wlcInterfaces.rx\":\"solid\",\"Main - wlcInterfaces.rx\":\"solid\",\"Meeting - wlcInterfaces.rx\":\"solid\",\"Keynote - wlcInterfaces.tx\":\"solid\",\"Main - wlcInterfaces.tx\":\"solid\",\"Meeting - wlcInterfaces.tx\":\"solid\"}",
+        "displayView": "analytics_workspace",
+        "nullValueDisplay": "connect",
+        "xAxisTitleVisibility": "hide"
+      },
+      "dataSources": {
+        "primary": "search_3"
+      },
+      "title": "Meeting Village",
+      "description": ""
+    }
+  },
+  "dataSources": {
+    "search_1": {
+      "type": "ds.search",
+      "options": {
+        "query": "| mstats avg(\"wlcInterfaces.inDiscards\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Main\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.inDiscards\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.inDiscards\"\n| rename \"_time - wlcInterfaces.inDiscards\" AS _time\n| append [\n| mstats avg(\"wlcInterfaces.inErrors\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Main\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.inErrors\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.inErrors\"\n| rename \"_time - wlcInterfaces.inErrors\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wlcInterfaces.outDiscards\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Main\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.outDiscards\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.outDiscards\"\n| rename \"_time - wlcInterfaces.outDiscards\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wlcInterfaces.outErrors\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Main\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.outErrors\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.outErrors\"\n| rename \"_time - wlcInterfaces.outErrors\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wlcInterfaces.rx\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Main\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.rx\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.rx\"\n| rename \"_time - wlcInterfaces.rx\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wlcInterfaces.tx\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Main\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.tx\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.tx\"\n| rename \"_time - wlcInterfaces.tx\" AS _time\n]\n| selfjoin keepsingle=true _time",
+        "queryParameters": {
+          "earliest": "$global_time_tok.earliest$",
+          "latest": "$global_time_tok.latest$"
+        }
+      }
+    },
+    "search_2": {
+      "type": "ds.search",
+      "options": {
+        "query": "| mstats avg(\"wlcInterfaces.inDiscards\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Keynote\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.inDiscards\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.inDiscards\"\n| rename \"_time - wlcInterfaces.inDiscards\" AS _time\n| append [\n| mstats avg(\"wlcInterfaces.inErrors\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Keynote\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.inErrors\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.inErrors\"\n| rename \"_time - wlcInterfaces.inErrors\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wlcInterfaces.outDiscards\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Keynote\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.outDiscards\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.outDiscards\"\n| rename \"_time - wlcInterfaces.outDiscards\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wlcInterfaces.outErrors\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Keynote\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.outErrors\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.outErrors\"\n| rename \"_time - wlcInterfaces.outErrors\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wlcInterfaces.rx\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Keynote\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.rx\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.rx\"\n| rename \"_time - wlcInterfaces.rx\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wlcInterfaces.tx\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Keynote\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.tx\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.tx\"\n| rename \"_time - wlcInterfaces.tx\" AS _time\n]\n| selfjoin keepsingle=true _time",
+        "queryParameters": {
+          "earliest": "$global_time_tok.earliest$",
+          "latest": "$global_time_tok.latest$"
+        }
+      },
+      "name": "ds-WLC-LAN"
+    },
+    "search_3": {
+      "type": "ds.search",
+      "options": {
+        "query": "| mstats avg(\"wlcInterfaces.inDiscards\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Meeting\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.inDiscards\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.inDiscards\"\n| rename \"_time - wlcInterfaces.inDiscards\" AS _time\n| append [\n| mstats avg(\"wlcInterfaces.inErrors\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Meeting\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.inErrors\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.inErrors\"\n| rename \"_time - wlcInterfaces.inErrors\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wlcInterfaces.outDiscards\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Meeting\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.outDiscards\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.outDiscards\"\n| rename \"_time - wlcInterfaces.outDiscards\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wlcInterfaces.outErrors\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Meeting\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.outErrors\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.outErrors\"\n| rename \"_time - wlcInterfaces.outErrors\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wlcInterfaces.rx\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Meeting\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.rx\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.rx\"\n| rename \"_time - wlcInterfaces.rx\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wlcInterfaces.tx\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"Meeting\" span=10s BY wlcName\n| timechart avg(\"wlcInterfaces.tx\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wlcInterfaces.tx\"\n| rename \"_time - wlcInterfaces.tx\" AS _time\n]\n| selfjoin keepsingle=true _time",
+        "queryParameters": {
+          "earliest": "$global_time_tok.earliest$",
+          "latest": "$global_time_tok.latest$"
+        }
+      }
+    }
+  },
+  "title": "Wireless: WLC-LAN",
+  "description": "",
+  "inputs": {
+    "input_1": {
+      "type": "input.timerange",
+      "title": "Time Range",
+      "options": {
+        "token": "global_time_tok",
+        "defaultValue": "-1h,now"
+      }
+    }
+  },
+  "defaults": {
+    "dataSources": {}
+  },
+  "layout": {
+    "tabs": {
+      "items": [
+        {
+          "layoutId": "layout_1",
+          "label": "New tab"
+        }
+      ]
+    },
+    "layoutDefinitions": {
+      "layout_1": {
+        "type": "grid",
+        "options": {
+          "display": "auto-scale",
+          "height": 750
+        },
+        "structure": [
+          {
+            "item": "chart_1",
+            "type": "block",
+            "position": {
+              "x": 0,
+              "y": 0,
+              "w": 1200,
+              "h": 250
+            }
+          },
+          {
+            "item": "chart_2",
+            "type": "block",
+            "position": {
+              "x": 0,
+              "y": 250,
+              "w": 1200,
+              "h": 250
+            }
+          },
+          {
+            "item": "chart_3",
+            "type": "block",
+            "position": {
+              "x": 0,
+              "y": 500,
+              "w": 1200,
+              "h": 250
+            }
+          }
+        ]
+      }
+    },
+    "globalInputs": [
+      "input_1"
+    ]
+  }
+}

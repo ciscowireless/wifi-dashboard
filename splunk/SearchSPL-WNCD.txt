@@ -1,0 +1,37 @@
+| mstats avg("wncd.wncd_0") prestats=true WHERE "index"="wireless" AND "wlcName"="meeting-wlc" span=10s BY wlcName
+| timechart avg("wncd.wncd_0") span=10s useother=false BY wlcName WHERE max in top5
+| fields - _span*
+| rename * AS "* - wncd.wncd_0"
+| rename "_time - wncd.wncd_0" AS _time
+| append [
+| mstats avg("wncd.wncd_1") prestats=true WHERE "index"="wireless" AND "wlcName"="meeting-wlc" span=10s BY wlcName
+| timechart avg("wncd.wncd_1") span=10s useother=false BY wlcName WHERE max in top5
+| fields - _span*
+| rename * AS "* - wncd.wncd_1"
+| rename "_time - wncd.wncd_1" AS _time
+]
+| selfjoin keepsingle=true _time
+| append [
+| mstats avg("wncd.wncd_2") prestats=true WHERE "index"="wireless" AND "wlcName"="meeting-wlc" span=10s BY wlcName
+| timechart avg("wncd.wncd_2") span=10s useother=false BY wlcName WHERE max in top5
+| fields - _span*
+| rename * AS "* - wncd.wncd_2"
+| rename "_time - wncd.wncd_2" AS _time
+]
+| selfjoin keepsingle=true _time
+| append [
+| mstats avg("wncd.wncd_3") prestats=true WHERE "index"="wireless" AND "wlcName"="meeting-wlc" span=10s BY wlcName
+| timechart avg("wncd.wncd_3") span=10s useother=false BY wlcName WHERE max in top5
+| fields - _span*
+| rename * AS "* - wncd.wncd_3"
+| rename "_time - wncd.wncd_3" AS _time
+]
+| selfjoin keepsingle=true _time
+| append [
+| mstats avg("wncd.wncd_4") prestats=true WHERE "index"="wireless" AND "wlcName"="meeting-wlc" span=10s BY wlcName
+| timechart avg("wncd.wncd_4") span=10s useother=false BY wlcName WHERE max in top5
+| fields - _span*
+| rename * AS "* - wncd.wncd_4"
+| rename "_time - wncd.wncd_4" AS _time
+]
+| selfjoin keepsingle=true _time

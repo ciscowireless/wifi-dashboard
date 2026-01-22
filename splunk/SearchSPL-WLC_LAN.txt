@@ -1,0 +1,45 @@
+| mstats avg("wlcInterfaces.inDiscards") prestats=true WHERE "index"="wireless" AND "wlcName"="Main" span=10s BY wlcName
+| timechart avg("wlcInterfaces.inDiscards") span=10s useother=false BY wlcName WHERE max in top5
+| fields - _span*
+| rename * AS "* - wlcInterfaces.inDiscards"
+| rename "_time - wlcInterfaces.inDiscards" AS _time
+| append [
+| mstats avg("wlcInterfaces.inErrors") prestats=true WHERE "index"="wireless" AND "wlcName"="Main" span=10s BY wlcName
+| timechart avg("wlcInterfaces.inErrors") span=10s useother=false BY wlcName WHERE max in top5
+| fields - _span*
+| rename * AS "* - wlcInterfaces.inErrors"
+| rename "_time - wlcInterfaces.inErrors" AS _time
+]
+| selfjoin keepsingle=true _time
+| append [
+| mstats avg("wlcInterfaces.outDiscards") prestats=true WHERE "index"="wireless" AND "wlcName"="Main" span=10s BY wlcName
+| timechart avg("wlcInterfaces.outDiscards") span=10s useother=false BY wlcName WHERE max in top5
+| fields - _span*
+| rename * AS "* - wlcInterfaces.outDiscards"
+| rename "_time - wlcInterfaces.outDiscards" AS _time
+]
+| selfjoin keepsingle=true _time
+| append [
+| mstats avg("wlcInterfaces.outErrors") prestats=true WHERE "index"="wireless" AND "wlcName"="Main" span=10s BY wlcName
+| timechart avg("wlcInterfaces.outErrors") span=10s useother=false BY wlcName WHERE max in top5
+| fields - _span*
+| rename * AS "* - wlcInterfaces.outErrors"
+| rename "_time - wlcInterfaces.outErrors" AS _time
+]
+| selfjoin keepsingle=true _time
+| append [
+| mstats avg("wlcInterfaces.rx") prestats=true WHERE "index"="wireless" AND "wlcName"="Main" span=10s BY wlcName
+| timechart avg("wlcInterfaces.rx") span=10s useother=false BY wlcName WHERE max in top5
+| fields - _span*
+| rename * AS "* - wlcInterfaces.rx"
+| rename "_time - wlcInterfaces.rx" AS _time
+]
+| selfjoin keepsingle=true _time
+| append [
+| mstats avg("wlcInterfaces.tx") prestats=true WHERE "index"="wireless" AND "wlcName"="Main" span=10s BY wlcName
+| timechart avg("wlcInterfaces.tx") span=10s useother=false BY wlcName WHERE max in top5
+| fields - _span*
+| rename * AS "* - wlcInterfaces.tx"
+| rename "_time - wlcInterfaces.tx" AS _time
+]
+| selfjoin keepsingle=true _time

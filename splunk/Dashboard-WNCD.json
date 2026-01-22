@@ -1,0 +1,171 @@
+{
+  "visualizations": {
+    "chart_1": {
+      "type": "splunk.line",
+      "options": {
+        "drilldown": "none",
+        "chart.nullValueMode": "connect",
+        "chart.showDataLabels": "none",
+        "fieldColors": "{\"Avg\":\"#1e93c6\",\"wncd.wncd_0\":\"#1e93c6\",\"wncd.wncd_1\":\"#f2b827\",\"wncd.wncd_2\":\"#d6563c\",\"wncd.wncd_3\":\"#6a5c9e\",\"wncd.wncd_4\":\"#31a35f\",\"wncd.wncd_5\":\"#ed8440\",\"wncd.wncd_6\":\"#3863a0\",\"wncd.wncd_7\":\"#a2cc3e\",\"keynote-wlc - wncd.wncd_0\":\"#1e93c6\",\"main-wlc - wncd.wncd_0\":\"#f2b827\",\"meeting-wlc - wncd.wncd_0\":\"#d6563c\",\"keynote-wlc - wncd.wncd_1\":\"#6a5c9e\",\"main-wlc - wncd.wncd_1\":\"#31a35f\",\"meeting-wlc - wncd.wncd_1\":\"#ed8440\",\"keynote-wlc - wncd.wncd_2\":\"#3863a0\",\"main-wlc - wncd.wncd_2\":\"#a2cc3e\",\"meeting-wlc - wncd.wncd_2\":\"#cc5068\",\"keynote-wlc - wncd.wncd_3\":\"#73427f\",\"main-wlc - wncd.wncd_3\":\"#1e93c6\",\"meeting-wlc - wncd.wncd_3\":\"#f2b827\",\"keynote-wlc - wncd.wncd_4\":\"#d6563c\",\"main-wlc - wncd.wncd_4\":\"#6a5c9e\",\"meeting-wlc - wncd.wncd_4\":\"#31a35f\",\"keynote-wlc - wncd.wncd_5\":\"#ed8440\",\"main-wlc - wncd.wncd_5\":\"#3863a0\",\"keynote-wlc - wncd.wncd_6\":\"#a2cc3e\",\"main-wlc - wncd.wncd_6\":\"#cc5068\",\"keynote-wlc - wncd.wncd_7\":\"#73427f\",\"main-wlc - wncd.wncd_7\":\"#1e93c6\"}",
+        "gridLinesX.showMajorLines": true,
+        "axisY.abbreviation": "auto",
+        "legend.mode": "seriesCompare",
+        "fieldDashStyles": "{\"Avg\":\"solid\",\"wncd.wncd_0\":\"solid\",\"wncd.wncd_1\":\"solid\",\"wncd.wncd_2\":\"solid\",\"wncd.wncd_3\":\"solid\",\"wncd.wncd_4\":\"solid\",\"wncd.wncd_5\":\"solid\",\"wncd.wncd_6\":\"solid\",\"wncd.wncd_7\":\"solid\",\"keynote-wlc - wncd.wncd_0\":\"solid\",\"main-wlc - wncd.wncd_0\":\"solid\",\"meeting-wlc - wncd.wncd_0\":\"solid\",\"keynote-wlc - wncd.wncd_1\":\"solid\",\"main-wlc - wncd.wncd_1\":\"solid\",\"meeting-wlc - wncd.wncd_1\":\"solid\",\"keynote-wlc - wncd.wncd_2\":\"solid\",\"main-wlc - wncd.wncd_2\":\"solid\",\"meeting-wlc - wncd.wncd_2\":\"solid\",\"keynote-wlc - wncd.wncd_3\":\"solid\",\"main-wlc - wncd.wncd_3\":\"solid\",\"meeting-wlc - wncd.wncd_3\":\"solid\",\"keynote-wlc - wncd.wncd_4\":\"solid\",\"main-wlc - wncd.wncd_4\":\"solid\",\"meeting-wlc - wncd.wncd_4\":\"solid\",\"keynote-wlc - wncd.wncd_5\":\"solid\",\"main-wlc - wncd.wncd_5\":\"solid\",\"keynote-wlc - wncd.wncd_6\":\"solid\",\"main-wlc - wncd.wncd_6\":\"solid\",\"keynote-wlc - wncd.wncd_7\":\"solid\",\"main-wlc - wncd.wncd_7\":\"solid\"}",
+        "displayView": "analytics_workspace",
+        "nullValueDisplay": "connect",
+        "xAxisTitleVisibility": "hide"
+      },
+      "dataSources": {
+        "primary": "search_1"
+      },
+      "title": "Keynote",
+      "description": ""
+    },
+    "chart_2": {
+      "type": "splunk.line",
+      "options": {
+        "drilldown": "none",
+        "chart.nullValueMode": "connect",
+        "chart.showDataLabels": "none",
+        "fieldColors": "{\"Avg\":\"#1e93c6\",\"wncd.wncd_0\":\"#1e93c6\",\"wncd.wncd_1\":\"#f2b827\",\"wncd.wncd_2\":\"#d6563c\",\"wncd.wncd_3\":\"#6a5c9e\",\"wncd.wncd_4\":\"#31a35f\",\"wncd.wncd_5\":\"#ed8440\",\"wncd.wncd_6\":\"#3863a0\",\"wncd.wncd_7\":\"#a2cc3e\",\"keynote-wlc - wncd.wncd_0\":\"#1e93c6\",\"main-wlc - wncd.wncd_0\":\"#f2b827\",\"meeting-wlc - wncd.wncd_0\":\"#d6563c\",\"keynote-wlc - wncd.wncd_1\":\"#6a5c9e\",\"main-wlc - wncd.wncd_1\":\"#31a35f\",\"meeting-wlc - wncd.wncd_1\":\"#ed8440\",\"keynote-wlc - wncd.wncd_2\":\"#3863a0\",\"main-wlc - wncd.wncd_2\":\"#a2cc3e\",\"meeting-wlc - wncd.wncd_2\":\"#cc5068\",\"keynote-wlc - wncd.wncd_3\":\"#73427f\",\"main-wlc - wncd.wncd_3\":\"#1e93c6\",\"meeting-wlc - wncd.wncd_3\":\"#f2b827\",\"keynote-wlc - wncd.wncd_4\":\"#d6563c\",\"main-wlc - wncd.wncd_4\":\"#6a5c9e\",\"meeting-wlc - wncd.wncd_4\":\"#31a35f\",\"keynote-wlc - wncd.wncd_5\":\"#ed8440\",\"main-wlc - wncd.wncd_5\":\"#3863a0\",\"keynote-wlc - wncd.wncd_6\":\"#a2cc3e\",\"main-wlc - wncd.wncd_6\":\"#cc5068\",\"keynote-wlc - wncd.wncd_7\":\"#73427f\",\"main-wlc - wncd.wncd_7\":\"#1e93c6\"}",
+        "gridLinesX.showMajorLines": true,
+        "axisY.abbreviation": "auto",
+        "legend.mode": "seriesCompare",
+        "fieldDashStyles": "{\"Avg\":\"solid\",\"wncd.wncd_0\":\"solid\",\"wncd.wncd_1\":\"solid\",\"wncd.wncd_2\":\"solid\",\"wncd.wncd_3\":\"solid\",\"wncd.wncd_4\":\"solid\",\"wncd.wncd_5\":\"solid\",\"wncd.wncd_6\":\"solid\",\"wncd.wncd_7\":\"solid\",\"keynote-wlc - wncd.wncd_0\":\"solid\",\"main-wlc - wncd.wncd_0\":\"solid\",\"meeting-wlc - wncd.wncd_0\":\"solid\",\"keynote-wlc - wncd.wncd_1\":\"solid\",\"main-wlc - wncd.wncd_1\":\"solid\",\"meeting-wlc - wncd.wncd_1\":\"solid\",\"keynote-wlc - wncd.wncd_2\":\"solid\",\"main-wlc - wncd.wncd_2\":\"solid\",\"meeting-wlc - wncd.wncd_2\":\"solid\",\"keynote-wlc - wncd.wncd_3\":\"solid\",\"main-wlc - wncd.wncd_3\":\"solid\",\"meeting-wlc - wncd.wncd_3\":\"solid\",\"keynote-wlc - wncd.wncd_4\":\"solid\",\"main-wlc - wncd.wncd_4\":\"solid\",\"meeting-wlc - wncd.wncd_4\":\"solid\",\"keynote-wlc - wncd.wncd_5\":\"solid\",\"main-wlc - wncd.wncd_5\":\"solid\",\"keynote-wlc - wncd.wncd_6\":\"solid\",\"main-wlc - wncd.wncd_6\":\"solid\",\"keynote-wlc - wncd.wncd_7\":\"solid\",\"main-wlc - wncd.wncd_7\":\"solid\"}",
+        "displayView": "analytics_workspace",
+        "nullValueDisplay": "connect",
+        "xAxisTitleVisibility": "hide"
+      },
+      "dataSources": {
+        "primary": "search_2"
+      },
+      "title": "Main",
+      "description": ""
+    },
+    "chart_3": {
+      "type": "splunk.line",
+      "options": {
+        "drilldown": "none",
+        "chart.nullValueMode": "connect",
+        "chart.showDataLabels": "none",
+        "fieldColors": "{\"Avg\":\"#1e93c6\",\"wncd.wncd_0\":\"#1e93c6\",\"wncd.wncd_1\":\"#f2b827\",\"wncd.wncd_2\":\"#d6563c\",\"wncd.wncd_3\":\"#6a5c9e\",\"wncd.wncd_4\":\"#31a35f\",\"wncd.wncd_5\":\"#ed8440\",\"wncd.wncd_6\":\"#3863a0\",\"wncd.wncd_7\":\"#a2cc3e\",\"keynote-wlc - wncd.wncd_0\":\"#1e93c6\",\"main-wlc - wncd.wncd_0\":\"#f2b827\",\"meeting-wlc - wncd.wncd_0\":\"#d6563c\",\"keynote-wlc - wncd.wncd_1\":\"#6a5c9e\",\"main-wlc - wncd.wncd_1\":\"#31a35f\",\"meeting-wlc - wncd.wncd_1\":\"#ed8440\",\"keynote-wlc - wncd.wncd_2\":\"#3863a0\",\"main-wlc - wncd.wncd_2\":\"#a2cc3e\",\"meeting-wlc - wncd.wncd_2\":\"#cc5068\",\"keynote-wlc - wncd.wncd_3\":\"#73427f\",\"main-wlc - wncd.wncd_3\":\"#1e93c6\",\"meeting-wlc - wncd.wncd_3\":\"#f2b827\",\"keynote-wlc - wncd.wncd_4\":\"#d6563c\",\"main-wlc - wncd.wncd_4\":\"#6a5c9e\",\"meeting-wlc - wncd.wncd_4\":\"#31a35f\",\"keynote-wlc - wncd.wncd_5\":\"#ed8440\",\"main-wlc - wncd.wncd_5\":\"#3863a0\",\"keynote-wlc - wncd.wncd_6\":\"#a2cc3e\",\"main-wlc - wncd.wncd_6\":\"#cc5068\",\"keynote-wlc - wncd.wncd_7\":\"#73427f\",\"main-wlc - wncd.wncd_7\":\"#1e93c6\"}",
+        "gridLinesX.showMajorLines": true,
+        "axisY.abbreviation": "auto",
+        "legend.mode": "seriesCompare",
+        "fieldDashStyles": "{\"Avg\":\"solid\",\"wncd.wncd_0\":\"solid\",\"wncd.wncd_1\":\"solid\",\"wncd.wncd_2\":\"solid\",\"wncd.wncd_3\":\"solid\",\"wncd.wncd_4\":\"solid\",\"wncd.wncd_5\":\"solid\",\"wncd.wncd_6\":\"solid\",\"wncd.wncd_7\":\"solid\",\"keynote-wlc - wncd.wncd_0\":\"solid\",\"main-wlc - wncd.wncd_0\":\"solid\",\"meeting-wlc - wncd.wncd_0\":\"solid\",\"keynote-wlc - wncd.wncd_1\":\"solid\",\"main-wlc - wncd.wncd_1\":\"solid\",\"meeting-wlc - wncd.wncd_1\":\"solid\",\"keynote-wlc - wncd.wncd_2\":\"solid\",\"main-wlc - wncd.wncd_2\":\"solid\",\"meeting-wlc - wncd.wncd_2\":\"solid\",\"keynote-wlc - wncd.wncd_3\":\"solid\",\"main-wlc - wncd.wncd_3\":\"solid\",\"meeting-wlc - wncd.wncd_3\":\"solid\",\"keynote-wlc - wncd.wncd_4\":\"solid\",\"main-wlc - wncd.wncd_4\":\"solid\",\"meeting-wlc - wncd.wncd_4\":\"solid\",\"keynote-wlc - wncd.wncd_5\":\"solid\",\"main-wlc - wncd.wncd_5\":\"solid\",\"keynote-wlc - wncd.wncd_6\":\"solid\",\"main-wlc - wncd.wncd_6\":\"solid\",\"keynote-wlc - wncd.wncd_7\":\"solid\",\"main-wlc - wncd.wncd_7\":\"solid\"}",
+        "displayView": "analytics_workspace",
+        "xAxisTitleVisibility": "hide",
+        "nullValueDisplay": "connect"
+      },
+      "dataSources": {
+        "primary": "search_3"
+      },
+      "title": "Meeting Village",
+      "description": ""
+    }
+  },
+  "dataSources": {
+    "search_1": {
+      "type": "ds.search",
+      "options": {
+        "query": "| mstats avg(\"wncd.wncd_0\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"keynote-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_0\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_0\"\n| rename \"_time - wncd.wncd_0\" AS _time\n| append [\n| mstats avg(\"wncd.wncd_1\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"keynote-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_1\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_1\"\n| rename \"_time - wncd.wncd_1\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_2\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"keynote-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_2\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_2\"\n| rename \"_time - wncd.wncd_2\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_3\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"keynote-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_3\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_3\"\n| rename \"_time - wncd.wncd_3\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_4\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"keynote-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_4\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_4\"\n| rename \"_time - wncd.wncd_4\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_5\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"keynote-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_5\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_5\"\n| rename \"_time - wncd.wncd_5\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_6\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"keynote-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_6\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_6\"\n| rename \"_time - wncd.wncd_6\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_7\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"keynote-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_7\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_7\"\n| rename \"_time - wncd.wncd_7\" AS _time\n]\n| selfjoin keepsingle=true _time",
+        "queryParameters": {
+          "earliest": "$global_time_tok.earliest$",
+          "latest": "$global_time_tok.latest$"
+        }
+      },
+      "name": "ds-WNCD-Keynote"
+    },
+    "search_2": {
+      "type": "ds.search",
+      "options": {
+        "query": "| mstats avg(\"wncd.wncd_0\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"main-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_0\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_0\"\n| rename \"_time - wncd.wncd_0\" AS _time\n| append [\n| mstats avg(\"wncd.wncd_1\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"main-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_1\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_1\"\n| rename \"_time - wncd.wncd_1\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_2\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"main-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_2\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_2\"\n| rename \"_time - wncd.wncd_2\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_3\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"main-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_3\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_3\"\n| rename \"_time - wncd.wncd_3\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_4\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"main-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_4\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_4\"\n| rename \"_time - wncd.wncd_4\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_5\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"main-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_5\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_5\"\n| rename \"_time - wncd.wncd_5\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_6\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"main-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_6\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_6\"\n| rename \"_time - wncd.wncd_6\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_7\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"main-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_7\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_7\"\n| rename \"_time - wncd.wncd_7\" AS _time\n]\n| selfjoin keepsingle=true _time",
+        "queryParameters": {
+          "earliest": "$global_time_tok.earliest$",
+          "latest": "$global_time_tok.latest$"
+        }
+      },
+      "name": "ds-WNCD-Main"
+    },
+    "search_3": {
+      "type": "ds.search",
+      "options": {
+        "query": "| mstats avg(\"wncd.wncd_0\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"meeting-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_0\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_0\"\n| rename \"_time - wncd.wncd_0\" AS _time\n| append [\n| mstats avg(\"wncd.wncd_1\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"meeting-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_1\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_1\"\n| rename \"_time - wncd.wncd_1\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_2\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"meeting-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_2\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_2\"\n| rename \"_time - wncd.wncd_2\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_3\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"meeting-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_3\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_3\"\n| rename \"_time - wncd.wncd_3\" AS _time\n]\n| selfjoin keepsingle=true _time\n| append [\n| mstats avg(\"wncd.wncd_4\") prestats=true WHERE \"index\"=\"wireless\" AND \"wlcName\"=\"meeting-wlc\" span=10s BY wlcName\n| timechart avg(\"wncd.wncd_4\") span=10s useother=false BY wlcName WHERE max in top5\n| fields - _span*\n| rename * AS \"* - wncd.wncd_4\"\n| rename \"_time - wncd.wncd_4\" AS _time\n]\n| selfjoin keepsingle=true _time",
+        "queryParameters": {
+          "earliest": "$global_time_tok.earliest$",
+          "latest": "$global_time_tok.latest$"
+        }
+      },
+      "name": "ds-WNCD-Meeting"
+    }
+  },
+  "title": "Wireless: WNCD",
+  "description": "",
+  "inputs": {
+    "input_1": {
+      "type": "input.timerange",
+      "title": "Time Range",
+      "options": {
+        "token": "global_time_tok",
+        "defaultValue": "-1h,now"
+      }
+    }
+  },
+  "defaults": {
+    "dataSources": {}
+  },
+  "layout": {
+    "tabs": {
+      "items": [
+        {
+          "layoutId": "layout_1",
+          "label": "New tab"
+        }
+      ]
+    },
+    "layoutDefinitions": {
+      "layout_1": {
+        "type": "grid",
+        "options": {
+          "display": "auto-scale",
+          "height": 750
+        },
+        "structure": [
+          {
+            "item": "chart_1",
+            "type": "block",
+            "position": {
+              "x": 0,
+              "y": 0,
+              "w": 1200,
+              "h": 250
+            }
+          },
+          {
+            "item": "chart_2",
+            "type": "block",
+            "position": {
+              "x": 0,
+              "y": 250,
+              "w": 1200,
+              "h": 250
+            }
+          },
+          {
+            "item": "chart_3",
+            "type": "block",
+            "position": {
+              "x": 0,
+              "y": 500,
+              "w": 1200,
+              "h": 275
+            }
+          }
+        ]
+      }
+    },
+    "globalInputs": [
+      "input_1"
+    ]
+  }
+}

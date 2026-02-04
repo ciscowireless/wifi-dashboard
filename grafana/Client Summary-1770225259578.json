@@ -1,0 +1,2620 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 0,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "super-light-green",
+            "mode": "shades"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      },
+      "id": 39,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "Main",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "measurement": "wlanSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wlanUsers"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlanId::tag",
+              "operator": "=",
+              "value": "4"
+            },
+            {
+              "condition": "AND",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "Keynote",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wlanSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wlanUsers"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlanId::tag",
+              "operator": "=",
+              "value": "4"
+            },
+            {
+              "condition": "AND",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "Meeting",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wlanSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wlanUsers"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlanId::tag",
+              "operator": "=",
+              "value": "4"
+            },
+            {
+              "condition": "AND",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting_WLC"
+            }
+          ]
+        }
+      ],
+      "title": "",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "OpenRoaming",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "Main",
+                "Keynote",
+                "Meeting"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "super-light-green",
+            "mode": "shades"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "id": 35,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "Main",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "measurement": "wlanSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wlanUsers"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlanId::tag",
+              "operator": "=",
+              "value": "5"
+            },
+            {
+              "condition": "AND",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "Keynote",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wlanSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wlanUsers"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlanId::tag",
+              "operator": "=",
+              "value": "5"
+            },
+            {
+              "condition": "AND",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote_WLC"
+            }
+          ]
+        },
+        {
+          "alias": "Meeting",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wlanSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wlanUsers"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlanId::tag",
+              "operator": "=",
+              "value": "5"
+            },
+            {
+              "condition": "AND",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting_WLC"
+            }
+          ]
+        }
+      ],
+      "title": "",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "eduroam",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "Main",
+                "Meeting",
+                "Keynote"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "super-light-green",
+            "mode": "shades"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 40,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "Main",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "measurement": "wlanSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wlanUsers"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlanId::tag",
+              "operator": "=",
+              "value": "6"
+            },
+            {
+              "condition": "AND",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "Keynote",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wlanSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wlanUsers"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlanId::tag",
+              "operator": "=",
+              "value": "6"
+            },
+            {
+              "condition": "AND",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            }
+          ]
+        }
+      ],
+      "title": "",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "CL-OPS",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "Keynote",
+                "Main"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "light-green",
+            "mode": "shades"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 3,
+        "y": 4
+      },
+      "id": 38,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "Main",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "measurement": "wlanSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wlanUsers"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlanId::tag",
+              "operator": "=",
+              "value": "3"
+            },
+            {
+              "condition": "AND",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "Keynote",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wlanSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wlanUsers"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlanId::tag",
+              "operator": "=",
+              "value": "3"
+            },
+            {
+              "condition": "AND",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            }
+          ]
+        },
+        {
+          "alias": "Meeting",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wlanSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wlanUsers"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlanId::tag",
+              "operator": "=",
+              "value": "3"
+            },
+            {
+              "condition": "AND",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting_WLC"
+            }
+          ]
+        }
+      ],
+      "title": "",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "CiscoLive!",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "Keynote",
+                "Meeting",
+                "Main"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "light-green",
+            "mode": "shades"
+          },
+          "fieldMinMax": false,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 11,
+        "y": 4
+      },
+      "id": 37,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "Main",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "measurement": "wlanSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wlanUsers"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlanId::tag",
+              "operator": "=",
+              "value": "1"
+            },
+            {
+              "condition": "AND",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "Keynote",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wlanSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wlanUsers"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlanId::tag",
+              "operator": "=",
+              "value": "1"
+            },
+            {
+              "condition": "AND",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            }
+          ]
+        },
+        {
+          "alias": "Meeting",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wlanSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wlanUsers"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlanId::tag",
+              "operator": "=",
+              "value": "1"
+            },
+            {
+              "condition": "AND",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting_WLC"
+            }
+          ]
+        }
+      ],
+      "title": "",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "CiscoLive-Legacy",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "Main",
+                "Keynote",
+                "Meeting"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "palette-classic-by-name"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisGridShow": false,
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Keynote"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Main"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Meeting"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 18,
+        "x": 0,
+        "y": 10
+      },
+      "id": 31,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "timezone": [
+          ""
+        ],
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "$tag_wlcName",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "wlcName::tag"
+              ],
+              "type": "tag"
+            }
+          ],
+          "hide": false,
+          "measurement": "wlcInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "clients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            },
+            {
+              "condition": "OR",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            },
+            {
+              "condition": "OR",
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting"
+            }
+          ]
+        }
+      ],
+      "title": "Total Wi-Fi Clients",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "light-blue",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 10
+      },
+      "id": 32,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "clients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "measurement": "wlcInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "clients"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "clients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wlcInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "clients"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            }
+          ]
+        },
+        {
+          "alias": "clients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wlcInventory",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "clients"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting"
+            }
+          ]
+        }
+      ],
+      "title": "Total Wi-Fi Clients",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Clients-Main"
+                }
+              },
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Clients-Keynote"
+                }
+              }
+            },
+            "cumulative": {
+              "field": "clients",
+              "reducer": "sum"
+            },
+            "mode": "cumulativeFunctions",
+            "reduce": {
+              "include": [
+                "Clients-Main",
+                "Clients-Keynote",
+                "Clients-Meeting"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "super-light-blue",
+            "mode": "shades"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "id": 30,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "Clients 2.4GHz",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "24ghzClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "Clients 2.4GHz",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "I",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "24ghzClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            }
+          ]
+        },
+        {
+          "alias": "Clients 2.4GHz",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "24ghzClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting"
+            }
+          ]
+        },
+        {
+          "alias": "Clients 5GHz",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "5ghzClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "Clients 5GHz",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "5ghzClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            }
+          ]
+        },
+        {
+          "alias": "Clients 5GHz",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "5ghzClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting"
+            }
+          ]
+        },
+        {
+          "alias": "Clients 6GHz",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "6ghzClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "Clients 6GHz",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "6ghzClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            }
+          ]
+        },
+        {
+          "alias": "Clients 6GHz",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "6ghzClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting"
+            }
+          ]
+        }
+      ],
+      "title": "Clients / Band",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "2.4GHz",
+            "cumulative": {
+              "field": "Clients 2.4GHz",
+              "reducer": "sum"
+            },
+            "mode": "cumulativeFunctions",
+            "reduce": {
+              "include": [
+                "Clients 2.4GHz"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "5GHz",
+            "cumulative": {
+              "field": "Clients 5GHz",
+              "reducer": "sum"
+            },
+            "mode": "cumulativeFunctions",
+            "reduce": {
+              "include": [
+                "Clients 5GHz"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "6GHz",
+            "cumulative": {
+              "field": "Clients 6GHz",
+              "reducer": "sum"
+            },
+            "mode": "cumulativeFunctions",
+            "reduce": {
+              "include": [
+                "Clients 6GHz"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "2.4GHz",
+                "5GHz",
+                "6GHz"
+              ]
+            }
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#8080808c",
+            "mode": "fixed"
+          },
+          "decimals": 0,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "randomMac"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 18
+      },
+      "id": 2,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "authClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "authClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "authClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "I",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "authClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            }
+          ]
+        },
+        {
+          "alias": "authClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "authClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting"
+            }
+          ]
+        },
+        {
+          "alias": "mobilityClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "mobilityClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "mobilityClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "K",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "mobilityClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            }
+          ]
+        },
+        {
+          "alias": "mobilityClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "J",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "mobilityClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting"
+            }
+          ]
+        },
+        {
+          "alias": "ipLearnClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "M",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ipLearnClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "ipLearnClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "L",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ipLearnClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            }
+          ]
+        },
+        {
+          "alias": "ipLearnClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "ipLearnClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting"
+            }
+          ]
+        },
+        {
+          "alias": "webAuthClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "webAuthClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "webAuthClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "N",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "webAuthClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            }
+          ]
+        },
+        {
+          "alias": "webAuthClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "O",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "webAuthClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting"
+            }
+          ]
+        },
+        {
+          "alias": "runClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "wlcName::tag"
+              ],
+              "type": "tag"
+            }
+          ],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "runClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "runClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "P",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "runClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            }
+          ]
+        },
+        {
+          "alias": "runClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "Q",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "runClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting"
+            }
+          ]
+        },
+        {
+          "alias": "deleteClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "deleteClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "deleteClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "R",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "deleteClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            }
+          ]
+        },
+        {
+          "alias": "deleteClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "S",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "deleteClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting"
+            }
+          ]
+        },
+        {
+          "alias": "randomMacClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "randomMacClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Main"
+            }
+          ]
+        },
+        {
+          "alias": "randomMacClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "T",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "randomMacClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Keynote"
+            }
+          ]
+        },
+        {
+          "alias": "randomMacClients",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "f257cac0-840c-4c41-96d7-83ebea2dd46e"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "clientSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "from(bucket: \"wifininja\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"wlcData\")\n  |> filter(fn: (r) => r[\"_field\"] == \"authClients\" or r[\"_field\"] == \"deleteClients\" or r[\"_field\"] == \"ipLearnClients\" or r[\"_field\"] == \"mobilityClients\" or r[\"_field\"] == \"randomMacClients\" or r[\"_field\"] == \"runClients\" or r[\"_field\"] == \"webAuthClients\")\n  |> filter(fn: (r) => r[\"wlcName\"] == \"WLC9800\")\n  |> yield()\n",
+          "refId": "U",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "randomMacClients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting"
+            }
+          ]
+        }
+      ],
+      "title": "Client States",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "auth",
+            "cumulative": {
+              "field": "authClients",
+              "reducer": "sum"
+            },
+            "mode": "cumulativeFunctions",
+            "reduce": {
+              "include": [
+                "authClients"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "mobility",
+            "cumulative": {
+              "field": "mobilityClients",
+              "reducer": "sum"
+            },
+            "mode": "cumulativeFunctions",
+            "reduce": {
+              "include": [
+                "mobilityClients"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "ipLearn",
+            "cumulative": {
+              "field": "ipLearnClients",
+              "reducer": "sum"
+            },
+            "mode": "cumulativeFunctions",
+            "reduce": {
+              "include": [
+                "ipLearnClients"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "webAuth",
+            "cumulative": {
+              "field": "webAuthClients",
+              "reducer": "sum"
+            },
+            "mode": "cumulativeFunctions",
+            "reduce": {
+              "include": [
+                "webAuthClients"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "run",
+            "cumulative": {
+              "field": "runClients",
+              "reducer": "sum"
+            },
+            "mode": "cumulativeFunctions",
+            "reduce": {
+              "include": [
+                "runClients.main",
+                "runClients.keynote",
+                "runClients.meeting"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "delete",
+            "cumulative": {
+              "field": "deleteClients",
+              "reducer": "sum"
+            },
+            "mode": "cumulativeFunctions",
+            "reduce": {
+              "include": [
+                "deleteClients"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "randomMac",
+            "cumulative": {
+              "field": "randomMacClients",
+              "reducer": "sum"
+            },
+            "mode": "cumulativeFunctions",
+            "reduce": {
+              "include": [
+                "randomMacClients"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "runClients.keynote",
+                "runClients.meeting",
+                "auth",
+                "mobility",
+                "ipLearn",
+                "webAuth",
+                "run",
+                "delete",
+                "randomMac",
+                "runClients.main"
+              ]
+            }
+          }
+        }
+      ],
+      "type": "bargauge"
+    }
+  ],
+  "preload": false,
+  "refresh": "auto",
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Client Summary",
+  "uid": "f2e1f618-b764-4e5f-b577-4b1f890cf03c",
+  "version": 63
+}

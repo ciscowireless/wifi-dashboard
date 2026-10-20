@@ -182,11 +182,9 @@ Configure
 aaa authorization exec default local
 ```
 
-## RADKit Service (system wide)
+## RADKit Service
 
-Install RADKit Service: https://radkit.cisco.com/docs/install/install_linux_systemd.html
-
-Bootstrap RADKit Service: https://radkit.cisco.com/docs/install/install_linux.html#install-linux-bootstrap
+Install RADKit Service (system wide): https://radkit.cisco.com/docs/install/install_linux_systemd.html
 
 Navigate: https://localhost:8081
 
@@ -208,17 +206,9 @@ Admin Users > Add Admin
 - Password
 - Confirm Password
 
-## RADKit Client (pip)
+## RADKit Client
 
-Download RADKit pip installation: **cisco_radkit_1.8.x_pip_linux.tgz**
-
-```
-mkdir radkit-pip-install
-cd radkit-pip-install
-tar zxvf cisco_radkit_1.8.x_pip_linux.tgz
-python3 -m pip install -f . cisco_radkit_client
-```
-Update version number as needed
+Install RADKit client (pip): https://radkit.cisco.com/docs/install/install_pip.html
 
 ## Wi-Fi Dashboard – SSH
 

@@ -12,8 +12,8 @@ RUN apt update
 RUN python3 -m pip install -U pip
 RUN pip install --upgrade pip
 WORKDIR /radkit/wheels
-COPY cisco_radkit_1.8.1_pip_linux_x86.tgz .
-RUN tar zxvf cisco_radkit_1.8.1_pip_linux_x86.tgz
+COPY cisco_radkit_2.0.12_pip_linux_x86.tgz .
+RUN tar zxvf cisco_radkit_2.0.12_pip_linux_x86.tgz
 RUN python3 -m pip install -f . cisco_radkit_client
 WORKDIR /radkit
 COPY wncd-radkit.py .

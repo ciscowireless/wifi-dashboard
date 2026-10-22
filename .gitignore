@@ -1,2 +1,4 @@
-*.ods
-data.json
+.gitignore
+Dockerfile-local
+venv/
+

@@ -1,4 +1,4 @@
-# Step-by-Step manual build
+# Step-by-Step Build Guide
 
 ## Operating system
 

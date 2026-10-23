@@ -1,10 +1,10 @@
-# Cisco 9800 WLC monitoring dashboard
+# Cisco Catalyst 9800 monitoring dashboard
 
 This repository consists of:
 
 - NETCONF collector - Python project, collects useful wireless metrics from Cisco 9800 using NETCONF
 - RADKIT collector - Python project, collects useful wireless metrics from Cisco 9800 using SSH (via RADKit)
-- Grafana Dashboard - Makes pretty graphs
+- Grafana dashboards - Pretty graphs
 
 The following components are used, see respective sites for installation instructions.
 - Grafana - grafana.com
@@ -34,37 +34,29 @@ The following components are used, see respective sites for installation instruc
 
 ## Project status
 
-This dashboard code was used at Cisco Live Amsterdam 2025
+This dashboard code was used at Cisco Live Amsterdam 2025 / 2026.
 
-However, it is a work in progress and some items may not work in your environment
+However, it is not officially supported by Cisco, and may not work in your environment.
 
-Tested on Catalyst 9800 running 17.9, 17.12, and 17.15, and at scale (>10K clients)
+There is no regression testing on this project, and YANG models evolve over time; i.e. things that were fixed or added for newer IOS-XE versions no longer work on older versions.
+
+Last tested at scale (>15K clients) on IOS-XE 17.18.2 
 
 ## Notes
 
 For IOS-XE versions before 17.9.5 - CSCwf78066 _may_ be a concern
 
-Python 3.10+, not tested on Windows
+Python 3.10+ required
+
+Developed and tested on Ubuntu
 
 ## Grafana Dashboard
 
-Grafana dashboard .json export is available in **grafana/** directory, import into existing Grafana installation
+Grafana dashboard .json exports are available in **grafana/** directory, import into existing Grafana installation
 
-Queries can be easily modified to show data from different WLC/SSID names, or to filter AP metrics by RF/Site tag
+Queries can be modified to show data from different Controller/SSID names, or to filter AP metrics by RF/Site tag
 
 The InfluxDB datasource UID will need to be modified
-
-Sample screenshots:
-
-![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/AP_Inventory.png)
-![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Client_Generations.png)
-![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Client_Summary.png)
-![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Dashboard_Statistics.png)
-![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Keynote_Summary.png)
-![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Load_Summary.png)
-![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Top_Radios_by_Channel_Utilization.png)
-![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/Top_Radios_by_Client_Count.png)
-![Image](https://github.com/ciscowireless/wifi-dashboard/blob/main/images/WLC_Inventory.png)
 
 ## NETCONF collector
 
@@ -110,7 +102,7 @@ RADKit collector can be run directly or in a Docker container
 
 There may be differences in the setup & operation of RADKit client between RADKit versions, if in doubt check the RADKit release notes.
 
-Last verified RADKit version is: 1.8.1
+Last verified RADKit version is: 2.0.12
 
 Flow diagram
 ![Image](https://github.com/Johnny8Bit/wifi-dashboard/blob/main/images/ssh-flow.png)
@@ -121,15 +113,12 @@ Docker is an optional component.
 
 The collector scripts for NETCONF and SSH can be deployed as Docker containers.
 
-The benefit is that contaners can be run in detached mode (in the background) and set to auto-restart in the event of a script problem, there is no other functional difference.
+The benefit is that containers can be run in detached mode (in the background) and set to auto-restart in the event of a script problem, there is no other functional difference.
 
-Influx / Grafana / MySQL / RADKit can also be depoyed as Docker contaners if so required, however, installing these as native services is preferred.
+Influx / Grafana / MySQL / RADKit can also be deployed as Docker containers if so required, however, installing these as native services is preferred.
 
 ## License
 
 This software is licensed under the Cisco Sample Code License
 
 URL: https://developer.cisco.com/docs/licenses/cisco-sample-code-license/
-
-
-

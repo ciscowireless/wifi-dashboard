@@ -1,6 +1,8 @@
 import logging
 import requests
 
+import xml.etree.ElementTree as ET
+
 log = logging.getLogger("wifininja.influx")
 
 
@@ -370,3 +372,47 @@ class Influx():
 
             line_protocol = line_protocol[:-1] + f'\n'
             self.write_influx(line_protocol)
+
+
+    def post_rogue_oper(self, netconf_data):
+
+        try:
+            rogue_oper_data = ET.fromstring(netconf_data.rogue_oper).find(".//rogue-oper-data")
+        
+        except ET.ParseError:
+            log.warning(f"XML parse error [rogue_oper]")
+        else:
+            line_protocol = ""
+            try:
+                for rogue in rogue_oper_data.findall(".//rogue-data"):
+                    address = rogue.find("rogue-address").text
+                    last_seen = rogue.find("rogue-last-timestamp").text[:-13]
+                    max_rssi = rogue.find("max-detected-rssi").text
+                    ssid = rogue.find("last-heard-ssid").text
+                    detecting_ap = rogue.find("ap-name-max-rssi").text
+                    radio_type = rogue.find("rogue-radio-type-max-rssi").text.lstrip("802-").rstrip("-radio-type")
+                    channel = rogue.find("last-channel").text
+                    #print(f'rogueAP {ssid},{address},{radio_type},{channel},{last_seen},{detecting_ap},{max_rssi}\n')
+                    #line_protocol += f'rogueAP {ssid},{address},{radio_type},{channel},{last_seen},{detecting_ap},{max_rssi}\n'
+                    line_protocol = (
+                                    f'rogueAP,ssid=\"{ssid}\"'
+                                    f' address=\"{address}\",'
+                                    f'radio=\"{radio_type}\",'
+                                    f'channel=\"{channel}\",'
+                                    f'lastSeen=\"{last_seen}\",'
+                                    f'detectingAP=\"{detecting_ap}\",'
+                                    f'maxRssi={max_rssi}'
+                                    f'\n'
+                                    )
+
+            except AttributeError:
+                log.warning(f"Data validation error: wireless_rogue_oper")
+            else:
+                self.write_influx(line_protocol)
+                
+            
+
+
+
+
+

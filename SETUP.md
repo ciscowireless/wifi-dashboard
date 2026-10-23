@@ -2,7 +2,7 @@
 
 ## Operating system
 
-Ubuntu Desktop 22.04 (recommended)
+Ubuntu Desktop 22.04
 
 ## git
 

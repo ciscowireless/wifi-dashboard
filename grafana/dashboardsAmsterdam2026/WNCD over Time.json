@@ -1,0 +1,1072 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 19,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-green",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "orange",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "WNCD 0",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_0"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "main-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 1",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_1"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "main-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 2",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_2"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "main-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 3",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_3"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "main-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 4",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_4"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "main-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 5",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_5"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "main-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 6",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_6"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "main-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 7",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_7"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "main-wlc"
+            }
+          ]
+        }
+      ],
+      "title": "WNCD - Main",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-green",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "orange",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "WNCD 0",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_0"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "keynote-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 1",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_1"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "keynote-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 2",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_2"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "keynote-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 3",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_3"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "keynote-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 4",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_4"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "keynote-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 5",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_5"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "keynote-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 6",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_6"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "keynote-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 7",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_7"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "keynote-wlc"
+            }
+          ]
+        }
+      ],
+      "title": "WNCD - Keynote",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "de6hd2z8syp6oe"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "showValues": false,
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "light-green",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 50
+              },
+              {
+                "color": "orange",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "WNCD 0",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_0"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "meeting-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 1",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_1"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "meeting-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 2",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_2"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "meeting-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 3",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_3"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "meeting-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 4",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_4"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "meeting-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 5",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_5"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "meeting-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 6",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_6"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "meeting-wlc"
+            }
+          ]
+        },
+        {
+          "alias": "WNCD 7",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dd64badd-0a5b-4266-91e0-f80fb3c956d5"
+          },
+          "groupBy": [],
+          "hide": false,
+          "measurement": "wncd",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "wncd_7"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "meeting-wlc"
+            }
+          ]
+        }
+      ],
+      "title": "WNCD - Meeting",
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "2026-02-08T23:00:00.000Z",
+    "to": "2026-02-13T22:59:59.000Z"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "WNCD over Time",
+  "uid": "adzc27q",
+  "version": 4
+}

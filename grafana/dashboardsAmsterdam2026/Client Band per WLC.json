@@ -1,4 +1,35 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_INFLUXDB",
+      "label": "influxdb",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "12.3.0"
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -18,13 +49,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 14,
+  "id": null,
   "links": [],
   "panels": [
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "de6hd2z8syp6oe"
+        "uid": "${DS_INFLUXDB}"
       },
       "fieldConfig": {
         "defaults": {
@@ -147,7 +178,11 @@
               "operator": "=",
               "value": "Main"
             }
-          ]
+          ],
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          }
         }
       ],
       "title": "Clients per Band - Main",
@@ -165,7 +200,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "de6hd2z8syp6oe"
+        "uid": "${DS_INFLUXDB}"
       },
       "fieldConfig": {
         "defaults": {
@@ -288,7 +323,11 @@
               "operator": "=",
               "value": "Keynote"
             }
-          ]
+          ],
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          }
         }
       ],
       "title": "Clients per Band - Keynote",
@@ -306,7 +345,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "de6hd2z8syp6oe"
+        "uid": "${DS_INFLUXDB}"
       },
       "fieldConfig": {
         "defaults": {
@@ -429,7 +468,11 @@
               "operator": "=",
               "value": "Meeting"
             }
-          ]
+          ],
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          }
         }
       ],
       "title": "Clients per Band - Meeting Village",
@@ -446,18 +489,20 @@
     }
   ],
   "preload": false,
+  "refresh": "auto",
   "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-30m",
-    "to": "now"
+    "from": "2026-02-08T23:00:00.000Z",
+    "to": "2026-02-13T22:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Client Band per WLC",
   "uid": "adld9ks",
-  "version": 11
+  "version": 12,
+  "weekStart": ""
 }

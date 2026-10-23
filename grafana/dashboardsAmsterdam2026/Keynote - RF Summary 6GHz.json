@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 9,
+  "id": 0,
   "links": [],
   "panels": [
     {
@@ -86,7 +86,7 @@
         "x": 0,
         "y": 0
       },
-      "id": 1,
+      "id": 2,
       "options": {
         "barRadius": 0,
         "barWidth": 0.97,
@@ -156,7 +156,7 @@
               "condition": "AND",
               "key": "band::tag",
               "operator": "=",
-              "value": "dot11-5-ghz-band"
+              "value": "dot11-6-ghz-band"
             },
             {
               "condition": "AND",
@@ -167,7 +167,7 @@
           ]
         }
       ],
-      "title": "Stations / AP Slot - Keynote",
+      "title": "6GHz Stations / AP Slot - Keynote",
       "transformations": [
         {
           "id": "seriesToRows",
@@ -260,12 +260,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 14,
+        "h": 15,
         "w": 24,
         "x": 0,
         "y": 14
       },
-      "id": 2,
+      "id": 3,
       "options": {
         "barRadius": 0,
         "barWidth": 0.97,
@@ -335,7 +335,7 @@
               "condition": "AND",
               "key": "band::tag",
               "operator": "=",
-              "value": "dot11-5-ghz-band"
+              "value": "dot11-6-ghz-band"
             },
             {
               "condition": "AND",
@@ -346,7 +346,7 @@
           ]
         }
       ],
-      "title": "CCA % / AP Slot - Keynote",
+      "title": "6GHz CCA % / AP Slot - Keynote",
       "transformations": [
         {
           "id": "seriesToRows",
@@ -372,19 +372,19 @@
     }
   ],
   "preload": false,
-  "refresh": "1m",
+  "refresh": "auto",
   "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-5m",
-    "to": "now"
+    "from": "2026-02-10T10:00:00.000Z",
+    "to": "2026-02-10T13:00:00.000Z"
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Keynote - RF Summary",
-  "uid": "febjyv73gmrcwb",
-  "version": 9
+  "title": "Keynote - RF Summary 6GHz",
+  "uid": "adzgvqw",
+  "version": 6
 }

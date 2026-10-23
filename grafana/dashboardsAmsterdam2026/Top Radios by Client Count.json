@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 6,
+  "id": 0,
   "links": [],
   "panels": [
     {
@@ -26,7 +26,6 @@
         "type": "influxdb",
         "uid": "de6hd2z8syp6oe"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -43,9 +42,8 @@
             },
             "inspect": false
           },
-          "decimals": 0,
           "mappings": [],
-          "max": 100,
+          "max": 200,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -55,12 +53,12 @@
                 "value": 0
               },
               {
-                "color": "blue",
-                "value": 50
+                "color": "dark-blue",
+                "value": 100
               },
               {
                 "color": "dark-purple",
-                "value": 80
+                "value": 150
               }
             ]
           }
@@ -69,34 +67,15 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "last"
+              "options": "Client Count"
             },
             "properties": [
               {
                 "id": "custom.cellOptions",
                 "value": {
-                  "mode": "lcd",
+                  "mode": "gradient",
                   "type": "gauge"
                 }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byType",
-              "options": "time"
-            },
-            "properties": []
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "slot"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 207
               }
             ]
           },
@@ -108,7 +87,19 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 415
+                "value": 383
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "slot"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 92
               }
             ]
           }
@@ -128,7 +119,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "CCA"
+            "displayName": "Client Count"
           }
         ]
       },
@@ -162,7 +153,7 @@
             [
               {
                 "params": [
-                  "cca"
+                  "stations"
                 ],
                 "type": "field"
               },
@@ -174,6 +165,7 @@
           ],
           "tags": [
             {
+              "condition": "AND",
               "key": "band::tag",
               "operator": "=",
               "value": "dot11-6-ghz-band"
@@ -181,7 +173,7 @@
           ]
         }
       ],
-      "title": "Top Radios - Channel Utilization (6GHz)",
+      "title": "Top Radios - Client Count (6GHz)",
       "transformations": [
         {
           "id": "organize",
@@ -190,15 +182,9 @@
               "Time": true
             },
             "includeByName": {},
-            "indexByName": {
-              "Time": 0,
-              "apName": 1,
-              "last": 3,
-              "slot": 2
-            },
+            "indexByName": {},
             "renameByName": {
-              "Time": "",
-              "last": "CCA"
+              "last": "Client Count"
             }
           }
         }
@@ -210,7 +196,6 @@
         "type": "influxdb",
         "uid": "de6hd2z8syp6oe"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -227,9 +212,8 @@
             },
             "inspect": false
           },
-          "decimals": 0,
           "mappings": [],
-          "max": 100,
+          "max": 200,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -239,12 +223,12 @@
                 "value": 0
               },
               {
-                "color": "blue",
-                "value": 50
+                "color": "dark-blue",
+                "value": 100
               },
               {
                 "color": "dark-purple",
-                "value": 80
+                "value": 150
               }
             ]
           }
@@ -253,34 +237,15 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "last"
+              "options": "Client Count"
             },
             "properties": [
               {
                 "id": "custom.cellOptions",
                 "value": {
-                  "mode": "lcd",
+                  "mode": "gradient",
                   "type": "gauge"
                 }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byType",
-              "options": "time"
-            },
-            "properties": []
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "slot"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 207
               }
             ]
           },
@@ -292,7 +257,19 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 415
+                "value": 384
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "slot"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 88
               }
             ]
           }
@@ -312,7 +289,7 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "CCA"
+            "displayName": "Client Count"
           }
         ]
       },
@@ -346,7 +323,7 @@
             [
               {
                 "params": [
-                  "cca"
+                  "stations"
                 ],
                 "type": "field"
               },
@@ -358,6 +335,7 @@
           ],
           "tags": [
             {
+              "condition": "AND",
               "key": "band::tag",
               "operator": "=",
               "value": "dot11-5-ghz-band"
@@ -365,7 +343,7 @@
           ]
         }
       ],
-      "title": "Top Radios - Channel Utilization (5GHz)",
+      "title": "Top Radios - Client Count (5GHz)",
       "transformations": [
         {
           "id": "organize",
@@ -381,8 +359,7 @@
               "slot": 2
             },
             "renameByName": {
-              "Time": "",
-              "last": "CCA"
+              "last": "Client Count"
             }
           }
         }
@@ -398,12 +375,12 @@
     "list": []
   },
   "time": {
-    "from": "now-5m",
-    "to": "now"
+    "from": "2026-02-08T23:00:00.000Z",
+    "to": "2026-02-13T22:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Top Radios by Channel Utilization",
-  "uid": "cdylzgmfkxczkc",
-  "version": 5
+  "title": "Top Radios by Client Count",
+  "uid": "fdym3kscee58ga",
+  "version": 11
 }

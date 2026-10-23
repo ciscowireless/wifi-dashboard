@@ -76,7 +76,7 @@
               }
             ]
           },
-          "unit": "KBs"
+          "unit": "Kbits"
         },
         "overrides": []
       },
@@ -906,7 +906,7 @@
               }
             ]
           },
-          "unit": "KBs"
+          "unit": "Kbits"
         },
         "overrides": []
       },
@@ -1736,7 +1736,7 @@
               }
             ]
           },
-          "unit": "KBs"
+          "unit": "Kbits"
         },
         "overrides": []
       },
@@ -2520,12 +2520,12 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
-    "to": "now"
+    "from": "2026-02-10T07:00:00.000Z",
+    "to": "2026-02-10T10:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Controller Stats",
   "uid": "fdyr1ygwdnzeod",
-  "version": 29
+  "version": 32
 }

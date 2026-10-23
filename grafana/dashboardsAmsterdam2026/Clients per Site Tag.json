@@ -1,4 +1,35 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_INFLUXDB",
+      "label": "influxdb",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "influxdb",
+      "pluginName": "InfluxDB"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "12.3.0"
+    },
+    {
+      "type": "datasource",
+      "id": "influxdb",
+      "name": "InfluxDB",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -18,13 +49,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 17,
+  "id": null,
   "links": [],
   "panels": [
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "de6hd2z8syp6oe"
+        "uid": "${DS_INFLUXDB}"
       },
       "fieldConfig": {
         "defaults": {
@@ -83,7 +114,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
+        "h": 9,
         "w": 24,
         "x": 0,
         "y": 0
@@ -111,7 +142,7 @@
           "alias": "$tag_tag",
           "datasource": {
             "type": "influxdb",
-            "uid": "de6hd2z8syp6oe"
+            "uid": "${DS_INFLUXDB}"
           },
           "groupBy": [
             {
@@ -151,13 +182,13 @@
           ]
         }
       ],
-      "title": "Clients per Site Tag",
+      "title": "Clients per Site Tag - Main",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "de6hd2z8syp6oe"
+        "uid": "${DS_INFLUXDB}"
       },
       "fieldConfig": {
         "defaults": {
@@ -216,10 +247,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
+        "h": 10,
         "w": 24,
         "x": 0,
-        "y": 13
+        "y": 9
       },
       "id": 2,
       "options": {
@@ -244,7 +275,7 @@
           "alias": "$tag_tag",
           "datasource": {
             "type": "influxdb",
-            "uid": "de6hd2z8syp6oe"
+            "uid": "${DS_INFLUXDB}"
           },
           "groupBy": [
             {
@@ -284,23 +315,158 @@
           ]
         }
       ],
-      "title": "Clients per Site Tag",
+      "title": "Clients per Site Tag - Keynote",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "${DS_INFLUXDB}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "alias": "$tag_tag",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "${DS_INFLUXDB}"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "tag::tag"
+              ],
+              "type": "tag"
+            }
+          ],
+          "measurement": "tagSummary",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "clients"
+                ],
+                "type": "field"
+              }
+            ]
+          ],
+          "tags": [
+            {
+              "key": "wlcName::tag",
+              "operator": "=",
+              "value": "Meeting"
+            },
+            {
+              "condition": "AND",
+              "key": "tags::tag",
+              "operator": "=",
+              "value": "siteTags"
+            }
+          ]
+        }
+      ],
+      "title": "Clients per Site Tag - Meeting",
       "type": "timeseries"
     }
   ],
   "preload": false,
+  "refresh": "auto",
   "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-6h",
-    "to": "now"
+    "from": "2026-02-08T23:00:00.000Z",
+    "to": "2026-02-13T22:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Clients per Site Tag",
   "uid": "adfcv7f",
-  "version": 6
+  "version": 9,
+  "weekStart": ""
 }

@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 18,
+  "id": 9,
   "links": [],
   "panels": [
     {
@@ -29,53 +29,51 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "continuous-YlBl"
           },
           "custom": {
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
+            "axisGridShow": true,
             "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "axisPlacement": "left",
+            "fillOpacity": 80,
+            "gradientMode": "scheme",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
             "lineWidth": 1,
-            "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
             }
           },
           "mappings": [],
+          "max": 200,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "blue",
                 "value": 0
               },
               {
-                "color": "red",
-                "value": 80
+                "color": "green",
+                "value": 20
+              },
+              {
+                "color": "#EAB839",
+                "value": 60
+              },
+              {
+                "color": "orange",
+                "value": 90
               }
             ]
           }
@@ -90,38 +88,51 @@
       },
       "id": 1,
       "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
         "legend": {
-          "calcs": [
-            "max",
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
         },
+        "orientation": "vertical",
+        "showValue": "never",
+        "stacking": "none",
         "tooltip": {
           "hideZeros": false,
           "mode": "single",
           "sort": "none"
-        }
+        },
+        "xField": "Metric",
+        "xTickLabelRotation": -90,
+        "xTickLabelSpacing": 0
       },
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "alias": "$tag_tag",
+          "alias": "$tag_apName : Slot $tag_slot",
           "datasource": {
             "type": "influxdb",
-            "uid": "de6hd2z8syp6oe"
+            "uid": "f720b49a-35e4-4f8a-890d-cf0e280083d6"
           },
           "groupBy": [
             {
               "params": [
-                "tag::tag"
+                "apName::tag"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "slot::tag"
               ],
               "type": "tag"
             }
           ],
-          "measurement": "tagSummary",
+          "measurement": "rfData",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -130,29 +141,64 @@
             [
               {
                 "params": [
-                  "clients"
+                  "stations"
                 ],
                 "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
               }
             ]
           ],
           "tags": [
             {
-              "key": "wlcName::tag",
+              "condition": "AND",
+              "key": "band::tag",
               "operator": "=",
-              "value": "Main"
+              "value": "dot11-5-ghz-band"
             },
             {
               "condition": "AND",
-              "key": "tags::tag",
+              "key": "wlcName::tag",
               "operator": "=",
-              "value": "siteTags"
+              "value": "Keynote"
             }
           ]
         }
       ],
-      "title": "Clients per RF Tag - Main",
-      "type": "timeseries"
+      "title": "5GHz Stations / AP Slot - Keynote",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "byVariable": false,
+            "include": {
+              "names": [
+                "Value",
+                "Metric"
+              ]
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Metric": "AP : Slot",
+              "Value": "Stations"
+            }
+          }
+        }
+      ],
+      "type": "barchart"
     },
     {
       "datasource": {
@@ -162,53 +208,51 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "continuous-BlPu"
           },
           "custom": {
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
+            "axisGridShow": true,
             "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "axisPlacement": "left",
+            "fillOpacity": 80,
+            "gradientMode": "scheme",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
             "lineWidth": 1,
-            "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
             }
           },
           "mappings": [],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "blue",
                 "value": 0
               },
               {
-                "color": "red",
-                "value": 80
+                "color": "green",
+                "value": 20
+              },
+              {
+                "color": "#EAB839",
+                "value": 60
+              },
+              {
+                "color": "orange",
+                "value": 90
               }
             ]
           }
@@ -223,38 +267,51 @@
       },
       "id": 2,
       "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
         "legend": {
-          "calcs": [
-            "max",
-            "lastNotNull"
-          ],
+          "calcs": [],
           "displayMode": "list",
-          "placement": "right",
-          "showLegend": true
+          "placement": "bottom",
+          "showLegend": false
         },
+        "orientation": "vertical",
+        "showValue": "never",
+        "stacking": "none",
         "tooltip": {
           "hideZeros": false,
           "mode": "single",
           "sort": "none"
-        }
+        },
+        "xField": "Metric",
+        "xTickLabelRotation": -90,
+        "xTickLabelSpacing": 0
       },
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "alias": "$tag_tag",
+          "alias": "$tag_apName : Slot $tag_slot",
           "datasource": {
             "type": "influxdb",
-            "uid": "de6hd2z8syp6oe"
+            "uid": "f720b49a-35e4-4f8a-890d-cf0e280083d6"
           },
           "groupBy": [
             {
               "params": [
-                "tag::tag"
+                "apName::tag"
+              ],
+              "type": "tag"
+            },
+            {
+              "params": [
+                "slot::tag"
               ],
               "type": "tag"
             }
           ],
-          "measurement": "tagSummary",
+          "measurement": "rfData",
           "orderByTime": "ASC",
           "policy": "default",
           "refId": "A",
@@ -263,44 +320,71 @@
             [
               {
                 "params": [
-                  "clients"
+                  "cca"
                 ],
                 "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
               }
             ]
           ],
           "tags": [
             {
-              "key": "wlcName::tag",
+              "condition": "AND",
+              "key": "band::tag",
               "operator": "=",
-              "value": "Keynote"
+              "value": "dot11-5-ghz-band"
             },
             {
               "condition": "AND",
-              "key": "tags::tag",
+              "key": "wlcName::tag",
               "operator": "=",
-              "value": "siteTags"
+              "value": "Keynote"
             }
           ]
         }
       ],
-      "title": "Clients per RF Tag - Keynote",
-      "type": "timeseries"
+      "title": "5GHz CCA % / AP Slot - Keynote",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Metric": false,
+              "Time": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Metric": "AP : Slot",
+              "Value": "CCA %"
+            }
+          }
+        }
+      ],
+      "type": "barchart"
     }
   ],
   "preload": false,
+  "refresh": "auto",
   "schemaVersion": 42,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-6h",
-    "to": "now"
+    "from": "2026-02-08T23:00:00.000Z",
+    "to": "2026-02-13T22:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Clients per RF Tag",
-  "uid": "adfvdjm",
-  "version": 2
+  "title": "Keynote - RF Summary 5GHz",
+  "uid": "febjyv73gmrcwb",
+  "version": 13
 }

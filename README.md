@@ -40,7 +40,9 @@ However, it is not officially supported by Cisco, and may not work in your envir
 
 There is no regression testing on this project, and YANG models evolve over time; i.e. things that were fixed or added for newer IOS-XE versions no longer work on older versions.
 
-Last tested at scale (>15K clients) on IOS-XE 17.18.2 
+Last tested at scale (>15K clients) on IOS-XE 17.18.2
+
+See [System Design](DESIGN.md).
 
 ## Notes
 
@@ -49,6 +51,8 @@ For IOS-XE versions before 17.9.5 - CSCwf78066 _may_ be a concern
 Python 3.10+ required
 
 Developed and tested on Ubuntu
+
+See [Step-by-Step build guide](SETUP.md).
 
 ## Grafana Dashboard
 

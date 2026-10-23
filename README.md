@@ -34,15 +34,13 @@ The following components are used, see respective sites for installation instruc
 
 ## Project status
 
-This dashboard code was used at Cisco Live Amsterdam 2025 / 2026.
+This dashboard code was used at [Cisco Live Amsterdam](DESIGN.md). 2025 / 2026.
 
 However, it is not officially supported by Cisco, and may not work in your environment.
 
 There is no regression testing on this project, and YANG models evolve over time; i.e. things that were fixed or added for newer IOS-XE versions no longer work on older versions.
 
 Last tested at scale (>15K clients) on IOS-XE 17.18.2
-
-See [System Design](DESIGN.md).
 
 ## Notes
 

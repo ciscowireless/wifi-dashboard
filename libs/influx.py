@@ -386,24 +386,29 @@ class Influx():
             try:
                 for rogue in rogue_oper_data.findall(".//rogue-data"):
                     address = rogue.find("rogue-address").text
-                    last_seen = rogue.find("rogue-last-timestamp").text[:-13]
+                    last_seen_day = rogue.find("rogue-last-timestamp").text.split("T")[0]
+                    last_seen_time = rogue.find("rogue-last-timestamp").text.split("T")[1][:-13]
+                    last_seen = f"{last_seen_day}\\ @\\ " +  f"{last_seen_time:0<8}"[:-3]
                     max_rssi = rogue.find("max-detected-rssi").text
                     ssid = rogue.find("last-heard-ssid").text
+                    if not ssid: ssid = ">>HIDDEN<<"
+                    ssid = ssid.replace(" ", "\\ ")
                     detecting_ap = rogue.find("ap-name-max-rssi").text
-                    radio_type = rogue.find("rogue-radio-type-max-rssi").text.lstrip("802-").rstrip("-radio-type")
+                    radio_type = rogue.find("rogue-radio-type-max-rssi").text[:-11].lstrip("802-")
                     channel = rogue.find("last-channel").text
-                    #print(f'rogueAP {ssid},{address},{radio_type},{channel},{last_seen},{detecting_ap},{max_rssi}\n')
-                    #line_protocol += f'rogueAP {ssid},{address},{radio_type},{channel},{last_seen},{detecting_ap},{max_rssi}\n'
-                    line_protocol = (
-                                    f'rogueAP,ssid=\"{ssid}\"'
-                                    f' address=\"{address}\",'
-                                    f'radio=\"{radio_type}\",'
-                                    f'channel=\"{channel}\",'
-                                    f'lastSeen=\"{last_seen}\",'
-                                    f'detectingAP=\"{detecting_ap}\",'
-                                    f'maxRssi={max_rssi}'
-                                    f'\n'
-                                    )
+                    rogue_info = (
+                                f'rogueAP,address={address},'
+                                f'ssid={ssid},'
+                                f'radio={radio_type},'
+                                f'channel={channel},'
+                                f'lastSeen={last_seen},'
+                                f'detectingAP={detecting_ap},'
+                                f'maxRssi={max_rssi}'
+                                f' maxRssi={max_rssi}'
+                                f'\n'
+                                )
+                    #print(rogue_info)
+                    line_protocol += rogue_info
 
             except AttributeError:
                 log.warning(f"Data validation error: wireless_rogue_oper")

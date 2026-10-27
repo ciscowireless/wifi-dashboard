@@ -232,7 +232,17 @@ class Netconf():
                     <rogue-radio-type-max-rssi/>
                     <last-channel/>
                     <last-heard-ssid/>
-                    </rogue-data>
-                </rogue-oper-data>
+                    <n-clients/>
+                    <band-data-2dot4g>
+                        <chan-width/>
+                    </band-data-2dot4g>
+                    <band-data-5g>
+                        <chan-width/>
+                    </band-data-5g>
+                    <band-data-6g>
+                        <chan-width/>
+                    </band-data-6g>
+                </rogue-data>
+            </rogue-oper-data>
         '''
         self.rogue_oper = self.netconf_rpc(filter, "rogue-oper")

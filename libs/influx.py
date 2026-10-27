@@ -386,28 +386,31 @@ class Influx():
             try:
                 for rogue in rogue_oper_data.findall(".//rogue-data"):
                     address = rogue.find("rogue-address").text
+                    ssid = rogue.find("last-heard-ssid").text
+                    ssid = ">>HIDDEN<<" if not ssid else ssid.replace(" ", "\\ ")
                     last_seen_day = rogue.find("rogue-last-timestamp").text.split("T")[0]
                     last_seen_time = rogue.find("rogue-last-timestamp").text.split("T")[1][:-13]
-                    last_seen = f"{last_seen_day}\\ @\\ " +  f"{last_seen_time:0<8}"[:-3]
+                    last_seen = f"{last_seen_day} @ " + f"{last_seen_time:0<8}"[:-3]
+                    channel = rogue.find("last-channel").text
+                    clients = rogue.find("n-clients").text
                     max_rssi = rogue.find("max-detected-rssi").text
-                    ssid = rogue.find("last-heard-ssid").text
-                    if not ssid: ssid = ">>HIDDEN<<"
-                    ssid = ssid.replace(" ", "\\ ")
                     detecting_ap = rogue.find("ap-name-max-rssi").text
                     radio_type = rogue.find("rogue-radio-type-max-rssi").text[:-11].lstrip("802-")
-                    channel = rogue.find("last-channel").text
+                    width_2 = int(rogue.find("./band-data-2dot4g/chan-width").text)
+                    width_5 = int(rogue.find("./band-data-5g/chan-width").text)
+                    width_6 = int(rogue.find("./band-data-6g/chan-width").text)
+                    width = max(width_2, width_5, width_6) #Only one has a non-zero value
                     rogue_info = (
-                                f'rogueAP,address={address},'
-                                f'ssid={ssid},'
-                                f'radio={radio_type},'
-                                f'channel={channel},'
-                                f'lastSeen={last_seen},'
-                                f'detectingAP={detecting_ap},'
-                                f'maxRssi={max_rssi}'
-                                f' maxRssi={max_rssi}'
+                                f'rogueAP,address={address},ssid={ssid}'
+                                f' radio=\"{radio_type}\",'
+                                f'channel=\"{channel}\",'
+                                f'lastSeen=\"{last_seen}\",'
+                                f'detectingAP=\"{detecting_ap}\",'
+                                f'maxRssi={max_rssi},'
+                                f'channelWidth=\"{width} MHz\",'
+                                f'clients=\"{clients}\"'
                                 f'\n'
                                 )
-                    #print(rogue_info)
                     line_protocol += rogue_info
 
             except AttributeError:

@@ -36,7 +36,7 @@ The following components are used, see respective sites for installation instruc
 
 This dashboard code was used at [Cisco Live](DESIGN.md) - Amsterdam 2025 / 2026 and other notable conferences and sporting events
 
-However, it is not officially supported by Cisco, and may not work in your environment
+However, it is officially _not_ supported by Cisco, and may not work in your environment
 
 There is no regression testing on this project, and YANG models evolve over time; i.e. things that were fixed or added for newer IOS-XE versions may not work on older versions
 

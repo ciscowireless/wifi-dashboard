@@ -6,12 +6,12 @@ This repository consists of:
 - RADKIT collector - Python project, collects useful wireless metrics from Cisco 9800 using SSH (via RADKit)
 - Grafana dashboards - Pretty graphs
 
-The following components are used, see respective sites for installation instructions.
+The following components are used, see respective sites for installation instructions:
 - Grafana - grafana.com
 - InfluxDB 2.x - influxdata.com
 - MySQL - mysql.com
 - RADKit - radkit.cisco.com
-- (Optional) Docker - docker.com
+- Docker - docker.com
 
 **Wireless metrics (collected via NETCONF)**
 
@@ -34,11 +34,11 @@ The following components are used, see respective sites for installation instruc
 
 ## Project status
 
-This dashboard code was used at [Cisco Live Amsterdam](DESIGN.md). 2025 / 2026.
+This dashboard code was used at [Cisco Live](DESIGN.md) - Amsterdam 2025 / 2026 and other notable conferences and sporting events
 
-However, it is not officially supported by Cisco, and may not work in your environment.
+However, it is not officially supported by Cisco, and may not work in your environment
 
-There is no regression testing on this project, and YANG models evolve over time; i.e. things that were fixed or added for newer IOS-XE versions no longer work on older versions.
+There is no regression testing on this project, and YANG models evolve over time; i.e. things that were fixed or added for newer IOS-XE versions may not work on older versions
 
 Last tested at scale (>15K clients) on IOS-XE 17.18.2
 
@@ -62,7 +62,7 @@ The InfluxDB datasource UID will need to be modified
 
 ## NETCONF collector
 
-Makes NETCONF calls directly to devices, parses output, stores temporary data in MySQL, sends to InfluxDB
+Makes NETCONF calls directly to wireless controller(s), parses output, stores temporary data in MySQL, sends to InfluxDB
 
 Edit **config.json** to configure options
 
@@ -90,7 +90,7 @@ MySQL is used for _temporary_ data manipulation only
 
 Makes API calls using RADKit Client API, parses output, sends to InfluxDB
 
-RADKit is currently used only for WNCD load metrics colected via SSH
+RADKit is currently used only for WNCD load metrics collected via SSH
 
 Configure the following environment variables:
 - RADKIT_USER
@@ -102,7 +102,7 @@ Configure the following environment variables:
 
 RADKit collector can be run directly or in a Docker container
 
-There may be differences in the setup & operation of RADKit client between RADKit versions, if in doubt check the RADKit release notes.
+There may be differences in the setup & operation of RADKit between RADKit versions, if in doubt check the RADKit release notes
 
 Last verified RADKit version is: 2.0.12
 
@@ -111,13 +111,13 @@ Flow diagram
 
 ## Docker
 
-Docker is an optional component.
+Docker is an optional component
 
-The collector scripts for NETCONF and SSH can be deployed as Docker containers.
+The collector scripts for NETCONF and SSH can be deployed as Docker containers
 
-The benefit is that containers can be run in detached mode (in the background) and set to auto-restart in the event of a script problem, there is no other functional difference.
+The benefit is that containers can be run in detached mode (in the background) and set to auto-restart in the event of a script problem, there is no other functional difference
 
-Influx / Grafana / MySQL / RADKit can also be deployed as Docker containers if so required, however, installing these as native services is preferred.
+Influx / Grafana / MySQL / RADKit can also be deployed as Docker containers if so required, however, installing these as native services is assumed
 
 ## License
 

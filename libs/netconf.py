@@ -175,19 +175,6 @@ class Netconf():
         '''
         self.interfaces_oper = self.netconf_rpc(filter, "interfaces-oper")
 
-        # filter = f'''
-        #     <interfaces xmlns='http://cisco.com/ns/yang/Cisco-IOS-XE-interfaces-oper'>
-        #         <interface>
-        #             <name>{self.wlc_interface}</name>
-        #             <statistics>
-        #                 <rx-kbps/>
-        #                 <tx-kbps/>
-        #             </statistics>
-        #         </interface>
-        #     </interfaces>
-        # '''
-        # self.interfaces_oper = self.netconf_rpc(filter, "interfaces-oper")
-
 
     def get_device_hardware_oper(self):
 
@@ -229,3 +216,33 @@ class Netconf():
             </install-oper-data>
         '''
         self.install_oper = self.netconf_rpc(filter, "install-oper")
+
+
+    def get_rogue_oper(self):
+
+        filter = f'''
+            <rogue-oper-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-wireless-rogue-oper">
+                <rogue-data>
+                    <rogue-address/>
+                    <rogue-last-timestamp/>
+                    <ad-hoc>false</ad-hoc>
+                    <max-detected-rssi/>
+                    <ssid-max-rssi/>
+                    <ap-name-max-rssi/>
+                    <rogue-radio-type-max-rssi/>
+                    <last-channel/>
+                    <last-heard-ssid/>
+                    <n-clients/>
+                    <band-data-2dot4g>
+                        <chan-width/>
+                    </band-data-2dot4g>
+                    <band-data-5g>
+                        <chan-width/>
+                    </band-data-5g>
+                    <band-data-6g>
+                        <chan-width/>
+                    </band-data-6g>
+                </rogue-data>
+            </rogue-oper-data>
+        '''
+        self.rogue_oper = self.netconf_rpc(filter, "rogue-oper")

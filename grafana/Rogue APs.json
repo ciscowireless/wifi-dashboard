@@ -3,7 +3,7 @@
   "kind": "Dashboard",
   "metadata": {
     "name": "ad496tj",
-    "generation": 13,
+    "generation": 14,
     "creationTimestamp": "2026-10-23T19:50:40Z",
     "labels": {},
     "annotations": {}
@@ -170,6 +170,15 @@
                             "id": "substring",
                             "options": {
                               "value": "24g"
+                            }
+                          },
+                          "fieldName": "radio"
+                        },
+                        {
+                          "config": {
+                            "id": "substring",
+                            "options": {
+                              "value": "-bg"
                             }
                           },
                           "fieldName": "radio"

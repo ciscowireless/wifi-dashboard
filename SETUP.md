@@ -51,10 +51,9 @@ CREATE USER 'mysql_user'@'localhost' IDENTIFIED BY 'mysql_password';
 GRANT ALL PRIVILEGES ON *.* TO 'mysql_user'@'localhost';
 exit
 mysql -u mysql_user -p
-CREATE DATABASE database_name;
-USE database_name;
+SHOW DATABASES;
 ```
-Create new tables by copying statements from **wifi-dashboard/mysql/table-create.txt**
+Create new database and tables by running the setup script **mysql/dbSetup.py**
 
 ## InfluxDB
 

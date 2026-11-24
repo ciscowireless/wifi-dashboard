@@ -93,7 +93,6 @@ class Dashboard():
 
                 self.netconf.wlc_ip = wlc["ip"]
                 self.netconf.wlc_name = wlc["name"]
-                #self.netconf.wlc_interface = wlc["interface"]
                 self.netconf.wlc_user = os.environ[wlc["user_env"]]
                 self.netconf.wlc_pass = os.environ[wlc["pass_env"]]
                 
@@ -114,20 +113,20 @@ class Dashboard():
                 self.influx.post_ap_inventory()
 
                 self.netconf.get_wireless_client_oper()
-                self.mysql.sql_wireless_client_oper(self.netconf)
-                self.influx.post_wireless_client_oper()
+                #self.mysql.sql_wireless_client_oper(self.netconf)
+                self.influx.post_wireless_client_oper(self.netconf)
+
+                self.netconf.get_interfaces_oper()
+                #self.mysql.sql_interfaces_oper(self.netconf)
+                self.influx.post_interfaces_oper(self.netconf)
 
                 self.netconf.get_wireless_ap_global_oper()
-                self.mysql.sql_wireless_ap_global_oper(self.netconf)
-                self.netconf.get_interfaces_oper()
-                self.mysql.sql_interfaces_oper(self.netconf)
-                self.influx.post_wlc_oper()
-
+                #self.mysql.sql_wireless_ap_global_oper(self.netconf)
                 self.netconf.get_device_hardware_oper()
-                self.netconf.get_native()
                 self.netconf.get_install_oper()
-                self.mysql.sql_wlc_detail(self.netconf)
-                self.influx.post_wlc_inventory()
+                self.netconf.get_native()
+                #self.mysql.sql_wlc_detail(self.netconf)
+                self.influx.post_wlc_detail(self.netconf)
 
                 self.netconf.get_rogue_oper()
                 self.influx.post_rogue_oper(self.netconf)

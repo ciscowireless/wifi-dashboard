@@ -26,9 +26,9 @@ class MySql():
         self.write_mysql(f"DELETE FROM Slot;")
         self.write_mysql(f"DELETE FROM SlotMetrics;")
         self.write_mysql(f"DELETE FROM Wlan;")
-        self.write_mysql(f"DELETE FROM Wlc;")
-        self.write_mysql(f"DELETE FROM WlcDetail;")
-        self.write_mysql(f"DELETE FROM WlcInterfaces;")
+        #self.write_mysql(f"DELETE FROM Wlc;")
+        #self.write_mysql(f"DELETE FROM WlcDetail;")
+        #self.write_mysql(f"DELETE FROM WlcInterfaces;")
 
 
     def write_mysql(self, query):
@@ -215,122 +215,112 @@ class MySql():
                 self.write_mysql(f"REPLACE INTO SlotMetrics (apRadioMac, slot, stations, cca) VALUES {query_string[:-1]};")
 
 
-    def sql_wireless_ap_global_oper(self, netconf_data):
+    # def sql_wireless_ap_global_oper(self, netconf_data):
 
-        try:
-            wireless_ap_global_oper_data = ET.fromstring(netconf_data.wireless_ap_global_oper).find(".//ap-global-oper-data")
+    #     try:
+    #         wireless_ap_global_oper_data = ET.fromstring(netconf_data.wireless_ap_global_oper).find(".//ap-global-oper-data")
 
-        except ET.ParseError:
-            log.warning(f"XML parse error [wireless_ap_global_oper]")
-        else:
-            try:
-                joined_aps = wireless_ap_global_oper_data.find("emltd-join-count-stat/joined-aps-count").text
+    #     except ET.ParseError:
+    #         log.warning(f"XML parse error [wireless_ap_global_oper]")
+    #     else:
+    #         try:
+    #             joined_aps = wireless_ap_global_oper_data.find("emltd-join-count-stat/joined-aps-count").text
                 
-            except AttributeError:
-                log.warning(f"Data validation error [wireless_ap_global_oper]")
-            else:
-                self.write_mysql(
-                                f"REPLACE INTO Wlc (wlcIp, wlcName, joinedAps) VALUES "\
-                                f"('{netconf_data.wlc_ip}', '{netconf_data.wlc_name}', '{joined_aps}');"
-                                )
+    #         except AttributeError:
+    #             log.warning(f"Data validation error [wireless_ap_global_oper]")
+    #         else:
+    #             self.write_mysql(
+    #                             f"REPLACE INTO Wlc (wlcIp, wlcName, joinedAps) VALUES "\
+    #                             f"('{netconf_data.wlc_ip}', '{netconf_data.wlc_name}', '{joined_aps}');"
+    #                             )
 
 
-    def sql_wireless_client_oper(self, netconf_data):
+    # def sql_wireless_client_oper(self, netconf_data):
 
-        try:
-            wireless_client_oper = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-oper-data")
+    #     try:
+    #         wireless_client_oper = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-oper-data")
 
-        except ET.ParseError:
-            log.warning(f"XML parse error [wireless_client_oper]")
-        else:
-            try:
-                wifi_4, wifi_5, wifi_6, wifi_7, wifi_other = 0, 0, 0, 0, 0
-                for item in wireless_client_oper.findall(".//common-oper-data"):
-                    match item.find("ms-radio-type").text:
-                        case "client-dot11be-6ghz-prot": wifi_7 += 1
-                        case "client-dot11be-5ghz-prot": wifi_7 += 1
-                        case "client-dot11be-24ghz-prot": wifi_7 += 1
-                        case "client-dot11ax-6ghz-prot": wifi_6 += 1
-                        case "client-dot11ax-5ghz-prot": wifi_6 += 1
-                        case "client-dot11ax-24ghz-prot": wifi_6 += 1
-                        case "client-dot11ac": wifi_5 += 1
-                        case "client-dot11n-5-ghz-prot": wifi_4 += 1
-                        case "client-dot11n-24-ghz-prot": wifi_4 += 1
-                        case "client-dot11g-prot": wifi_other += 1
-                        case "client-dot11a-prot": wifi_other += 1
-                        case "client-dot11b-prot": wifi_other += 1
-                        case _: wifi_other += 1
+    #     except ET.ParseError:
+    #         log.warning(f"XML parse error [wireless_client_oper]")
+    #     else:
+    #         try:
+    #             wifi_4, wifi_5, wifi_6, wifi_7, wifi_other = 0, 0, 0, 0, 0
+    #             for item in wireless_client_oper.findall(".//common-oper-data"):
+    #                 match item.find("ms-radio-type").text:
+    #                     case "client-dot11be-6ghz-prot": wifi_7 += 1
+    #                     case "client-dot11be-5ghz-prot": wifi_7 += 1
+    #                     case "client-dot11be-24ghz-prot": wifi_7 += 1
+    #                     case "client-dot11ax-6ghz-prot": wifi_6 += 1
+    #                     case "client-dot11ax-5ghz-prot": wifi_6 += 1
+    #                     case "client-dot11ax-24ghz-prot": wifi_6 += 1
+    #                     case "client-dot11ac": wifi_5 += 1
+    #                     case "client-dot11n-5-ghz-prot": wifi_4 += 1
+    #                     case "client-dot11n-24-ghz-prot": wifi_4 += 1
+    #                     case "client-dot11g-prot": wifi_other += 1
+    #                     case "client-dot11a-prot": wifi_other += 1
+    #                     case "client-dot11b-prot": wifi_other += 1
+    #                     case _: wifi_other += 1
             
-            except AttributeError:
-                log.warning(f"Data validation error [wireless_client_global_oper]")
-            else:
-                self.write_mysql(f"UPDATE Client SET wifi4 = '{wifi_4}', wifi5 = '{wifi_5}', wifi6 = '{wifi_6}', wifi7 = '{wifi_7}', wifiOther = '{wifi_other}' WHERE wlcIp = '{netconf_data.wlc_ip}';")
+    #         except AttributeError:
+    #             log.warning(f"Data validation error [wireless_client_global_oper]")
+    #         else:
+    #             self.write_mysql(f"UPDATE Client SET wifi4 = '{wifi_4}', wifi5 = '{wifi_5}', wifi6 = '{wifi_6}', wifi7 = '{wifi_7}', wifiOther = '{wifi_other}' WHERE wlcIp = '{netconf_data.wlc_ip}';")
 
 
-    def sql_interfaces_oper(self, netconf_data):
+    # def sql_interfaces_oper(self, netconf_data):
 
-        try:
-            interfaces_oper = ET.fromstring(netconf_data.interfaces_oper).find(".//interfaces")
+    #     try:
+    #         interfaces_oper = ET.fromstring(netconf_data.interfaces_oper).find(".//interfaces")
 
-        except ET.ParseError:
-            log.warning(f"XML parse error [interfaces_oper]")
-        else:
-            try:
-                intf_data = []
-                for item in interfaces_oper.findall(".//interface"):
-                    interface_name = item.find("name").text
-                    interface_status = item.find("oper-status").text
-                    tx = item.find("statistics/tx-kbps").text
-                    rx = item.find("statistics/rx-kbps").text
-                    in_errors = item.find("statistics/in-errors").text
-                    out_errors = item.find("statistics/out-errors").text
-                    in_discards = item.find("statistics/in-discards").text
-                    out_discards = item.find("statistics/out-discards").text
-                    intf_data.append([interface_name, interface_status, rx, tx, in_errors, out_errors, in_discards, out_discards])
+    #     except ET.ParseError:
+    #         log.warning(f"XML parse error [interfaces_oper]")
+    #     else:
+    #         try:
+    #             intf_data = []
+    #             for item in interfaces_oper.findall(".//interface"):
+    #                 interface_name = item.find("name").text
+    #                 interface_status = item.find("oper-status").text
+    #                 tx = item.find("statistics/tx-kbps").text
+    #                 rx = item.find("statistics/rx-kbps").text
+    #                 in_errors = item.find("statistics/in-errors").text
+    #                 out_errors = item.find("statistics/out-errors").text
+    #                 in_discards = item.find("statistics/in-discards").text
+    #                 out_discards = item.find("statistics/out-discards").text
+    #                 intf_data.append([interface_name, interface_status, rx, tx, in_errors, out_errors, in_discards, out_discards])
 
-            except AttributeError:
-                log.warning(f"Data validation error [interfaces_oper]")
-            else:
-                query_string = ""
-                for intf in intf_data:
-                        query_string += f"('{netconf_data.wlc_ip}', '{netconf_data.wlc_name}', '{intf[0]}', '{intf[1]}', '{intf[2]}', '{intf[3]}', '{intf[4]}', '{intf[5]}', '{intf[6]}', '{intf[7]}'),"
+    #         except AttributeError:
+    #             log.warning(f"Data validation error [interfaces_oper]")
+    #         else:
+    #             query_string = ""
+    #             for intf in intf_data:
+    #                     query_string += f"('{netconf_data.wlc_ip}', '{netconf_data.wlc_name}', '{intf[0]}', '{intf[1]}', '{intf[2]}', '{intf[3]}', '{intf[4]}', '{intf[5]}', '{intf[6]}', '{intf[7]}'),"
 
-                self.write_mysql(f"REPLACE INTO WlcInterfaces (wlcIp, wlcName, interfaceName, interfaceOperStatus, txKbps, rxKbps, inErrors, outErrors, inDiscards, outDiscards) VALUES {query_string[:-1]};")
+    #             self.write_mysql(f"REPLACE INTO WlcInterfaces (wlcIp, wlcName, interfaceName, interfaceOperStatus, txKbps, rxKbps, inErrors, outErrors, inDiscards, outDiscards) VALUES {query_string[:-1]};")
 
 
-    def sql_wlc_detail(self, netconf_data):
+    # def sql_wlc_detail(self, netconf_data):
 
-        try:
-            device_hardware_oper = ET.fromstring(netconf_data.device_hardware_oper).find(".//device-hardware-data")
-            install_oper = ET.fromstring(netconf_data.install_oper).find(".//install-oper-data")
-            native = ET.fromstring(netconf_data.native).find(".//native")
+    #     try:
+    #         device_hardware_oper = ET.fromstring(netconf_data.device_hardware_oper).find(".//device-hardware-data")
+    #         install_oper = ET.fromstring(netconf_data.install_oper).find(".//install-oper-data")
+    #         native = ET.fromstring(netconf_data.native).find(".//native")
             
-        except ET.ParseError:
-            log.warning(f"XML parse error: wlc_detail")
-        else:
-            try:
-                model = device_hardware_oper.find("device-hardware/device-inventory/part-number").text
-                software = device_hardware_oper.find("device-hardware/device-system-data/software-version").text
-                sso_status = install_oper.find("install-location-information/oper-state/sso-state").text
-                hostname = native.find("hostname").text
+    #     except ET.ParseError:
+    #         log.warning(f"XML parse error: wlc_detail")
+    #     else:
+    #         try:
+    #             model = device_hardware_oper.find("device-hardware/device-inventory/part-number").text
+    #             software = device_hardware_oper.find("device-hardware/device-system-data/software-version").text
+    #             sso_status = install_oper.find("install-location-information/oper-state/sso-state").text
+    #             hostname = native.find("hostname").text
 
-            except AttributeError:
-                log.warning(f"Data validation error [wlc_detail]")
-            else:
-                self.write_mysql(f"DELETE FROM WlcDetail;")
+    #         except AttributeError:
+    #             log.warning(f"Data validation error [wlc_detail]")
+    #         else:
+    #             self.write_mysql(f"DELETE FROM WlcDetail;")
 
-                software_version = re.search("Version [0-9.]+", software).group(0)[8:]
-                self.write_mysql(
-                                f"REPLACE INTO WlcDetail (wlcIp, wlcName, hostName, model, software, ssoState) VALUES "\
-                                f"('{netconf_data.wlc_ip}', '{netconf_data.wlc_name}', '{hostname}', '{model}', '{software_version}', '{sso_status}');"
-                                )
-
-        
-        
-
-
-
-
-
-
-                
+    #             software_version = re.search("Version [0-9.]+", software).group(0)[8:]
+    #             self.write_mysql(
+    #                             f"REPLACE INTO WlcDetail (wlcIp, wlcName, hostName, model, software, ssoState) VALUES "\
+    #                             f"('{netconf_data.wlc_ip}', '{netconf_data.wlc_name}', '{hostname}', '{model}', '{software_version}', '{sso_status}');"
+    #                             )

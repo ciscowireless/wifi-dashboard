@@ -41,43 +41,6 @@ TABLES["SlotMetrics"] = (
 "  );"
 )
 
-TABLES["Wlc"] = (
-"CREATE TABLE Wlc ("
-"  wlcIp varchar(15),"
-"  wlcName varchar(255),"
-"  joinedAps int,"
-"  PRIMARY KEY (wlcIp)"
-"  );"
-)
-
-TABLES["WlcDetail"]   = (
-"CREATE TABLE WlcDetail ("
-"  wlcIp varchar(15),"
-"  wlcName varchar(255),"
-"  hostName varchar(255),"
-"  model varchar(255),"
-"  software varchar(255),"
-"  ssoState varchar(255),"
-"  PRIMARY KEY (wlcIp)"
-"  );"
-)
-
-TABLES["WlcInterfaces"] = (
-"CREATE TABLE WlcInterfaces ("
-"  wlcIp varchar(15),"
-"  wlcName varchar(255),"
-"  interfaceName varchar(255),"
-"  interfaceOperStatus varchar(255),"
-"  txKbps bigint,"
-"  rxKbps bigint,"
-"  inErrors bigint,"
-"  outErrors bigint,"
-"  inDiscards bigint,"
-"  outDiscards bigint,"
-"  unique key UC_wlcInterface (wlcIp,interfaceName)"
-"  );"
-)
-
 TABLES["Client"] = (
 "CREATE TABLE Client ("
 "  wlcIp varchar(15),"
@@ -92,11 +55,6 @@ TABLES["Client"] = (
 "  clients24ghz int,"
 "  clients5ghz int,"
 "  clients6ghz int,"
-"  wifi4 int,"
-"  wifi5 int,"
-"  wifi6 int,"
-"  wifiOther int,"
-"  wifi7 int,"
 "  PRIMARY KEY (wlcIp)"
 "  );"
 )

@@ -14,11 +14,8 @@ reserved. Unless required by applicable law or agreed to separately in
 writing, software distributed under the License is distributed on an "AS
 IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
 or implied.
-'''
-__name__ = "Wi-Fi Dashboard"
-__version__ = "2.1"
-__author__ = "Michal Kowalik"
 
+'''
 import logging
 import os
 import sys
@@ -101,12 +98,6 @@ class Dashboard():
                 
                 subprocess.run(["echo", f"WLC: {self.netconf.wlc_ip} ({self.netconf.wlc_name})"])
 
-                self.netconf.get_wireless_client_global_oper()
-                #self.mysql.sql_wireless_client_global_oper_client(self.netconf)
-                #self.mysql.sql_wireless_client_global_oper_wlan(self.netconf)
-                self.influx.post_wireless_client_global_oper_client(self.netconf)
-                self.influx.post_wireless_client_global_oper_wlan(self.netconf)
-
                 self.netconf.get_wireless_access_point_oper()
                 self.mysql.sql_wireless_access_point_oper(self.netconf)
                 self.netconf.get_wireless_rrm_oper()
@@ -115,24 +106,24 @@ class Dashboard():
                 self.influx.post_wireless_oper_tag_summary()
                 self.influx.post_ap_inventory()
 
+                self.netconf.get_wireless_client_global_oper()
+                self.influx.post_wireless_client_global_oper_client(self.netconf)
+                self.influx.post_wireless_client_global_oper_wlan(self.netconf)
+
                 self.netconf.get_wireless_client_oper()
-                #self.mysql.sql_wireless_client_oper(self.netconf)
                 self.influx.post_wireless_client_oper(self.netconf)
 
                 self.netconf.get_interfaces_oper()
-                #self.mysql.sql_interfaces_oper(self.netconf)
                 self.influx.post_interfaces_oper(self.netconf)
-
-                self.netconf.get_wireless_ap_global_oper()
-                #self.mysql.sql_wireless_ap_global_oper(self.netconf)
-                self.netconf.get_device_hardware_oper()
-                self.netconf.get_install_oper()
-                self.netconf.get_native()
-                #self.mysql.sql_wlc_detail(self.netconf)
-                self.influx.post_wlc_detail(self.netconf)
 
                 self.netconf.get_rogue_oper()
                 self.influx.post_rogue_oper(self.netconf)
+
+                self.netconf.get_wireless_ap_global_oper()
+                self.netconf.get_device_hardware_oper()
+                self.netconf.get_install_oper()
+                self.netconf.get_native()
+                self.influx.post_wlc_detail(self.netconf)
 
                 self.mysql.clear_mysql()
 

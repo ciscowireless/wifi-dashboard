@@ -1,3 +1,21 @@
+'''
+Copyright (c) 2026 Cisco and/or its affiliates.
+
+This software is licensed to you under the terms of the Cisco Sample
+Code License, Version 1.1 (the "License"). You may obtain a copy of the
+License at
+
+               https://developer.cisco.com/docs/licenses
+
+All use of the material herein must be in accordance with the terms of
+the License. All rights not expressly granted by the License are
+reserved. Unless required by applicable law or agreed to separately in
+writing, software distributed under the License is distributed on an "AS
+IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+or implied.
+
+'''
+import re
 import logging
 import requests
 
@@ -54,73 +72,87 @@ class Influx():
             log.error(f"Influx connection error") 
 
 
-    def post_wireless_client_global_oper_client(self):
+    def post_wireless_client_global_oper_client(self, netconf_data):
 
-        query = ("SELECT * from Client")
-        result = self.read_mysql(query)
-        influx_data = ""
+        try:
+            client_live_stats = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-live-stats")
+            client_dot11_stats = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-dot11-stats")
 
-        for item in result:
-            #wlc_ip = item[0]
-            wlc_name = item[1]
-            auth_clients = item[2]
-            mobility_clients = item[3]
-            iplearn_clients = item[4]
-            webauth_clients = item[5]
-            run_clients = item[6]
-            delete_clients = item[7]
-            random_mac_clients = item[8]
-            clients_24ghz = item[9]
-            clients_5ghz = item[10]
-            clients_6ghz = item[11]
-            
-            line_protocol = (
-                            f'clientSummary,wlcName={wlc_name} '
-                            f'authClients={auth_clients},'
-                            f'mobilityClients={mobility_clients},'
-                            f'ipLearnClients={iplearn_clients},'
-                            f'webAuthClients={webauth_clients},'
-                            f'runClients={run_clients},'
-                            f'deleteClients={delete_clients},'
-                            f'randomMacClients={random_mac_clients},'
-                            f'24ghzClients={clients_24ghz},'
-                            f'5ghzClients={clients_5ghz},'
-                            f'6ghzClients={clients_6ghz}'
-                            f'\n'
-                            )
-            
-            influx_data += line_protocol
-        
-        if influx_data != "":
-            self.write_influx(influx_data)
+        except ET.ParseError:
+            log.warning(f"XML parse error: wireless_client_global_oper (client)")
+        else:
+            try:
+                random_mac_clients = int(client_live_stats.find("random-mac-clients").text)
+                mobility_clients = int(client_live_stats.find("mobility-state-clients").text)
+                iplearn_clients = int(client_live_stats.find("iplearn-state-clients").text)
+                webauth_clients = int(client_live_stats.find("webauth-state-clients").text)
+                delete_clients = int(client_live_stats.find("delete-state-clients").text)
+                auth_clients = int(client_live_stats.find("auth-state-clients").text)
+                run_clients = int(client_live_stats.find("run-state-clients").text)
+
+                client_count = auth_clients + mobility_clients + iplearn_clients + webauth_clients + run_clients + delete_clients
+                
+                clients_24ghz = client_dot11_stats.find("num-clients-on-24ghz-radio").text
+                clients_5ghz = client_dot11_stats.find("num-clients-on-5ghz-radio").text
+                clients_6ghz = client_dot11_stats.find("num-6ghz-clients").text
+      
+            except AttributeError:
+                log.warning(f"Data validation error: wireless_client_global_oper (client)")
+            else:
+                line_protocol = (
+                                f'clientSummary,wlcName={netconf_data.wlc_name} '
+                                f'totalClients={client_count},'
+                                f'authClients={auth_clients},'
+                                f'mobilityClients={mobility_clients},'
+                                f'ipLearnClients={iplearn_clients},'
+                                f'webAuthClients={webauth_clients},'
+                                f'runClients={run_clients},'
+                                f'deleteClients={delete_clients},'
+                                f'randomMacClients={random_mac_clients},'
+                                f'24ghzClients={clients_24ghz},'
+                                f'5ghzClients={clients_5ghz},'
+                                f'6ghzClients={clients_6ghz}'
+                                f'\n'
+                                )        
+                self.write_influx(line_protocol)
 
 
-    def post_wireless_client_global_oper_wlan(self):
+    def post_wireless_client_global_oper_wlan(self, netconf_data):
 
-        query = ("SELECT wlcName, wlanId, wlanProfileName, wlanUsers, wlanDataUsage from Wlan")
-        result = self.read_mysql(query)
-        influx_data = ""
+        try:
+            wlan_stats = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//sort-wlan")
 
-        for item in result:
-            wlc_name = item[0]
-            wlan_id = item[1]
-            wlan_name = item[2]
-            wlan_users = item[3]
-            wlan_data = item[4]
-            
-            line_protocol = (
-                            f'wlanSummary,wlcName={wlc_name},'
-                            f'wlanId={wlan_id},'
-                            f'wlanProfileName={wlan_name}'
-                            f' wlanUsers={wlan_users},'
-                            f'wlanData={wlan_data}'
-                            f'\n'
-                            )
-            
-            influx_data += line_protocol
-        
-        if influx_data != "":
-            self.write_influx(influx_data)
+        except ET.ParseError:
+            log.warning(f"XML parse error: wireless_client_global_oper (wlan)")
+        else:
+            try:
+                wlan_data = []
+                for item in wlan_stats.findall(".//wlan-list"):
+                    wlan_id = item.find("wlan-id").text
+                    wlan_name = item.find("wlan-profile-name").text
+                    wlan_users = item.find("num-client").text
+                    wlan_data_usage = item.find("data-usage").text
+                    wlan_data.append([wlan_id, wlan_name, wlan_users, wlan_data_usage])
+
+                if len(wlan_data) == 0:
+                    raise ValueError("No WLAN data")
+
+            except AttributeError:
+                log.warning(f"Data validation error: wireless_client_global_oper (wlan)")
+            except ValueError:
+                log.warning("No WLAN data, possible zero clients connected to WLC")
+            else:
+                line_protocol = ""
+                for wlan in wlan_data:
+                    line_protocol += (
+                                     f'wlanSummary,wlcName={netconf_data.wlc_name},'
+                                     f'wlanId={wlan[0]},'
+                                     f'wlanProfileName={wlan[1]}'
+                                     f' wlanUsers={wlan[2]},'
+                                     f'wlanData={wlan[3]}'
+                                     f'\n'
+                                     ) 
+                self.write_influx(line_protocol)
 
 
     def post_wireless_oper(self):
@@ -228,120 +260,127 @@ class Influx():
             self.write_influx(influx_data)
 
 
-    def post_wlc_oper(self):
+    def post_interfaces_oper(self, netconf_data):
 
-        query = ("SELECT Wlc.wlcName, interfaceName, interfaceOperStatus, rxKbps, txKbps, inErrors, outErrors, inDiscards, outDiscards FROM Wlc JOIN WlcInterfaces")
+        try:
+            interfaces_oper = ET.fromstring(netconf_data.interfaces_oper).find(".//interfaces")
 
-        result = self.read_mysql(query)
-        influx_data = ""
+        except ET.ParseError:
+            log.warning(f"XML parse error [interfaces_oper]")
+        else:
+            intf_data = []
+            try:
+                for item in interfaces_oper.findall(".//interface"):
+                    interface_name = item.find("name").text
+                    interface_status = item.find("oper-status").text
+                    tx = item.find("statistics/tx-kbps").text
+                    rx = item.find("statistics/rx-kbps").text
+                    in_errors = item.find("statistics/in-errors").text
+                    out_errors = item.find("statistics/out-errors").text
+                    in_discards = item.find("statistics/in-discards").text
+                    out_discards = item.find("statistics/out-discards").text
 
-        for item in result:
-            wlc_name = item[0]
-            interface_name = item[1]
-            interface_status = item[2]
-            rx = item[3]
-            tx = item[4]
-            in_errors = item[5]
-            out_errors = item[6]
-            in_discards = item[7]
-            out_discards = item[8]
-            
-            line_protocol = (
-                            f'wlcInterfaces,wlcName={wlc_name},intName={interface_name},intStatus={interface_status}'
-                            f' rx={rx},' 
-                            f'tx={tx},'
-                            f'inErrors={in_errors},'
-                            f'outErrors={out_errors},'
-                            f'inDiscards={in_discards},'
-                            f'outDiscards={out_discards}'
-                            f'\n'
-                            )
-            
-            influx_data += line_protocol
-        
-        if influx_data != "":
-            self.write_influx(influx_data)
+                    intf_data.append([interface_name, interface_status, rx, tx, in_errors, out_errors, in_discards, out_discards])
 
+            except AttributeError:
+                log.warning(f"Data validation error [interfaces_oper]")
+            else:
+                line_protocol = ""
+                for intf in intf_data:
+                    line_protocol += (
+                                     f'wlcInterfaces,wlcName={netconf_data.wlc_name},intName={intf[0]},intStatus={intf[1]}'
+                                     f' rx={intf[2]},' 
+                                     f'tx={intf[3]},'
+                                     f'inErrors={intf[4]},'
+                                     f'outErrors={intf[5]},'
+                                     f'inDiscards={intf[6]},'
+                                     f'outDiscards={intf[7]}'
+                                     f'\n'
+                                     )
+                self.write_influx(line_protocol)
 
-    def post_wireless_client_oper(self):
-
-        query = (
-            f"SELECT wlcName, wifi4, wifi5, wifi6, wifi7, wifiOther from Client "
-            f"WHERE wifi4 IS NOT NULL "
-            f"AND wifi5 IS NOT NULL "
-            f"AND wifi6 IS NOT NULL "
-            f"AND wifi7 IS NOT NULL "
-            f"AND wifiOther IS NOT NULL;"
-            )
-        result = self.read_mysql(query)
-        influx_data = ""
-        
-        for item in result:
-            wlc_name = item[0]
-            wifi_4 = item[1]
-            wifi_5 = item[2]
-            wifi_6 = item[3]
-            wifi_7 = item[4]
-            wifi_other = item[5]
-
-            line_protocol = (
-                            f'clientGenerations,wlcName={wlc_name}'
-                            f' wifi4={wifi_4},'
-                            f'wifi5={wifi_5},'
-                            f'wifi6={wifi_6},'
-                            f'wifi7={wifi_7},'
-                            f'wifiOther={wifi_other}'
-                            f'\n'
-                            )
-            
-            influx_data += line_protocol
-
-            if influx_data != "":
-                self.write_influx(influx_data)
     
+    def post_wireless_client_oper(self, netconf_data):
 
-    def post_wlc_inventory(self):
+        try:
+            wireless_client_oper = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-oper-data")
 
-        query = (
-            f"SELECT WlcDetail.wlcName, hostName, model, software, ssoState, joinedAps, "
-            f"authClients, mobilityClients, ipLearnClients, webAuthClients, runClients, deleteClients FROM WlcDetail "
-            f"JOIN Wlc ON WlcDetail.wlcIp = Wlc.wlcIp "
-            f"JOIN Client ON WlcDetail.wlcIp = Client.wlcIp;"
-            )
-        result = self.read_mysql(query)
-
-        if len(result) > 0:
-
-            influx_data = ""
-            wlc_name = result[0][0]
-            hostname = result[0][1]
-            model = result[0][2]
-            software = result[0][3]
-            sso = result[0][4]
-            match sso:
-                case "true":
-                    sso_state = "Up"
-                case "false":
-                    sso_state = "Down"
-
-            ap_count = result[0][5]
-            client_count = result[0][6] + result[0][7] + result[0][8] + result[0][9] + result[0][10] + result[0][11]
+        except ET.ParseError:
+            log.warning(f"XML parse error [wireless_client_oper]")
+        else:
+            line_protocol = ""
+            try:
+                wifi_4, wifi_5, wifi_6, wifi_7, wifi_other = 0, 0, 0, 0, 0
+                for item in wireless_client_oper.findall(".//common-oper-data"):
+                    match item.find("ms-radio-type").text:
+                        case "client-dot11be-6ghz-prot": wifi_7 += 1
+                        case "client-dot11be-5ghz-prot": wifi_7 += 1
+                        case "client-dot11be-24ghz-prot": wifi_7 += 1
+                        case "client-dot11ax-6ghz-prot": wifi_6 += 1
+                        case "client-dot11ax-5ghz-prot": wifi_6 += 1
+                        case "client-dot11ax-24ghz-prot": wifi_6 += 1
+                        case "client-dot11ac": wifi_5 += 1
+                        case "client-dot11n-5-ghz-prot": wifi_4 += 1
+                        case "client-dot11n-24-ghz-prot": wifi_4 += 1
+                        case "client-dot11g-prot": wifi_other += 1
+                        case "client-dot11a-prot": wifi_other += 1
+                        case "client-dot11b-prot": wifi_other += 1
+                        case _: wifi_other += 1
             
-            line_protocol = (
-                            f'wlcInventory,wlcName={wlc_name}'
-                            f' wlcHostName=\"{hostname}\",'
-                            f'model=\"{model}\",'
-                            f'software=\"{software}\",'
-                            f'sso=\"{sso_state}\",'
-                            f'aps={ap_count},'
-                            f'clients={client_count}'
-                            f'\n'
-                            )
-            
-            influx_data += line_protocol
+            except AttributeError:
+                log.warning(f"Data validation error [wireless_client_oper]")
+            else:
+                line_protocol += (
+                                 f'clientGenerations,wlcName={netconf_data.wlc_name}'
+                                 f' wifi4={wifi_4},'
+                                 f'wifi5={wifi_5},'
+                                 f'wifi6={wifi_6},'
+                                 f'wifi7={wifi_7},'
+                                 f'wifiOther={wifi_other}'
+                                 f'\n'
+                                 )
+                self.write_influx(line_protocol)
 
-            if influx_data != "":
-                    self.write_influx(influx_data)
+
+    def post_wlc_detail(self, netconf_data):
+
+        try:
+            wireless_ap_global_oper_data = ET.fromstring(netconf_data.wireless_ap_global_oper).find(".//ap-global-oper-data")
+            device_hardware_oper = ET.fromstring(netconf_data.device_hardware_oper).find(".//device-hardware-data")
+            install_oper = ET.fromstring(netconf_data.install_oper).find(".//install-oper-data")
+            native = ET.fromstring(netconf_data.native).find(".//native")
+            
+        except ET.ParseError:
+            log.warning(f"XML parse error: wlc_detail")
+        else:
+            try:
+                software_version = device_hardware_oper.find("device-hardware/device-system-data/software-version").text
+                joined_aps_count = wireless_ap_global_oper_data.find("emltd-join-count-stat/joined-aps-count").text
+                part_number = device_hardware_oper.find("device-hardware/device-inventory/part-number").text
+                sso_state = install_oper.find("install-location-information/oper-state/sso-state").text
+                hostname = native.find("hostname").text
+
+                software = re.search("Version [0-9.]+", software_version).group(0)[8:]
+
+            except AttributeError:
+                log.warning(f"Data validation error [wlc_detail]")
+            else:
+                match sso_state:
+                    case "true":
+                        sso_state = "Up"
+                    case "false":
+                        sso_state = "Down"
+                
+                line_protocol = (
+                             f'wlcInventory,wlcName={netconf_data.wlc_name}'
+                             f' wlcHostName=\"{hostname}\",'
+                             f'model=\"{part_number}\",'
+                             f'software=\"{software}\",'
+                             f'sso=\"{sso_state}\",'
+                             f'aps={joined_aps_count}'
+                             f'\n'
+                             )
+                self.write_influx(line_protocol)
 
 
     def post_ap_inventory(self):
@@ -400,18 +439,17 @@ class Influx():
                     width_5 = int(rogue.find("./band-data-5g/chan-width").text)
                     width_6 = int(rogue.find("./band-data-6g/chan-width").text)
                     width = max(width_2, width_5, width_6) #Only one has a non-zero value
-                    rogue_info = (
-                                f'rogueAP,address={address},ssid={ssid}'
-                                f' radio=\"{radio_type}\",'
-                                f'channel=\"{channel}\",'
-                                f'lastSeen=\"{last_seen}\",'
-                                f'detectingAP=\"{detecting_ap}\",'
-                                f'maxRssi={max_rssi},'
-                                f'channelWidth=\"{width} MHz\",'
-                                f'clients=\"{clients}\"'
-                                f'\n'
-                                )
-                    line_protocol += rogue_info
+                    line_protocol += (
+                                     f'rogueAP,address={address},ssid={ssid}'
+                                     f' radio=\"{radio_type}\",'
+                                     f'channel=\"{channel}\",'
+                                     f'lastSeen=\"{last_seen}\",'
+                                     f'detectingAP=\"{detecting_ap}\",'
+                                     f'maxRssi={max_rssi},'
+                                     f'channelWidth=\"{width} MHz\",'
+                                     f'clients=\"{clients}\"'
+                                     f'\n'
+                                     )
 
             except AttributeError:
                 log.warning(f"Data validation error: wireless_rogue_oper")

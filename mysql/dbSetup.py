@@ -41,36 +41,6 @@ TABLES["SlotMetrics"] = (
 "  );"
 )
 
-TABLES["Client"] = (
-"CREATE TABLE Client ("
-"  wlcIp varchar(15),"
-"  wlcName varchar(255),"
-"  authClients int,"
-"  mobilityClients int,"
-"  ipLearnClients int,"
-"  webAuthClients int,"
-"  runClients int,"
-"  deleteClients int,"
-"  randomMacClients int,"
-"  clients24ghz int,"
-"  clients5ghz int,"
-"  clients6ghz int,"
-"  PRIMARY KEY (wlcIp)"
-"  );"
-)
-
-TABLES["Wlan"] = (
-"CREATE TABLE Wlan ("
-"  wlcIp varchar(15),"
-"  wlcName varchar(255),"
-"  wlanId int,"
-"  wlanProfileName varchar(255),"
-"  wlanUsers int,"
-"  wlanDataUsage bigint,"
-"  UNIQUE KEY UC_Wlan (wlcIp,wlanId)"
-"  );"
-)
-
 
 class SetupDB():
 

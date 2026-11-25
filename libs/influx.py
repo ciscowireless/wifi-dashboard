@@ -1,3 +1,20 @@
+'''
+Copyright (c) 2026 Cisco and/or its affiliates.
+
+This software is licensed to you under the terms of the Cisco Sample
+Code License, Version 1.1 (the "License"). You may obtain a copy of the
+License at
+
+               https://developer.cisco.com/docs/licenses
+
+All use of the material herein must be in accordance with the terms of
+the License. All rights not expressly granted by the License are
+reserved. Unless required by applicable law or agreed to separately in
+writing, software distributed under the License is distributed on an "AS
+IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+or implied.
+
+'''
 import re
 import logging
 import requests
@@ -55,76 +72,159 @@ class Influx():
             log.error(f"Influx connection error") 
 
 
-    def post_wireless_client_global_oper_client(self):
+    # def post_wireless_client_global_oper_client(self):
 
-        query = ("SELECT * from Client")
-        result = self.read_mysql(query)
-        influx_data = ""
+    #     query = ("SELECT * from Client")
+    #     result = self.read_mysql(query)
+    #     influx_data = ""
 
-        for item in result:
-            #wlc_ip = item[0]
-            wlc_name = item[1]
-            auth_clients = item[2]
-            mobility_clients = item[3]
-            iplearn_clients = item[4]
-            webauth_clients = item[5]
-            run_clients = item[6]
-            delete_clients = item[7]
-            random_mac_clients = item[8]
-            clients_24ghz = item[9]
-            clients_5ghz = item[10]
-            clients_6ghz = item[11]
+    #     for item in result:
+    #         #wlc_ip = item[0]
+    #         wlc_name = item[1]
+    #         auth_clients = item[2]
+    #         mobility_clients = item[3]
+    #         iplearn_clients = item[4]
+    #         webauth_clients = item[5]
+    #         run_clients = item[6]
+    #         delete_clients = item[7]
+    #         random_mac_clients = item[8]
+    #         clients_24ghz = item[9]
+    #         clients_5ghz = item[10]
+    #         clients_6ghz = item[11]
 
-            client_count = auth_clients + mobility_clients + iplearn_clients + webauth_clients + run_clients + delete_clients
+    #         client_count = auth_clients + mobility_clients + iplearn_clients + webauth_clients + run_clients + delete_clients
             
-            line_protocol = (
-                            f'clientSummary,wlcName={wlc_name} '
-                            f'totalClients={client_count},'
-                            f'authClients={auth_clients},'
-                            f'mobilityClients={mobility_clients},'
-                            f'ipLearnClients={iplearn_clients},'
-                            f'webAuthClients={webauth_clients},'
-                            f'runClients={run_clients},'
-                            f'deleteClients={delete_clients},'
-                            f'randomMacClients={random_mac_clients},'
-                            f'24ghzClients={clients_24ghz},'
-                            f'5ghzClients={clients_5ghz},'
-                            f'6ghzClients={clients_6ghz}'
-                            f'\n'
-                            )
+    #         line_protocol = (
+    #                         f'clientSummary,wlcName={wlc_name} '
+    #                         f'totalClients={client_count},'
+    #                         f'authClients={auth_clients},'
+    #                         f'mobilityClients={mobility_clients},'
+    #                         f'ipLearnClients={iplearn_clients},'
+    #                         f'webAuthClients={webauth_clients},'
+    #                         f'runClients={run_clients},'
+    #                         f'deleteClients={delete_clients},'
+    #                         f'randomMacClients={random_mac_clients},'
+    #                         f'24ghzClients={clients_24ghz},'
+    #                         f'5ghzClients={clients_5ghz},'
+    #                         f'6ghzClients={clients_6ghz}'
+    #                         f'\n'
+    #                         )
             
-            influx_data += line_protocol
+    #         influx_data += line_protocol
         
-        if influx_data != "":
-            self.write_influx(influx_data)
+    #     if influx_data != "":
+    #         self.write_influx(influx_data)
 
 
-    def post_wireless_client_global_oper_wlan(self):
+    def post_wireless_client_global_oper_client(self, netconf_data):
 
-        query = ("SELECT wlcName, wlanId, wlanProfileName, wlanUsers, wlanDataUsage from Wlan")
-        result = self.read_mysql(query)
-        influx_data = ""
+        try:
+            client_live_stats = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-live-stats")
+            client_dot11_stats = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-dot11-stats")
 
-        for item in result:
-            wlc_name = item[0]
-            wlan_id = item[1]
-            wlan_name = item[2]
-            wlan_users = item[3]
-            wlan_data = item[4]
+        except ET.ParseError:
+            log.warning(f"XML parse error: wireless_client_global_oper (client)")
+        else:
+            try:
+                random_mac_clients = int(client_live_stats.find("random-mac-clients").text)
+                mobility_clients = int(client_live_stats.find("mobility-state-clients").text)
+                iplearn_clients = int(client_live_stats.find("iplearn-state-clients").text)
+                webauth_clients = int(client_live_stats.find("webauth-state-clients").text)
+                delete_clients = int(client_live_stats.find("delete-state-clients").text)
+                auth_clients = int(client_live_stats.find("auth-state-clients").text)
+                run_clients = int(client_live_stats.find("run-state-clients").text)
+
+                client_count = auth_clients + mobility_clients + iplearn_clients + webauth_clients + run_clients + delete_clients
+                
+                clients_24ghz = client_dot11_stats.find("num-clients-on-24ghz-radio").text
+                clients_5ghz = client_dot11_stats.find("num-clients-on-5ghz-radio").text
+                clients_6ghz = client_dot11_stats.find("num-6ghz-clients").text
+      
+            except AttributeError:
+                log.warning(f"Data validation error: wireless_client_global_oper (client)")
+            else:
+                line_protocol = (
+                                f'clientSummary,wlcName={netconf_data.wlc_name} '
+                                f'totalClients={client_count},'
+                                f'authClients={auth_clients},'
+                                f'mobilityClients={mobility_clients},'
+                                f'ipLearnClients={iplearn_clients},'
+                                f'webAuthClients={webauth_clients},'
+                                f'runClients={run_clients},'
+                                f'deleteClients={delete_clients},'
+                                f'randomMacClients={random_mac_clients},'
+                                f'24ghzClients={clients_24ghz},'
+                                f'5ghzClients={clients_5ghz},'
+                                f'6ghzClients={clients_6ghz}'
+                                f'\n'
+                                )        
+                self.write_influx(line_protocol)
+
+
+    # def post_wireless_client_global_oper_wlan(self):
+
+    #     query = ("SELECT wlcName, wlanId, wlanProfileName, wlanUsers, wlanDataUsage from Wlan")
+    #     result = self.read_mysql(query)
+    #     influx_data = ""
+
+    #     for item in result:
+    #         wlc_name = item[0]
+    #         wlan_id = item[1]
+    #         wlan_name = item[2]
+    #         wlan_users = item[3]
+    #         wlan_data = item[4]
             
-            line_protocol = (
-                            f'wlanSummary,wlcName={wlc_name},'
-                            f'wlanId={wlan_id},'
-                            f'wlanProfileName={wlan_name}'
-                            f' wlanUsers={wlan_users},'
-                            f'wlanData={wlan_data}'
-                            f'\n'
-                            )
+    #         line_protocol = (
+    #                         f'wlanSummary,wlcName={wlc_name},'
+    #                         f'wlanId={wlan_id},'
+    #                         f'wlanProfileName={wlan_name}'
+    #                         f' wlanUsers={wlan_users},'
+    #                         f'wlanData={wlan_data}'
+    #                         f'\n'
+    #                         )
             
-            influx_data += line_protocol
+    #         influx_data += line_protocol
         
-        if influx_data != "":
-            self.write_influx(influx_data)
+    #     if influx_data != "":
+    #         self.write_influx(influx_data)
+
+
+    def post_wireless_client_global_oper_wlan(self, netconf_data):
+
+        try:
+            wlan_stats = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//sort-wlan")
+
+        except ET.ParseError:
+            log.warning(f"XML parse error: wireless_client_global_oper (wlan)")
+        else:
+            try:
+                wlan_data = []
+                for item in wlan_stats.findall(".//wlan-list"):
+                    wlan_id = item.find("wlan-id").text
+                    wlan_name = item.find("wlan-profile-name").text
+                    wlan_users = item.find("num-client").text
+                    wlan_data_usage = item.find("data-usage").text
+                    wlan_data.append([wlan_id, wlan_name, wlan_users, wlan_data_usage])
+
+                if len(wlan_data) == 0:
+                    raise ValueError("No WLAN data")
+
+            except AttributeError:
+                log.warning(f"Data validation error: wireless_client_global_oper (wlan)")
+            except ValueError:
+                log.warning("No WLAN data, possible zero clients connected to WLC")
+            else:
+                line_protocol = ""
+                for wlan in wlan_data:
+                    line_protocol += (
+                                     f'wlanSummary,wlcName={netconf_data.wlc_name},'
+                                     f'wlanId={wlan[0]},'
+                                     f'wlanProfileName={wlan[1]}'
+                                     f' wlanUsers={wlan[2]},'
+                                     f'wlanData={wlan[3]}'
+                                     f'\n'
+                                     ) 
+                self.write_influx(line_protocol)
 
 
     def post_wireless_oper(self):
@@ -527,18 +627,17 @@ class Influx():
                     width_5 = int(rogue.find("./band-data-5g/chan-width").text)
                     width_6 = int(rogue.find("./band-data-6g/chan-width").text)
                     width = max(width_2, width_5, width_6) #Only one has a non-zero value
-                    rogue_info = (
-                                f'rogueAP,address={address},ssid={ssid}'
-                                f' radio=\"{radio_type}\",'
-                                f'channel=\"{channel}\",'
-                                f'lastSeen=\"{last_seen}\",'
-                                f'detectingAP=\"{detecting_ap}\",'
-                                f'maxRssi={max_rssi},'
-                                f'channelWidth=\"{width} MHz\",'
-                                f'clients=\"{clients}\"'
-                                f'\n'
-                                )
-                    line_protocol += rogue_info
+                    line_protocol += (
+                                     f'rogueAP,address={address},ssid={ssid}'
+                                     f' radio=\"{radio_type}\",'
+                                     f'channel=\"{channel}\",'
+                                     f'lastSeen=\"{last_seen}\",'
+                                     f'detectingAP=\"{detecting_ap}\",'
+                                     f'maxRssi={max_rssi},'
+                                     f'channelWidth=\"{width} MHz\",'
+                                     f'clients=\"{clients}\"'
+                                     f'\n'
+                                     )
 
             except AttributeError:
                 log.warning(f"Data validation error: wireless_rogue_oper")

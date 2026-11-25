@@ -1,6 +1,6 @@
 
 '''
-Copyright (c) 2025 Cisco and/or its affiliates.
+Copyright (c) 2026 Cisco and/or its affiliates.
 
 This software is licensed to you under the terms of the Cisco Sample
 Code License, Version 1.1 (the "License"). You may obtain a copy of the
@@ -14,8 +14,11 @@ reserved. Unless required by applicable law or agreed to separately in
 writing, software distributed under the License is distributed on an "AS
 IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
 or implied.
-
 '''
+__name__ = "Wi-Fi Dashboard"
+__version__ = "2.1"
+__author__ = "Michal Kowalik"
+
 import logging
 import os
 import sys
@@ -99,10 +102,10 @@ class Dashboard():
                 subprocess.run(["echo", f"WLC: {self.netconf.wlc_ip} ({self.netconf.wlc_name})"])
 
                 self.netconf.get_wireless_client_global_oper()
-                self.mysql.sql_wireless_client_global_oper_client(self.netconf)
-                self.mysql.sql_wireless_client_global_oper_wlan(self.netconf)
-                self.influx.post_wireless_client_global_oper_client()
-                self.influx.post_wireless_client_global_oper_wlan()
+                #self.mysql.sql_wireless_client_global_oper_client(self.netconf)
+                #self.mysql.sql_wireless_client_global_oper_wlan(self.netconf)
+                self.influx.post_wireless_client_global_oper_client(self.netconf)
+                self.influx.post_wireless_client_global_oper_wlan(self.netconf)
 
                 self.netconf.get_wireless_access_point_oper()
                 self.mysql.sql_wireless_access_point_oper(self.netconf)

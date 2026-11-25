@@ -1,5 +1,21 @@
+'''
+Copyright (c) 2026 Cisco and/or its affiliates.
+
+This software is licensed to you under the terms of the Cisco Sample
+Code License, Version 1.1 (the "License"). You may obtain a copy of the
+License at
+
+               https://developer.cisco.com/docs/licenses
+
+All use of the material herein must be in accordance with the terms of
+the License. All rights not expressly granted by the License are
+reserved. Unless required by applicable law or agreed to separately in
+writing, software distributed under the License is distributed on an "AS
+IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+or implied.
+
+'''
 import logging
-import re
 
 import xml.etree.ElementTree as ET
 
@@ -22,10 +38,10 @@ class MySql():
     def clear_mysql(self):
 
         self.write_mysql(f"DELETE FROM Ap;")
-        self.write_mysql(f"DELETE FROM Client;")
         self.write_mysql(f"DELETE FROM Slot;")
         self.write_mysql(f"DELETE FROM SlotMetrics;")
-        self.write_mysql(f"DELETE FROM Wlan;")
+        #self.write_mysql(f"DELETE FROM Client;")
+        #self.write_mysql(f"DELETE FROM Wlan;")
         #self.write_mysql(f"DELETE FROM Wlc;")
         #self.write_mysql(f"DELETE FROM WlcDetail;")
         #self.write_mysql(f"DELETE FROM WlcInterfaces;")
@@ -40,71 +56,71 @@ class MySql():
         #log.info("Write to MySQL")
 
 
-    def sql_wireless_client_global_oper_client(self, netconf_data):
+    # def sql_wireless_client_global_oper_client(self, netconf_data):
 
-        try:
-            client_live_stats = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-live-stats")
-            client_dot11_stats = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-dot11-stats")
+    #     try:
+    #         client_live_stats = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-live-stats")
+    #         client_dot11_stats = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//client-dot11-stats")
 
-        except ET.ParseError:
-            log.warning(f"XML parse error: wireless_client_global_oper (client)")
-        else:
-            try:
-                auth = client_live_stats.find("auth-state-clients").text
-                mobility = client_live_stats.find("mobility-state-clients").text
-                iplearn = client_live_stats.find("iplearn-state-clients").text
-                webauth = client_live_stats.find("webauth-state-clients").text
-                run = client_live_stats.find("run-state-clients").text
-                delete = client_live_stats.find("delete-state-clients").text
-                random_mac = client_live_stats.find("random-mac-clients").text
+    #     except ET.ParseError:
+    #         log.warning(f"XML parse error: wireless_client_global_oper (client)")
+    #     else:
+    #         try:
+    #             auth = client_live_stats.find("auth-state-clients").text
+    #             mobility = client_live_stats.find("mobility-state-clients").text
+    #             iplearn = client_live_stats.find("iplearn-state-clients").text
+    #             webauth = client_live_stats.find("webauth-state-clients").text
+    #             run = client_live_stats.find("run-state-clients").text
+    #             delete = client_live_stats.find("delete-state-clients").text
+    #             random_mac = client_live_stats.find("random-mac-clients").text
 
-                clients24ghz = client_dot11_stats.find("num-clients-on-24ghz-radio").text
-                clients5ghz = client_dot11_stats.find("num-clients-on-5ghz-radio").text
-                clients6ghz = client_dot11_stats.find("num-6ghz-clients").text
+    #             clients24ghz = client_dot11_stats.find("num-clients-on-24ghz-radio").text
+    #             clients5ghz = client_dot11_stats.find("num-clients-on-5ghz-radio").text
+    #             clients6ghz = client_dot11_stats.find("num-6ghz-clients").text
       
-            except AttributeError:
-                log.warning(f"Data validation error: wireless_client_global_oper (client)")
-            else:
-                self.write_mysql(
-                                f"REPLACE INTO Client "
-                                f"(wlcIp, wlcName, authClients, mobilityClients, ipLearnClients, webAuthClients, runClients, deleteClients, randomMacClients, "
-                                f"clients24ghz, clients5ghz, clients6ghz) "
-                                f"VALUES "\
-                                f"('{netconf_data.wlc_ip}', '{netconf_data.wlc_name}', '{auth}', '{mobility}', '{iplearn}', '{webauth}', '{run}', '{delete}', '{random_mac}', "
-                                f"'{clients24ghz}', '{clients5ghz}', '{clients6ghz}')"
-                                )
+    #         except AttributeError:
+    #             log.warning(f"Data validation error: wireless_client_global_oper (client)")
+    #         else:
+    #             self.write_mysql(
+    #                             f"REPLACE INTO Client "
+    #                             f"(wlcIp, wlcName, authClients, mobilityClients, ipLearnClients, webAuthClients, runClients, deleteClients, randomMacClients, "
+    #                             f"clients24ghz, clients5ghz, clients6ghz) "
+    #                             f"VALUES "\
+    #                             f"('{netconf_data.wlc_ip}', '{netconf_data.wlc_name}', '{auth}', '{mobility}', '{iplearn}', '{webauth}', '{run}', '{delete}', '{random_mac}', "
+    #                             f"'{clients24ghz}', '{clients5ghz}', '{clients6ghz}')"
+    #                             )
     
 
-    def sql_wireless_client_global_oper_wlan(self, netconf_data):
+    # def sql_wireless_client_global_oper_wlan(self, netconf_data):
 
-        try:
-            wlan_stats = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//sort-wlan")
+    #     try:
+    #         wlan_stats = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//sort-wlan")
 
-        except ET.ParseError:
-            log.warning(f"XML parse error: wireless_client_global_oper (wlan)")
-        else:
-            try:
-                wlan_data = []
-                for item in wlan_stats.findall(".//wlan-list"):
-                    wlan_id = item.find("wlan-id").text
-                    wlan_name = item.find("wlan-profile-name").text
-                    wlan_users = item.find("num-client").text
-                    wlan_data_usage = item.find("data-usage").text
-                    wlan_data.append([wlan_id, wlan_name, wlan_users, wlan_data_usage])
+    #     except ET.ParseError:
+    #         log.warning(f"XML parse error: wireless_client_global_oper (wlan)")
+    #     else:
+    #         try:
+    #             wlan_data = []
+    #             for item in wlan_stats.findall(".//wlan-list"):
+    #                 wlan_id = item.find("wlan-id").text
+    #                 wlan_name = item.find("wlan-profile-name").text
+    #                 wlan_users = item.find("num-client").text
+    #                 wlan_data_usage = item.find("data-usage").text
+    #                 wlan_data.append([wlan_id, wlan_name, wlan_users, wlan_data_usage])
 
-                if len(wlan_data) == 0:
-                    raise ValueError("No WLAN data")
+    #             if len(wlan_data) == 0:
+    #                 raise ValueError("No WLAN data")
 
-            except AttributeError:
-                log.warning(f"Data validation error: wireless_client_global_oper (wlan)")
-            except ValueError:
-                log.warning("No WLAN data, possible zero clients connected to WLC")
-            else:
-                query_string = ""
-                for wlan in wlan_data:
-                    query_string += f"('{netconf_data.wlc_ip}', '{netconf_data.wlc_name}', '{wlan[0]}','{wlan[1]}','{wlan[2]}','{wlan[3]}'),"
+    #         except AttributeError:
+    #             log.warning(f"Data validation error: wireless_client_global_oper (wlan)")
+    #         except ValueError:
+    #             log.warning("No WLAN data, possible zero clients connected to WLC")
+    #         else:
+    #             query_string = ""
+    #             for wlan in wlan_data:
+    #                 query_string += f"('{netconf_data.wlc_ip}', '{netconf_data.wlc_name}', '{wlan[0]}','{wlan[1]}','{wlan[2]}','{wlan[3]}'),"
                 
-                self.write_mysql(f"REPLACE INTO Wlan (wlcIp, wlcName, wlanId, wlanProfileName, wlanUsers, wlanDataUsage) VALUES {query_string[:-1]};")
+    #             self.write_mysql(f"REPLACE INTO Wlan (wlcIp, wlcName, wlanId, wlanProfileName, wlanUsers, wlanDataUsage) VALUES {query_string[:-1]};")
 
 
     def sql_wireless_access_point_oper(self, netconf_data):

@@ -69,6 +69,9 @@ class Netconf():
         filter = '''
             <client-global-oper-data xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-wireless-client-global-oper">
                 <client-live-stats/>
+                <client-stats>
+                    <co-client-del-reason/>
+                </client-stats>
                 <client-dot11-stats>
                     <num-clients-on-24ghz-radio/>
                     <num-clients-on-5ghz-radio/>

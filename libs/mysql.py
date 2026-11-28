@@ -106,7 +106,7 @@ class MySql():
 
                         slot_data.append([ap_radio_mac, slot, oper_state, radio_mode, band, channel, power])
 
-                except KeyboardInterrupt:
+                except AttributeError:
                     log.warning(f"Data validation error [wireless_access_point_oper]")
                 else:
                     self.write_mysql(f"DELETE FROM Ap;")

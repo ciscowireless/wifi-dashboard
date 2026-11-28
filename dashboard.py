@@ -90,6 +90,7 @@ class Dashboard():
             self.lastrun = datetime.now()
 
             for wlc in self.config["wlc"]:
+                self.mysql.clear_mysql()
 
                 self.netconf.wlc_ip = wlc["ip"]
                 self.netconf.wlc_name = wlc["name"]
@@ -109,6 +110,7 @@ class Dashboard():
                 self.netconf.get_wireless_client_global_oper()
                 self.influx.post_wireless_client_global_oper_client(self.netconf)
                 self.influx.post_wireless_client_global_oper_wlan(self.netconf)
+                self.influx.post_wireless_client_global_oper_diagnostics(self.netconf)
 
                 self.netconf.get_wireless_client_oper()
                 self.influx.post_wireless_client_oper(self.netconf)
@@ -124,8 +126,6 @@ class Dashboard():
                 self.netconf.get_install_oper()
                 self.netconf.get_native()
                 self.influx.post_wlc_detail(self.netconf)
-
-                self.mysql.clear_mysql()
 
             log.info(f'Waiting for next NETCONF cycle ({self.config["general"]["netconf_cycle"]}sec)\n')
     

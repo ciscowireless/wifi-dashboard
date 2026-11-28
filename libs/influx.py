@@ -100,20 +100,20 @@ class Influx():
                 log.warning(f"Data validation error: wireless_client_global_oper (client)")
             else:
                 line_protocol = (
-                                f'clientSummary,wlcName={netconf_data.wlc_name} '
-                                f'totalClients={client_count},'
-                                f'authClients={auth_clients},'
-                                f'mobilityClients={mobility_clients},'
-                                f'ipLearnClients={iplearn_clients},'
-                                f'webAuthClients={webauth_clients},'
-                                f'runClients={run_clients},'
-                                f'deleteClients={delete_clients},'
-                                f'randomMacClients={random_mac_clients},'
-                                f'24ghzClients={clients_24ghz},'
-                                f'5ghzClients={clients_5ghz},'
-                                f'6ghzClients={clients_6ghz}'
-                                f'\n'
-                                )        
+                    f'clientSummary,wlcName={netconf_data.wlc_name} '
+                    f'totalClients={client_count},'
+                    f'authClients={auth_clients},'
+                    f'mobilityClients={mobility_clients},'
+                    f'ipLearnClients={iplearn_clients},'
+                    f'webAuthClients={webauth_clients},'
+                    f'runClients={run_clients},'
+                    f'deleteClients={delete_clients},'
+                    f'randomMacClients={random_mac_clients},'
+                    f'24ghzClients={clients_24ghz},'
+                    f'5ghzClients={clients_5ghz},'
+                    f'6ghzClients={clients_6ghz}'
+                    f'\n'
+                )        
                 self.write_influx(line_protocol)
 
 
@@ -145,14 +145,39 @@ class Influx():
                 line_protocol = ""
                 for wlan in wlan_data:
                     line_protocol += (
-                                     f'wlanSummary,wlcName={netconf_data.wlc_name},'
-                                     f'wlanId={wlan[0]},'
-                                     f'wlanProfileName={wlan[1]}'
-                                     f' wlanUsers={wlan[2]},'
-                                     f'wlanData={wlan[3]}'
-                                     f'\n'
-                                     ) 
+                        f'wlanSummary,wlcName={netconf_data.wlc_name},'
+                        f'wlanId={wlan[0]},'
+                        f'wlanProfileName={wlan[1]}'
+                        f' wlanUsers={wlan[2]},'
+                        f'wlanData={wlan[3]}'
+                        f'\n'
+                    ) 
                 self.write_influx(line_protocol)
+
+
+    def post_wireless_client_global_oper_diagnostics(self, netconf_data):
+
+        try:
+            co_client_del_reason = ET.fromstring(netconf_data.wireless_client_global_oper).find(".//co-client-del-reason")
+        
+        except ET.ParseError:
+            log.warning(f"XML parse error: wireless_client_global_oper (wlan)")
+        else:
+            try:
+                delete_reasons = dict({element.tag: int(element.text) for element in co_client_del_reason.iter() if element is not co_client_del_reason}) #Parse all possible reasons, excluding root
+                delete_reasons_sorted = {k: v for k, v in sorted(delete_reasons.items(), key=lambda item: item[1], reverse=True)}
+                
+                line_protocol = f'deleteReasons,wlcName={netconf_data.wlc_name} '
+                for reason, counter in delete_reasons_sorted.items():
+                    if counter != 0:
+                        line_protocol += (
+                            f'{reason}={counter}i,'
+                        )
+                line_protocol = line_protocol[:-1] + "\n"
+                self.write_influx(line_protocol)
+                                            
+            except AttributeError:
+                log.warning(f"Data validation error: wireless_client_global_oper (diagnostics)")
 
 
     def post_wireless_oper(self):
@@ -184,21 +209,21 @@ class Influx():
             cca = item[12]
 
             line_protocol = (
-                            f'rfData,wlcName={wlc_name},'
-                            f'apName={ap_name},'
-                            f'apRadioMac={ap_radio_mac},'
-                            f'slot={slot},'
-                            f'band={band},'
-                            f'rfTag={rf_tag},'
-                            f'siteTag={site_tag},'
-                            f'operState={oper_state},'
-                            f'radioMode={radio_mode}'
-                            f' channel={channel},'
-                            f'power={power},'
-                            f'stations={stations},'
-                            f'cca={cca}'
-                            f'\n'
-                            )
+                f'rfData,wlcName={wlc_name},'
+                f'apName={ap_name},'
+                f'apRadioMac={ap_radio_mac},'
+                f'slot={slot},'
+                f'band={band},'
+                f'rfTag={rf_tag},'
+                f'siteTag={site_tag},'
+                f'operState={oper_state},'
+                f'radioMode={radio_mode}'
+                f' channel={channel},'
+                f'power={power},'
+                f'stations={stations},'
+                f'cca={cca}'
+                f'\n'
+            )
 
             influx_data += line_protocol
 
@@ -288,15 +313,15 @@ class Influx():
                 line_protocol = ""
                 for intf in intf_data:
                     line_protocol += (
-                                     f'wlcInterfaces,wlcName={netconf_data.wlc_name},intName={intf[0]},intStatus={intf[1]}'
-                                     f' rx={intf[2]},' 
-                                     f'tx={intf[3]},'
-                                     f'inErrors={intf[4]},'
-                                     f'outErrors={intf[5]},'
-                                     f'inDiscards={intf[6]},'
-                                     f'outDiscards={intf[7]}'
-                                     f'\n'
-                                     )
+                        f'wlcInterfaces,wlcName={netconf_data.wlc_name},intName={intf[0]},intStatus={intf[1]}'
+                        f' rx={intf[2]},' 
+                        f'tx={intf[3]},'
+                        f'inErrors={intf[4]},'
+                        f'outErrors={intf[5]},'
+                        f'inDiscards={intf[6]},'
+                        f'outDiscards={intf[7]}'
+                        f'\n'
+                    )
                 self.write_influx(line_protocol)
 
     
@@ -331,14 +356,14 @@ class Influx():
                 log.warning(f"Data validation error [wireless_client_oper]")
             else:
                 line_protocol += (
-                                 f'clientGenerations,wlcName={netconf_data.wlc_name}'
-                                 f' wifi4={wifi_4},'
-                                 f'wifi5={wifi_5},'
-                                 f'wifi6={wifi_6},'
-                                 f'wifi7={wifi_7},'
-                                 f'wifiOther={wifi_other}'
-                                 f'\n'
-                                 )
+                    f'clientGenerations,wlcName={netconf_data.wlc_name}'
+                    f' wifi4={wifi_4},'
+                    f'wifi5={wifi_5},'
+                    f'wifi6={wifi_6},'
+                    f'wifi7={wifi_7},'
+                    f'wifiOther={wifi_other}'
+                    f'\n'
+                )
                 self.write_influx(line_protocol)
 
 
@@ -372,14 +397,14 @@ class Influx():
                         sso_state = "Down"
                 
                 line_protocol = (
-                             f'wlcInventory,wlcName={netconf_data.wlc_name}'
-                             f' wlcHostName=\"{hostname}\",'
-                             f'model=\"{part_number}\",'
-                             f'software=\"{software}\",'
-                             f'sso=\"{sso_state}\",'
-                             f'aps={joined_aps_count}'
-                             f'\n'
-                             )
+                    f'wlcInventory,wlcName={netconf_data.wlc_name}'
+                    f' wlcHostName=\"{hostname}\",'
+                    f'model=\"{part_number}\",'
+                    f'software=\"{software}\",'
+                    f'sso=\"{sso_state}\",'
+                    f'aps={joined_aps_count}'
+                    f'\n'
+                )
                 self.write_influx(line_protocol)
 
 
@@ -440,16 +465,16 @@ class Influx():
                     width_6 = int(rogue.find("./band-data-6g/chan-width").text)
                     width = max(width_2, width_5, width_6) #Only one has a non-zero value
                     line_protocol += (
-                                     f'rogueAP,address={address},ssid={ssid}'
-                                     f' radio=\"{radio_type}\",'
-                                     f'channel=\"{channel}\",'
-                                     f'lastSeen=\"{last_seen}\",'
-                                     f'detectingAP=\"{detecting_ap}\",'
-                                     f'maxRssi={max_rssi},'
-                                     f'channelWidth=\"{width} MHz\",'
-                                     f'clients=\"{clients}\"'
-                                     f'\n'
-                                     )
+                        f'rogueAP,address={address},ssid={ssid}'
+                        f' radio=\"{radio_type}\",'
+                        f'channel=\"{channel}\",'
+                        f'lastSeen=\"{last_seen}\",'
+                        f'detectingAP=\"{detecting_ap}\",'
+                        f'maxRssi={max_rssi},'
+                        f'channelWidth=\"{width} MHz\",'
+                        f'clients=\"{clients}\"'
+                        f'\n'
+                    )
 
             except AttributeError:
                 log.warning(f"Data validation error: wireless_rogue_oper")

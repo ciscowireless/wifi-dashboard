@@ -52,7 +52,7 @@ class Netconf():
             query_duration = round(end - start, 1)
 
         except transport.errors.AuthenticationError:
-            log.error(f"NETCONF Authentication Error")
+            log.error(f"NETCONF Authentication Error")       
         except operations.errors.TimeoutExpiredError:
             log.error(f"NETCONF Timeout ({timeout}sec)")
         except (transport.errors.SSHError, transport.errors.SessionError):
